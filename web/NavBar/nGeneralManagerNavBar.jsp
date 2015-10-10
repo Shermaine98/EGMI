@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/table-design.css">
         <!--<title>Welcome to Hammerhead!</title>-->
     </head>
     <body>

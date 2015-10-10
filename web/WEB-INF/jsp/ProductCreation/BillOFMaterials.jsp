@@ -12,21 +12,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/searchInput.css">
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <script src="js/searchItem.js"></script>
         <script src="js/deleteRow.js"></script>
         <title>Bill of Materials</title>
-        <style>
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button { 
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                margin: 0; 
-            }
-        </style>
+
         <script>
             $(document).ready(function () {
                 var prID = '${BoMPrNumber}';
@@ -36,21 +27,21 @@
         </script>
     </head>
     <body> 
-        <br/><br/><br/>
+        <br/>
         <div>
             <center><h2>Encode Bill of Materials</h2></center>
             <br/><br/>
             <form method="POST" action="EncodeBillOfMaterialsServlet">
                 <div align="center" class="container">
-                    <table class="table width35 table-bordered">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Product ID</th>
-                                <td><input type="text" class="input" name="productID" id="productID" value=""/></td>
+                                <td><input type="text" name="productID" id="productID" value="" readonly/></td>
                             </tr>
                             <tr>
                                 <th>Product Name</th>
-                                <td><input type="text" class="input" name="productName"/></td>
+                                <td><input type="text" name="productName"/></td>
                             </tr>
                             <tr>
                                 <th>Product Type</th>
@@ -63,13 +54,13 @@
                             </tr>
                         </thead>
                     </table>
-                    <input type="text" style="width:35%; height:35px" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
+                    <input name="itemName" class="search" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
                     <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                    <input type="Button" onClick="getItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
+                    <input type="Button" onClick="getItem()" class="btn btn-danger" value="Add Item">
                     <br/><br/>
-                    <table  class="table table-bordered" style="width:47%">
+                    <table  class="table table-bordered">
                         <colgroup>
-                            <col style="width:3%" />
+                            <col style="width:3%"/>
                         </colgroup>
                         <tbody id="dataTable">
                         </tbody>
@@ -77,7 +68,7 @@
                     <br/>
                     <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('dataTable')" />
                     <br/><br/>
-                    <input type="submit" style="width:77px; height:34px" class="btn btn-danger" value="Create">
+                    <input type="submit" class="btn btn-danger" value="Create">
                     <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
                 </div>
             </form>
