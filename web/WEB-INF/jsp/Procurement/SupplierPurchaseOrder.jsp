@@ -9,7 +9,6 @@
 <%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,10 +16,16 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
         <script type="text/javascript" src="bootstrap/js/jquery.autocomplete.js"></script>
-        <script src="bootstrap/js/addRow.js"></script>
-        <script src="bootstrap/js/deleteRow.js"></script>
         <script src="bootstrap/js/jquery-ui.js"></script>
         <title>Encode Supplier Purchase Order</title>
+         <script>
+            $(document).ready(function () {
+            var spoNumber = '${SPONumber}';
+            document.getElementById('poNumber').value = spoNumber;
+            
+            });
+
+        </script>
     </head>
     <body>  
         <br/><br/><br/>
@@ -35,19 +40,19 @@
                 <thead>
                     <tr>
                         <th>Purchase Order number</th>
-                        <td class="value"><input class="input" type="text" name="poNumber" value="" /></td>
+                        <td class="value"><input class="input" type="text" name="poNumber" id="poNumber"/></td>
                     </tr><tr>
                         <th>Prepared By</th>
                         <td><input type="hidden" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%> <%= user.getLastName()%> </td>
                     </tr><tr>
                         <th>Date Made</th>
-                        <td><input type="text" class="input" name="dateMade"  value=""/></td>  
+                        <td><input type="text" class="input" name="dateMade" id="dateMade"/></td>  
                     </tr><tr>
                         <th>Delivery </th>
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                     </tr><tr>
                         <th>Supplier</th>
-                        <td><input type="text" class="input" name="dateMade" value="" /></td>                 
+                        <td><input type="text" class="input" name="dateMade" /></td>                 
                     </tr>
                 </thead>
 
@@ -100,11 +105,11 @@
                 noSuggestionNotice: 'No Exsiting Item',
             });
         }
-        ;
         $(function () {
             $("#datepicker").datepicker({minDate: 1, maxDate: "+4M +10D", dateFormat: 'yy-mm-dd'});
 
         });
+        
     </script>
 </body>
 </html>

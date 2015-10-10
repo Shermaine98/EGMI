@@ -18,8 +18,53 @@
                 font-size: 40px;
             }
         </style>
+         <script>
+            function updateClock( )
+            {
+                var currentTime = new Date( );
+                var currentHours = currentTime.getHours( );
+                var currentMinutes = currentTime.getMinutes( );
+                var currentSeconds = currentTime.getSeconds( );
+
+                // Pad the minutes and seconds with leading zeros, if required
+                currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+                currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+                // Choose either "AM" or "PM" as appropriate
+                var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+
+                // Convert the hours component to 12-hour format if needed
+                currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+
+                // Convert an hours component of "0" to "12"
+                currentHours = (currentHours == 0) ? 12 : currentHours;
+
+                // Compose the string for display
+                var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+                var d = new Date();
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+                var output = d.getFullYear() + '-' +
+                        (('' + month).length < 2 ? '0' : '') + month + '' +
+                        (('' + day).length < 2 ? '0' : '') + day;
+                document.getElementById('Today').value = output + "   " + currentTimeString;
+
+            }
+
+            $(document).ready(function ()
+            {
+                setInterval('updateClock()', 1000);
+            });
+
+        </script>
     </head>
     <body>
-        <p>Welcome First Name Last Name!</p>
+        <p><%= user.getFirstName()%> <%= user.getLastName()%> </p>
+         <p>Today is  <input type="text" class="input" id="Today" /></p>
+    
+    
     </body>
+    
+    
 </html>

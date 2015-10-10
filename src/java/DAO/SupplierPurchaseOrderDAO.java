@@ -102,7 +102,7 @@ public class SupplierPurchaseOrderDAO {
             i = rs.getInt("MAX(poNumber)");
         }
         if (i == 0) {
-            i = 300000000;
+            i = 70000000;
         } else {
             i += 1;
         }

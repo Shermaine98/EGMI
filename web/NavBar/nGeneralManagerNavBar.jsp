@@ -38,7 +38,7 @@
                                 <li><a href="/EGMI/ViewConsumptionReportServlet">View Consumption Report</a></li>
                             </ul>
                         </li>
-                        
+
                         <!--Procurement-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Procurement
@@ -56,7 +56,7 @@
                                 <li><a href="">View Cutting Report</a></li>
                             </ul>
                         </li>
-                        
+
                         <!--Inventory-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventory
@@ -69,7 +69,7 @@
                                 <li><a href="BoutiqueInventory.jsp">Boutique Inventory</a></li>
                             </ul>
                         </li>
-                        
+
                         <!--DELIVERY-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Delivery
@@ -81,7 +81,7 @@
                                 <li><a href="DeliveryReceipt.jsp">Delivery Receipt</a></li>
                             </ul>
                         </li>
-                        
+
                         <!--Vendor-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendor
@@ -93,26 +93,11 @@
                         </li>
                     </ul>
 
-                    
+
                     <!--MAIL-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="https://mail.google.com/">
-                                <span class="glyphicon glyphicon-envelope"></span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-bell"></span><b class="caret"></b></a>
-                            <ul class="dropdown-menu alert-dropdown">
-                                <li><a href="#">Alert Name <span class="label label-default">Alert Badge</span></a></li>
-                                <li><a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a></li>
-                                <li><a href="#">Alert Name <span class="label label-success">Alert Badge</span></a></li>
-                                <li><a href="#">Alert Name <span class="label label-info">Alert Badge</span></a></li>
-                                <li><a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a></li>
-                                <li><a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">View All</a></li>
-                            </ul>
-                        </li>
-                        
+                        <li><input type="text" class="input" name="dateMade" id="dateMade" /></li>
+                        <li><a href="https://mail.google.com/"><span class="glyphicon glyphicon-envelope"></span></a></li>
                         <!--ACCOUNT DETAILS-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -131,7 +116,46 @@
         </nav>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            function updateClock1( )
+            {
+                var currentTime = new Date( );
+                var currentHours = currentTime.getHours( );
+                var currentMinutes = currentTime.getMinutes( );
+                var currentSeconds = currentTime.getSeconds( );
 
+                // Pad the minutes and seconds with leading zeros, if required
+                currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+                currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+                // Choose either "AM" or "PM" as appropriate
+                var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+
+                // Convert the hours component to 12-hour format if needed
+                currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+
+                // Convert an hours component of "0" to "12"
+                currentHours = (currentHours == 0) ? 12 : currentHours;
+
+                // Compose the string for display
+                var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+                var d = new Date();
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+                var output = d.getFullYear() + '-' +
+                        (('' + month).length < 2 ? '0' : '') + month + '' +
+                        (('' + day).length < 2 ? '0' : '') + day;
+                document.getElementById('dateMade').value = output + "   " + currentTimeString;
+
+            }
+
+            $(document).ready(function ()
+            {
+                setInterval('updateClock1()', 1000);
+            });
+
+        </script>
     </body>
 
 </html>
