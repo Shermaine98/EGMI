@@ -85,7 +85,7 @@ public class RefSupplierDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT companyName FROM `ref_supplier`");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT companyName FROM `ref_supplier` group by companyName");
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -111,7 +111,7 @@ public class RefSupplierDAO {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
 
-        String query = "SELECT * FROM `ref_supplier` WHERE itemName LIKE '%"+ supplierName + "%'";
+        String query = "SELECT * FROM `ref_supplier` WHERE itemName LIKE '%"+ supplierName + "%' group by companyName ";
         PreparedStatement ps = conn.prepareStatement(query);
         ArrayList<RefSupplier> RefSupplierList = new ArrayList();
         ResultSet rs = ps.executeQuery();

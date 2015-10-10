@@ -16,7 +16,9 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-        <script src="bootstrap/js/jquery-ui.js"></script>
+         <script type="text/javascript" src="js/searchSupplier.js"></script>
+        <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
+       
         <title>Encode Supplier Purchase Order</title>
          <script>
             $(document).ready(function () {
@@ -29,7 +31,7 @@
     </head>
     <body>  
         <br/>
-        <% ArrayList<String> SupplierName = (ArrayList<String>) request.getAttribute("supplierName");     %>
+        
     <center><h2>Encode Supplier Purchase Order</h2></center><br/>
     <form method="POST" action="EncodeSupplierPurchaseOrderServlet">
         <div align="center" class="container">
@@ -49,11 +51,8 @@
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                     </tr><tr>
                         <th>Supplier</th>
-                        <td><select name="supplierName">
-                                <%for(int i=0; i<SupplierName.size();i++){%>
-                                <option value="<%= SupplierName.get(i) %>"><%= SupplierName.get(i) %></option>
-                                <%}%>       
-                                    </select>    </td>               
+                        <td> <input type="text" style="width:35%; height:35px" name="supplierName" id="supplierName" onkeydown="autoComplete()" placeholder="Search Supplier"/>
+                    <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
                     </tr>
                 </thead>
             </table>

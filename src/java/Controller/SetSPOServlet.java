@@ -25,13 +25,12 @@ public class SetSPOServlet extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RefSupplierDAO refSupplierDAO = new RefSupplierDAO();
+      
         SupplierPurchaseOrderDAO DAO = new SupplierPurchaseOrderDAO();
         Integer SupplierpurchaseOrder=0;
-        ArrayList<String> supplierName = new ArrayList<>();
         try {
             SupplierpurchaseOrder = DAO.getSupplierPurchaseOrderNumber();
-            supplierName = refSupplierDAO.GetSupplierName();
+            
         } catch (SQLException ex) {
             Logger.getLogger(SetSPOServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +39,7 @@ public class SetSPOServlet extends BaseServlet {
 
         RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/SupplierPurchaseOrder.jsp");
         request.setAttribute("SPONumber",SupplierpurchaseOrder );
-         request.setAttribute("supplierName",supplierName );
+    
         rd.forward(request, response);
 
     }

@@ -64,6 +64,10 @@
         <servlet-name>EncodeConsumptionReportServlet</servlet-name>
         <servlet-class>Controller.EncodeConsumptionReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchSupplierServlet</servlet-name>
+        <servlet-class>Controller.SearchSupplierServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>EncodeConsumptionReportServlet</servlet-name>
         <url-pattern>/EncodeConsumptionReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchSupplierServlet</servlet-name>
+        <url-pattern>/SearchSupplierServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
