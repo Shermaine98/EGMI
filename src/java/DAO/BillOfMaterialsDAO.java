@@ -108,7 +108,7 @@ public class BillOfMaterialsDAO {
     public Integer getProductNumber() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
-        int i =200000000;
+        Integer i =0;
          String query = "SELECT MAX(productID) from bill_of_materials";
         PreparedStatement ps = conn.prepareStatement(query);
  

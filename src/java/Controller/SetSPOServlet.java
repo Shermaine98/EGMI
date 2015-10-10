@@ -1,8 +1,7 @@
 package Controller;
 
-import DAO.BillOfMaterialsDAO;
+import DAO.RefSupplierDAO;
 import DAO.SupplierPurchaseOrderDAO;
-import Model.BillOfMaterials;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,26 +15,33 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author gcla109
+ * @author Atayan
+ * @author Lapidario
+ * @author Sy
+ * @author Nunez
+ *
  */
 public class SetSPOServlet extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     
+        RefSupplierDAO refSupplierDAO = new RefSupplierDAO();
         SupplierPurchaseOrderDAO DAO = new SupplierPurchaseOrderDAO();
-        Integer spoNumber=0;
+        Integer SupplierpurchaseOrder=0;
+        ArrayList<String> supplierName = new ArrayList<>();
         try {
-            spoNumber = DAO.getSupplierNumber();
+            SupplierpurchaseOrder = DAO.getSupplierPurchaseOrderNumber();
+            supplierName = refSupplierDAO.GetSupplierName();
         } catch (SQLException ex) {
-            Logger.getLogger(SetPIDServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SetSPOServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
         ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/SupplierPurchaseOrder.jsp");
-        request.setAttribute("SPONumber", spoNumber);
-        rd.forward(request, response);
 
-       
+        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/SupplierPurchaseOrder.jsp");
+        request.setAttribute("SPONumber",SupplierpurchaseOrder );
+         request.setAttribute("supplierName",supplierName );
+        rd.forward(request, response);
 
     }
 }

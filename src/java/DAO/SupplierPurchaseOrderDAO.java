@@ -90,10 +90,10 @@ public class SupplierPurchaseOrderDAO {
         return null;
     }
     
-      public Integer getSupplierNumber() throws SQLException {
+      public Integer getSupplierPurchaseOrderNumber() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
-        int i = 0;
+        Integer i = 0;
         String query = "SELECT MAX(poNumber) from supplier_purchase_order";
         PreparedStatement ps = conn.prepareStatement(query);
 

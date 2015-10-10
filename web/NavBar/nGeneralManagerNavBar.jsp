@@ -96,7 +96,7 @@
 
                     <!--MAIL-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><input type="text" class="input" name="dateMade" id="dateMade" /></li>
+                        <li>Today is<input type="text" class="input" name="dateMade" id="dateMade" /></li>
                         <li><a href="https://mail.google.com/"><span class="glyphicon glyphicon-envelope"></span></a></li>
                         <!--ACCOUNT DETAILS-->
                         <li class="dropdown">

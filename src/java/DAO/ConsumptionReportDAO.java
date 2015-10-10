@@ -115,7 +115,7 @@ public class ConsumptionReportDAO {
     public Integer getProductionNumber() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
-        int i = 0;
+        Integer i = 0;
         String query = "SELECT MAX(productionNumber) from consumption_report";
         PreparedStatement ps = conn.prepareStatement(query);
 

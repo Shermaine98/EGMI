@@ -3,8 +3,6 @@
     Created on : 08 20, 15, 6:43:37 PM
     Author     : Geraldine
 --%>
-
-<%@page import="Model.SupplierPurchaseOrder"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <!DOCTYPE html>
@@ -39,9 +37,7 @@
                     </tr><tr>
                         <th>Date Made</th>
                         <td><input type="text" name="dateMade" class="input" readonly
-                                   value="<% SupplierPurchaseOrder x = new SupplierPurchaseOrder();
-                                       x.setDateMade();
-                                   %><%=x.getDateMade()%>"/></td> 
+                                   value=""/></td> 
                     </tr><tr>
                         <th>Delivery Date</th>
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>  

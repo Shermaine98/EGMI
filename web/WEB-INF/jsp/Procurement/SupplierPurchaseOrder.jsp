@@ -4,7 +4,7 @@
     Author     : Geraldine
 --%>
 
-<%@page import="Model.SupplierPurchaseOrder"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
-        <script type="text/javascript" src="bootstrap/js/jquery.autocomplete.js"></script>
+        <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <script src="bootstrap/js/jquery-ui.js"></script>
         <title>Encode Supplier Purchase Order</title>
          <script>
@@ -28,8 +28,8 @@
         </script>
     </head>
     <body>  
-        <br/><br/><br/>
-
+        <br/>
+        <% ArrayList<String> SupplierName = (ArrayList<String>) request.getAttribute("supplierName");     %>
     <center><h2>Encode Supplier Purchase Order</h2></center><br/>
     <form method="POST" action="EncodeSupplierPurchaseOrderServlet">
         <div align="center" class="container">
@@ -45,22 +45,21 @@
                         <th>Prepared By</th>
                         <td><input type="hidden" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%> <%= user.getLastName()%> </td>
                     </tr><tr>
-                        <th>Date Made</th>
-                        <td><input type="text" class="input" name="dateMade" id="dateMade"/></td>  
-                    </tr><tr>
-                        <th>Delivery </th>
+                        <th>Delivery Date </th>
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                     </tr><tr>
                         <th>Supplier</th>
-                        <td><input type="text" class="input" name="dateMade" /></td>                 
+                        <td><select name="supplierName">
+                                <%for(int i=0; i<SupplierName.size();i++){%>
+                                <option value="<%= SupplierName.get(i) %>"><%= SupplierName.get(i) %></option>
+                                <%}%>       
+                                    </select>    </td>               
                     </tr>
                 </thead>
-
             </table>
-                    <input type="text" style="width:35%; height:35px" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
+                <input type="text" style="width:35%; height:35px" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
                 <input type="hidden" name="itemName" id="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
                 <input type="Button" onClick="getItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
-
             <br/><br/>
             <table class="table table-bordered width">
                 <thead>
