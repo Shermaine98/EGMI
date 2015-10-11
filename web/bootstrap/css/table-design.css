@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 10, 15, 9:17:37 PM
+    Author     : Geraldine
+*/
+
+
+.table{
+    width:45%;
+    vertical-align: middle;
+}
+
+/*Makes input box transparent*/
+input[type="text"]{
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    cursor:default;
+}
+
+input[type="number"]{
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    cursor:default;
+}
+
+.search {
+    width:250px;
+    height:35px;
+    outline: none;
+    padding:5px;
+}
+
+.pantsTable {
+    width:30%;
+    vertical-align: middle;
+    padding:10px;
+}

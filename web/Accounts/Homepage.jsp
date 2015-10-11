@@ -11,14 +11,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home | Welcome to Hammerhead!</title>
-        
+
         <style>
             p{
-                padding: 20px;
                 font-size: 40px;
             }
+            .padding{
+                padding-top:100px; padding-left: 50px;
+            }
         </style>
-         <script>
+        <script>
             function updateClock( )
             {
                 var currentTime = new Date( );
@@ -45,9 +47,10 @@
                 var d = new Date();
                 var month = d.getMonth() + 1;
                 var day = d.getDate();
-                var output = d.getFullYear() + '-' +
-                        (('' + month).length < 2 ? '0' : '') + month + '' +
-                        (('' + day).length < 2 ? '0' : '') + day;
+                var output =  
+                        (('' + month).length < 2 ? '0' : '') + month + '-' +
+                        (('' + day).length < 2 ? '0' : '') + day + '-' + d.getFullYear();
+
                 document.getElementById('Today').value = output + "   " + currentTimeString;
 
             }
@@ -60,11 +63,11 @@
         </script>
     </head>
     <body>
-        <p><%= user.getFirstName()%> <%= user.getLastName()%> </p>
-         <p>Today is  <input type="text" class="input" id="Today" /></p>
-    
-    
+        <div class="padding">
+            <p>Welcome, <%= user.getFirstName()%> <%= user.getLastName()%>! </p>
+            <p>Today is  <input type="text" id="Today" /></p>
+        </div>
     </body>
-    
-    
+
+
 </html>
