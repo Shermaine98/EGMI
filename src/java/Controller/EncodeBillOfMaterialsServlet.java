@@ -1,13 +1,9 @@
 package Controller;
 
 import DAO.BillOfMaterialsDAO;
-import DAO.ConsumptionReportDAO;
 import Model.BillOfMaterials;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,12 +33,12 @@ public class EncodeBillOfMaterialsServlet extends BaseServlet {
         ArrayList<BillOfMaterials> arrBillOfMaterials = new ArrayList<>();
         BillOfMaterialsDAO billOfMaterialsDAO = new BillOfMaterialsDAO();
 
-        String productID = request.getParameter("productID");
-        String productName = request.getParameter("productName");
-        String sizeName = request.getParameter("sizeName");
-        String[] itemCode = request.getParameterValues("itemCode");
-        String[] itemConsumption = request.getParameterValues("itemConsumption");
-        String[] unitMeasurement = request.getParameterValues("unitMeasurement");
+        String productID = request.getParameter("productIDModal");
+        String productName = request.getParameter("productNameModal");
+        String sizeName = request.getParameter("sizeTypeModal");
+        String[] itemCode = request.getParameterValues("itemCodeModal");
+        String[] itemConsumption = request.getParameterValues("itemConsumptionModal");
+        String[] unitMeasurement = request.getParameterValues("unitMeasurementModal");
 
         boolean x = false;
         for (int i = 0; i < itemCode.length; i++) {
@@ -64,7 +60,7 @@ public class EncodeBillOfMaterialsServlet extends BaseServlet {
         if (x == true) {
            
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/ProductCreation/ViewBillOfMaterials.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("SetPDIDServlet");
             request.setAttribute("BillofMaterials", arrBillOfMaterials);
             rd.forward(request, response);
         } else {
