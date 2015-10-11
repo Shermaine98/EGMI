@@ -43,7 +43,7 @@ public class SearchSupplierServlet extends HttpServlet {
             String supplierName = request.getParameter("query");
             ArrayList<RefSupplier> refSupplier = new RefSupplierDAO().searchSupplier(supplierName);
             ArrayList<String> SupplierName = new ArrayList<String>();
-           
+           System.out.println(supplierName);
             for (int i=0; i<refSupplier.size();i++){
               SupplierName.add(refSupplier.get(i).getCompanyName());
             } 

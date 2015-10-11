@@ -68,6 +68,10 @@
         <servlet-name>SearchSupplierServlet</servlet-name>
         <servlet-class>Controller.SearchSupplierServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchItemSuppliersServlet</servlet-name>
+        <servlet-class>Controller.SearchItemSuppliersServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>SearchSupplierServlet</servlet-name>
         <url-pattern>/SearchSupplierServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchItemSuppliersServlet</servlet-name>
+        <url-pattern>/SearchItemSuppliersServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

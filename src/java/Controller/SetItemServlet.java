@@ -41,6 +41,7 @@ public class SetItemServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+           
             String itemName = request.getParameter("itemName");
             ArrayList<RefItem> RefItemList = new RefItemDAO().searchItemName(itemName);
             JSONArray array = new JSONArray();

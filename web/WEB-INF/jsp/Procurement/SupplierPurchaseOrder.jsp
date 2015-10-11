@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-         <script type="text/javascript" src="js/searchSupplier.js"></script>
+        <script type="text/javascript" src="js/searchSupplier.js"></script>
         <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
        
         <title>Encode Supplier Purchase Order</title>
@@ -51,14 +51,14 @@
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                     </tr><tr>
                         <th>Supplier</th>
-                        <td> <input type="text" style="width:35%; height:35px" name="supplierName" id="supplierName" onkeydown="autoComplete()" placeholder="Search Supplier"/>
-                    <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
+                        <td> <input type="text" style="width:35%; height:35px" name="supplierName" id="supplierName" onkeydown="autoCompleteSupplier()" placeholder="Search Supplier"/>
+                    <input type="hidden" name="supplierName" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
                     </tr>
                 </thead>
             </table>
-                <input type="text" style="width:35%; height:35px" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
-                <input type="hidden" name="itemName" id="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                <input type="Button" onClick="getItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
+                <input type="text" style="width:35%; height:35px" name="itemNameSupplier" id="itemNameSupplier" onkeydown="autoCompleteSupplierItem()" placeholder="Search Item"/>
+                <input type="hidden" name="itemNameSupplier" id="itemNameSupplier" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
+                <input type="Button" onClick="getItemSupplierItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
             <br/><br/>
             <table class="table table-bordered width">
                 <thead>
