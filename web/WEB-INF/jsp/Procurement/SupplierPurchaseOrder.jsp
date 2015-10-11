@@ -49,13 +49,13 @@ var spoNumber = '${SPONumber}';
                             <td class="value"><input class="input" type="text" name="poNumber" id="poNumber" readonly /></td>
                         </tr><tr>
                             <th>Prepared By</th>
-                            <td><input type="hidden" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%> <%= user.getLastName()%> </td>
+                            <td><input type="hidden" name="preparedBy" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%> <%= user.getLastName()%> </td>
                         </tr><tr>
                             <th>Delivery </th>
                             <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                         </tr><tr>
                            <th>Supplier</th>
-                        <td> <input type="text" name="supplierName" id="supplierName" onkeydown="autoCompleteSupplier()" placeholder="Search Supplier"/>
+                        <td> <input type="text" name="supplier" id="supplierName" onkeydown="autoCompleteSupplier()" placeholder="Search Supplier"/>
                     <input type="hidden" name="supplierName" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
                     </tr>
                 </thead>
