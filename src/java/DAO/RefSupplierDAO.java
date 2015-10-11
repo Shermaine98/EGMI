@@ -25,16 +25,17 @@ public class RefSupplierDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into `ref_supplier`"
-                    + "(supplierID,itemCode,itemName,companyName,companyAddress,contactPerson,contactNumber) "
-                    + "values (?,?,?,?,?,?,?)";
+                    + "(supplierID,itemCode,itemName,unitPrice,companyName,companyAddress,contactPerson,contactNumber) "
+                    + "values (?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, newRefSupplier.getSupplierID());
             pstmt.setInt(2, newRefSupplier.getItemCode());
             pstmt.setString(3, newRefSupplier.getItemName());
-            pstmt.setString(4, newRefSupplier.getCompanyName());
-            pstmt.setString(5, newRefSupplier.getCompanyAddress());
-            pstmt.setString(6, newRefSupplier.getContactPerson());
-            pstmt.setFloat(7, newRefSupplier.getContactNumber());
+            pstmt.setDouble(4, newRefSupplier.getUnitPrice());
+            pstmt.setString(5, newRefSupplier.getCompanyName());
+            pstmt.setString(6, newRefSupplier.getCompanyAddress());
+            pstmt.setString(7, newRefSupplier.getContactPerson());
+            pstmt.setFloat(8, newRefSupplier.getContactNumber());
 
             int rows = pstmt.executeUpdate();
             conn.close();
@@ -59,6 +60,7 @@ public class RefSupplierDAO {
 
                 newRefSupplier.setSupplierID(rs.getInt("supplierID"));
                 newRefSupplier.setItemCode(rs.getInt("itemCode"));
+                 newRefSupplier.setUnitPrice(rs.getDouble("unitPrice"));
                 newRefSupplier.setItemName(rs.getString("itemName"));
                 newRefSupplier.setCompanyName(rs.getString("companyName"));
                 newRefSupplier.setCompanyAddress(rs.getString("companyAddress"));
@@ -80,39 +82,12 @@ public class RefSupplierDAO {
         return null;
     }
     
-     public ArrayList<String> GetSupplierName() {
-        ArrayList<String> refSupplier = new ArrayList<>();
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT companyName FROM `ref_supplier` group by companyName");
-
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                RefSupplier newRefSupplier = new RefSupplier();
-                newRefSupplier.setCompanyName(rs.getString("companyName"));
-                refSupplier.add(newRefSupplier.getCompanyName());
-            
-            }
-
-            pstmt.close();
-            rs.close();
-            conn.close();
-
-            return refSupplier;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RefSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    
+  
      public ArrayList<RefSupplier> searchSupplier(String supplierName) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
 
-        String query = "SELECT * FROM `ref_supplier` WHERE companyName LIKE '%"+ supplierName + "%' group by companyName ";
-        PreparedStatement ps = conn.prepareStatement(query);
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_supplier` WHERE companyName LIKE '%"+ supplierName + "%' group by companyName");
         ArrayList<RefSupplier> RefSupplierList = new ArrayList();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -136,14 +111,14 @@ public class RefSupplierDAO {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
 
-        String query = "SELECT * FROM `ref_supplier` WHERE companyName = "+company +" and itemName Like '%"+itemName+"%'";
-        PreparedStatement ps = conn.prepareStatement(query);
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_supplier` WHERE companyName = '"+ company +"' and itemName LIKE '%"+ itemName + "%'");
         ArrayList<RefSupplier> RefSupplierList = new ArrayList();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
              RefSupplier RefSupplierN = new RefSupplier();
              RefSupplierN.setSupplierID(rs.getInt("supplierID"));
              RefSupplierN.setItemCode(rs.getInt("itemCode"));
+             RefSupplierN.setUnitPrice(rs.getInt("unitPrice"));
              RefSupplierN.setItemName(rs.getString("itemName"));
              RefSupplierN.setCompanyName(rs.getString("companyName"));
              RefSupplierN.setCompanyAddress(rs.getString("companyAddress"));
@@ -156,5 +131,28 @@ public class RefSupplierDAO {
         return RefSupplierList;
 
     }
-    
+   public ArrayList<RefSupplier> setSupplierItem(String itemName,String company) throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_supplier` WHERE companyName = '"+ company +"' and itemName ='"+ itemName + "'");
+        ArrayList<RefSupplier> RefSupplierList = new ArrayList();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+             RefSupplier RefSupplierN = new RefSupplier();
+             RefSupplierN.setSupplierID(rs.getInt("supplierID"));
+             RefSupplierN.setItemCode(rs.getInt("itemCode"));
+              RefSupplierN.setUnitPrice(rs.getDouble("unitPrice"));
+             RefSupplierN.setItemName(rs.getString("itemName"));
+             RefSupplierN.setCompanyName(rs.getString("companyName"));
+             RefSupplierN.setCompanyAddress(rs.getString("companyAddress"));
+             RefSupplierN.setContactPerson(rs.getString("contactPerson"));
+             RefSupplierN.setContactNumber(rs.getFloat("contactNumber"));
+             
+             RefSupplierList.add(RefSupplierN);  
+        }
+        rs.close();
+        return RefSupplierList;
+
+    }  
 }

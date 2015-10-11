@@ -12,6 +12,7 @@ public class RefSupplier {
 
     private int supplierID;
     private int itemCode;
+     private double unitPrice;
     private String itemName;
     private String companyName;
     private String companyAddress;
@@ -114,6 +115,20 @@ public class RefSupplier {
      */
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    /**
+     * @return the unitPrice
+     */
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    /**
+     * @param unitPrice the unitPrice to set
+     */
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
 }

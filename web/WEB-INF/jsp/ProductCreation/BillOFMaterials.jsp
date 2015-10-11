@@ -17,8 +17,13 @@
         <script src="js/searchItem.js"></script>
         <script src="js/deleteRow.js"></script>
         <title>Bill of Materials</title>
-
+        <style>input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}</style>
         <script>
+            
             $(document).ready(function () {
                 var prID = '${BoMPrNumber}';
                 document.getElementById('productID').value = prID;
