@@ -1,4 +1,5 @@
 var i = 1;
+var x= true;
 function autoCompleteSupplier() {
     $("#supplierName").devbridgeAutocomplete({
         serviceUrl: 'SearchSupplierServlet',
@@ -16,7 +17,6 @@ function autoCompleteSupplier() {
         }
     });
 }
-
 function autoCompleteSupplierItem() {
     var supplierName = document.getElementById('supplierName').value;
     if (supplierName == "") {
@@ -32,20 +32,15 @@ function autoCompleteSupplierItem() {
         });
     }
 }
-var x= true;
 function chk(){
     if (i > 1) {
          var itemNameSupplier = document.getElementById('itemNameSupplier').value;
         $("#data tbody tr").each(function () {
             var $this = $(this);
             var chk= $this.find('[id="itemName\\[\\]"]').val();
-              console.log(chk);
                if (itemNameSupplier == chk ) {
-              
-                x = false;
-            }else{
-                  x=true;  
-                }
+                 x = false;
+            }
             }  
         );
     }
@@ -54,8 +49,8 @@ function chk(){
 }
 
 function getSupplierItem() {
-
-    var x = chk();
+     x=true;
+     x = chk();
     var itemNameSupplier = document.getElementById('itemNameSupplier').value;
     var supplierName = document.getElementById('supplierName').value;
     
@@ -81,6 +76,6 @@ function getSupplierItem() {
             }
         });
     } else{
-        window.alert("item Already Added;")
+        window.alert("item Already Added;");      
     }
 }
