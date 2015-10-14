@@ -94,7 +94,6 @@ public class DeliveryReceiptDAO {
         } else {
             i += 1;
         }
-
         rs.close();
         return i;
     }
