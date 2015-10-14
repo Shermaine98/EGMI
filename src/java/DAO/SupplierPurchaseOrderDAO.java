@@ -103,7 +103,9 @@ public class SupplierPurchaseOrderDAO {
         }
         if (i == 0) {
             i = 70000000;
-        } else {
+        } else if (i==79999999)
+            i=-1;
+        else {
             i += 1;
         }
 

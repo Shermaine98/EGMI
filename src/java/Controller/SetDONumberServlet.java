@@ -1,6 +1,7 @@
 package Controller;
 
-import DAO.SupplierPurchaseOrderDAO;
+import DAO.ConsumptionReportDAO;
+import DAO.DeliveryOrderDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,25 +20,22 @@ import javax.servlet.http.HttpServletResponse;
  * @author Nunez
  *
  */
-public class SetSPOServlet extends BaseServlet {
+public class SetDONumberServlet extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
-        SupplierPurchaseOrderDAO DAO = new SupplierPurchaseOrderDAO();
-        Integer SupplierpurchaseOrder=0;
-        try {
-            SupplierpurchaseOrder = DAO.getSupplierPurchaseOrderNumber();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SetSPOServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        ServletContext context = getServletContext();
 
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/SupplierPurchaseOrder.jsp");
-        request.setAttribute("SPONumber",SupplierpurchaseOrder );
-    
+        DeliveryOrderDAO DAO = new DeliveryOrderDAO();
+        Integer deliveryOrderNumber=0;
+        try {
+            deliveryOrderNumber = DAO.getDeliveryOrderNumber();
+        } catch (SQLException ex) {
+            Logger.getLogger(SetDONumberServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ServletContext context = getServletContext();
+        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Delivery/DeliveryOrder.jsp");
+        request.setAttribute("data", "none");
+        request.setAttribute("doNumber", deliveryOrderNumber);
         rd.forward(request, response);
 
     }

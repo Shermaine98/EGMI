@@ -77,7 +77,7 @@ public class RefItemDAO {
      public ArrayList<RefItem> searchItemName(String itemName) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
-
+        
         String query = "SELECT * FROM `ref_item` WHERE itemName LIKE '%"+ itemName + "%'";
         PreparedStatement ps = conn.prepareStatement(query);
         ArrayList<RefItem> RefItem = new ArrayList();

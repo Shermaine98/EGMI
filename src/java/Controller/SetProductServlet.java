@@ -34,7 +34,7 @@ public class SetProductServlet extends BaseServlet {
                 Logger.getLogger(SearchProductServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
            
-  request.setAttribute("data", "success");
+             request.setAttribute("data", "success");
             request.setAttribute("BillOfMaterialsConsumption", BillOfMaterialsListALL);
             RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/ProductCreation/ConsumptionReport.jsp");
             rd.forward(request, response);

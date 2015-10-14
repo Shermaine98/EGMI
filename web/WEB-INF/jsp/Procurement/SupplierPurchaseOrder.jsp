@@ -19,17 +19,19 @@
         <script src="js/deleteRow.js"></script>
         <script src="bootstrap/js/jquery-ui.js"></script>
         <title>Encode Supplier Purchase Order</title>
-        <style>input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}</style>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+        </style>
         <script>
             $(document).ready(function () {
-var spoNumber = '${SPONumber}';
-    document.getElementById('poNumber').value = spoNumber;
-            
-    });
+                var spoNumber = '${SPONumber}';
+                document.getElementById('poNumber').value = spoNumber;
+
+            });
 
         </script>
     </head>
@@ -54,35 +56,35 @@ var spoNumber = '${SPONumber}';
                             <th>Delivery </th>
                             <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>                 
                         </tr><tr>
-                           <th>Supplier</th>
-                        <td> <input type="text" name="supplier" id="supplierName" onkeydown="autoCompleteSupplier()" placeholder="Search Supplier"/>
-                    <input type="hidden" name="supplierName" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
-                    </tr>
-                </thead>
-            </table>
+                            <th>Supplier</th>
+                            <td> <input type="text" name="supplier" id="supplierName" onkeydown="autoCompleteSupplier()" placeholder="Search Supplier"/>
+                                <input type="hidden" name="supplierName" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>  </td>               
+                        </tr>
+                    </thead>
+                </table>
                 <input type="text" style="width:35%; height:35px" name="itemNameSupplier" id="itemNameSupplier" onkeydown="autoCompleteSupplierItem()" placeholder="Search Item"/>
                 <input type="hidden" name="itemNameSupplier" id="itemNameSupplier" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
                 <input type="Button" onClick="getSupplierItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
-            <br/><br/>
-            <table id ="data" class="table table-bordered width">
-<!--                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Item Name</th>
-                            <th>Unit Price</th>
-                            <th>Quantity</th>
-                            <th>Total Quantity Price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataTable">
-                        <tr>  
-                            <td><input type="checkbox" name="chk" /></td>
-                            <td><input type="text" class="input" name="unitPrice"></td>
-                            <td><input type="text" class="input" name="qty"/></td>
-                            <td><input type="text" class="input" name="qty"/></td>
-                            <td><input type="text" class="input" name="Total Price" value ="" readonly /></td>
-                        </tr>
-                    </tbody>-->
+                <br/><br/>
+                <table id ="data" class="table table-bordered width">
+                    <!--                    <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Item Name</th>
+                                                <th>Unit Price</th>
+                                                <th>Quantity</th>
+                                                <th>Total Quantity Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dataTable">
+                                            <tr>  
+                                                <td><input type="checkbox" name="chk" /></td>
+                                                <td><input type="text" class="input" name="unitPrice"></td>
+                                                <td><input type="text" class="input" name="qty"/></td>
+                                                <td><input type="text" class="input" name="qty"/></td>
+                                                <td><input type="text" class="input" name="Total Price" value ="" readonly /></td>
+                                            </tr>
+                                        </tbody>-->
                 </table>
                 <table class="table table-bordered" style="width:20%;">
                     <tr>
@@ -91,7 +93,7 @@ var spoNumber = '${SPONumber}';
                     </tr>
                 </table>
                 <br/><br/>
-                
+
                 <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('data')" />
                 <br/><br/>
                 <input type="submit" class="btn btn-danger" value="Submit">
@@ -100,12 +102,12 @@ var spoNumber = '${SPONumber}';
             </form>
         </div>
         <script>
-            
-                    $(function () {
+
+            $(function () {
                 $("#datepicker").datepicker({minDate: 1, maxDate: "+4M +10D", dateFormat: 'yy-mm-dd'});
 
             });
-          $('form').on('focus', 'input[type=number]', function (e) {
+            $('form').on('focus', 'input[type=number]', function (e) {
                 $(this).on('mousewheel.disableScroll', function (e) {
                     e.preventDefault();
                 });

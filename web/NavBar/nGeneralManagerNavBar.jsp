@@ -48,7 +48,7 @@
                                 <li><a href="/EGMI/SetSPOServlet">Encode Supplier Purchase Order</a></li>
                                 <li><a href="">View Supplier Purchase Order</a></li>
                                 <li><a href="">Subcontractor Purchase Order</a></li>
-                                <li><a href="SubconPurchaseOrder.jsp">Encode Subcontractor Purchase Order</a></li>
+                                <li><a href="/EGMI/SetSubPOServlet">Encode Subcontractor Purchase Order</a></li>
                                 <li><a href="">View Subcontractor Purchase Order</a></li>
                                 <li><a href="Receiving.jsp">Receiving</a></li>
                                 <li class="divider"></li>
@@ -75,10 +75,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Delivery
                                 <span class="caret"></span></a> 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="ReplenishmentRequest.jsp">Replenishment Request</a></li>
-                                <li><a href="PickingForm.jsp">Picking Form</a></li>
-                                <li><a href="/EGMI/GetPickingFormForDeliveryOrderServlet">Delivery Order</a></li>
-                                <li><a href="DeliveryReceipt.jsp">Delivery Receipt</a></li>
+                                <li><a href="/EGMI/SetDONumberServlet">Delivery Order</a></li>
+                                <li><a href="">Replenishment Request</a></li>
+                                <li><a href="">Picking Form</a></li>
+                                <li><a href="/EGMI/SetDRNumberServlet">Delivery Receipt</a></li>
                             </ul>
                         </li>
 

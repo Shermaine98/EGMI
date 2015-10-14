@@ -76,6 +76,26 @@
         <servlet-name>SetSupplierItemServlet</servlet-name>
         <servlet-class>Controller.SetSupplierItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetSubPOServlet</servlet-name>
+        <servlet-class>Controller.SetSubPOServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetDONumberServlet</servlet-name>
+        <servlet-class>Controller.SetDONumberServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetDRNumberServlet</servlet-name>
+        <servlet-class>Controller.SetDRNumberServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSuppliersAndItemServlet</servlet-name>
+        <servlet-class>Controller.ViewSuppliersAndItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSubcontractorAndServiceServlet</servlet-name>
+        <servlet-class>Controller.ViewSubcontractorAndServiceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -143,6 +163,26 @@
     <servlet-mapping>
         <servlet-name>SetSupplierItemServlet</servlet-name>
         <url-pattern>/SetSupplierItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetSubPOServlet</servlet-name>
+        <url-pattern>/SetSubPOServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetDONumberServlet</servlet-name>
+        <url-pattern>/SetDONumberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetDRNumberServlet</servlet-name>
+        <url-pattern>/SetDRNumberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSuppliersAndItemServlet</servlet-name>
+        <url-pattern>/ViewSuppliersAndItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSubcontractorAndServiceServlet</servlet-name>
+        <url-pattern>/ViewSubcontractorAndServiceServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

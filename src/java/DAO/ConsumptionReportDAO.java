@@ -125,7 +125,9 @@ public class ConsumptionReportDAO {
         }
         if (i == 0) {
             i = 300000000;
-        } else {
+        } else if (i==399999999)
+            i= -1;
+        else {
             i += 1;
         }
 

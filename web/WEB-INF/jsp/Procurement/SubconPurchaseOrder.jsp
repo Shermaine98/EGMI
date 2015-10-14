@@ -3,6 +3,8 @@
     Created on : 08 20, 15, 6:43:37 PM
     Author     : Geraldine
 --%>
+
+<%@page import="Model.SupplierPurchaseOrder"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <!DOCTYPE html>
@@ -14,9 +16,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <title>Encode Subcontractor Purchase Order</title>
+        <script src="/bootstrap/js/addRow.js"></script>
+        <script src="/bootstrap/js/deleteRow.js"></script>
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
         <script src="bootstrap/js/jquery-ui.js"></script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                var subPONumber = '${SubPONumber}';
+                document.getElementById('poNumber').value = subPONumber;
 
+            });
+
+        </script>
     </head>
 
     <body>  
@@ -27,7 +45,7 @@
             <table class="table table-bordered" style="width:30%">
                 <thead><tr>
                         <th>Purchase Order No.</th>
-                        <td class="value"><input type="text" class="input" name="poNumber"/></td>
+                        <td class="value"><input type="text" class="input" name="poNumber" id="poNumber"/></td>
                     </tr><tr>
                         <th>Production No.</th>
                         <td><input type="text" class="input" name="itemCode"/></td>
@@ -35,9 +53,6 @@
                         <th>Prepared By</th>
                         <td><input type="hidden" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%></td>
                     </tr><tr>
-                        <th>Date Made</th>
-                        <td><input type="text" name="dateMade" class="input" readonly
-                                   value=""/></td> 
                     </tr><tr>
                         <th>Delivery Date</th>
                         <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>  

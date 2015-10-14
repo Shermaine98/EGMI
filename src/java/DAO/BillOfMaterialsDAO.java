@@ -118,7 +118,9 @@ public class BillOfMaterialsDAO {
         }
          if(i ==0){
             i=200000000;
-        }else{
+        }else if (i==299999999)
+            i=-1;
+         else{
             i+=1;}
         rs.close();
         return i;

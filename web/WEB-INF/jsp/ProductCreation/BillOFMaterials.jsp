@@ -67,7 +67,7 @@
                 <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
                 <input type="Button" onClick="getItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
                 <br/><br/>
-                <table  id="thisTable"class="table table-bordered" style="width:47%">
+                <table  id="thisTable" class="table table-bordered" style="width:47%">
                     <colgroup>
                         <col style="width:3%" />
                     </colgroup>

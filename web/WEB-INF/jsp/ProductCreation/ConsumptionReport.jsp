@@ -17,13 +17,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <title>Encode Consumption Report</title>
+                <script>
+            $(document).ready(function () {
+                var pdID = '${CRPRNumber}';
+                document.getElementById('productionNumber').value = pdID;
+            });
+
+        </script>
     </head>
 
 
     <body>  
         <br/>
         <div align="center">
-            <h2>Encode Bill of Materials</h2>
+            <h2>Search Bill of Materials</h2>
             <form method="POST" action="SetProductServlet">
                 <input class="search" name="productName1" id="productName1" onkeydown="autoComplete();" placeholder="Search Item"/>
                 <input type="hidden" name="productName1" id="productName1" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
@@ -35,8 +42,7 @@
         <%        String data = (String) request.getAttribute("data");
             if (data.equals("success")) {
                 ArrayList<BillOfMaterials> billOfMaterialspID = (ArrayList<BillOfMaterials>) request.getAttribute("BillOfMaterialsConsumption");
-                Integer n = (Integer) request.getAttribute("CRPRNumber");
-
+               
         %>
 
         <br/>
@@ -46,7 +52,7 @@
 
                 <table class="table table-bordered">
                     <th>Production #</th>
-                    <td class="value"><input type="text" name="productionNumber" value="<%=n%>" readonly/></td>
+                    <td class="value"><input type="text" id="productionNumber" name="productionNumber"  readonly/></td>
                     <tr>
                         <th>Prepared By</th> 
                         <td><input type="hidden" name="preparedBy" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%> <%= user.getLastName()%></td>
