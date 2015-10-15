@@ -53,7 +53,7 @@ import java.text.SimpleDateFormat;
      * @param lastName the lastName to set
      */
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
     }
 
     /**
@@ -67,7 +67,7 @@ import java.text.SimpleDateFormat;
      * @param firstName the firstName to set
      */
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
     }
 
     /**

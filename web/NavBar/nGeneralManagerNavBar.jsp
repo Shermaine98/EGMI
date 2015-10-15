@@ -12,6 +12,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/table-design.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <!--<title>Welcome to Hammerhead!</title>-->
     </head>
@@ -96,7 +97,9 @@
 
                     <!--MAIL-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li>Today is<input type="text" class="input" name="dateMade" id="dateMade" /></li>
+                        <li>Today is <input type="text" name="dateMade" id="dateMade" readonly 
+                                            style="height: 50px; 
+                                            line-height: 15px;" /></li>
                         <li><a href="https://mail.google.com/"><span class="glyphicon glyphicon-envelope"></span></a></li>
                         <!--ACCOUNT DETAILS-->
                         <li class="dropdown">
@@ -143,9 +146,9 @@
                 var d = new Date();
                 var month = d.getMonth() + 1;
                 var day = d.getDate();
-                var output = d.getFullYear() + '-' +
-                        (('' + month).length < 2 ? '0' : '') + month + '' +
-                        (('' + day).length < 2 ? '0' : '') + day;
+                var output = 
+                        (('' + month).length < 2 ? '0' : '') + month + '-' +
+                        (('' + day).length < 2 ? '0' : '') + day + "-" + d.getFullYear();
                 document.getElementById('dateMade').value = output + "   " + currentTimeString;
 
             }
