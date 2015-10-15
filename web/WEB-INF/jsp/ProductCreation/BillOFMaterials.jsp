@@ -42,7 +42,7 @@
             <br/><br/>
 
             <div align="center" class="container">
-                <table class="table width35 table-bordered">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Product ID</th>
@@ -63,9 +63,9 @@
                         </tr>
                     </thead>
                 </table>
-                <input type="text" style="width:35%; height:35px" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
-                <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                <input type="Button" onClick="getItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
+                <input type="text" name="itemName" id="ItemName" onkeydown="autoComplete()" placeholder="Search Item"/>
+                <input type="hidden" name="itemName" id ="ItemName" disabled="disabled" style="color: #CCC; position: absolute;"/>
+                <input type="Button" onClick="getItem()" class="btn btn-danger" value="ADD ITEM">
                 <br/><br/>
                 <table  id="thisTable" class="table table-bordered" style="width:47%">
                     <colgroup>
