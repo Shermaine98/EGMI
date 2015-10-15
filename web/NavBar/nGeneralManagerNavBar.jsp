@@ -25,7 +25,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li> <a href="Accounts/Homepage.jsp">Home</a></li>
+                        <li> <a href="/EGMI/Login?action=goToHome">Home</a></li>
                         <!--Product Creation-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product Creation

@@ -43,6 +43,7 @@ public class Login extends HttpServlet {
 
             user.setUserName(request.getParameter("username"));
             user.setPassword(request.getParameter("password"));
+            String action = request.getParameter("action");
             
             UserDAO UserDAO = new UserDAO();
             boolean successful = UserDAO.authenticate(user);
@@ -53,6 +54,10 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("login", user);
                 session.setAttribute("successful", "successful");
+                rd.forward(request, response);
+            } else if(action.equals("goToHome")) {
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/Accounts/Homepage.jsp");
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();
