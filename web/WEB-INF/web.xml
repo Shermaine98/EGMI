@@ -85,10 +85,6 @@
         <servlet-class>Controller.SetDONumberServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SetDRNumberServlet</servlet-name>
-        <servlet-class>Controller.SetDRNumberServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewSuppliersAndItemServlet</servlet-name>
         <servlet-class>Controller.ViewSuppliersAndItemServlet</servlet-class>
     </servlet>
@@ -151,10 +147,6 @@
     <servlet>
         <servlet-name>ReconcileServlet</servlet-name>
         <servlet-class>Controller.ReconcileServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeliveryScheduleServlet</servlet-name>
-        <servlet-class>Controller.DeliveryScheduleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
@@ -233,10 +225,6 @@
         <url-pattern>/SetDONumberServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SetDRNumberServlet</servlet-name>
-        <url-pattern>/SetDRNumberServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewSuppliersAndItemServlet</servlet-name>
         <url-pattern>/ViewSuppliersAndItemServlet</url-pattern>
     </servlet-mapping>
@@ -299,10 +287,6 @@
     <servlet-mapping>
         <servlet-name>ReconcileServlet</servlet-name>
         <url-pattern>/ReconcileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeliveryScheduleServlet</servlet-name>
-        <url-pattern>/DeliveryScheduleServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

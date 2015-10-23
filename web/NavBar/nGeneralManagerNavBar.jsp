@@ -100,8 +100,6 @@
                                 <li><a href="/EGMI/SetDONumberServlet">Delivery Order</a></li>
                                 <li><a href="">Replenishment Request</a></li>
                                 <li><a href="">Picking Form</a></li>
-                                <li><a href="/EGMI/SetDRNumberServlet">Delivery Schedule</a></li>
-                                <li><a href="/EGMI/SetDRNumberServlet">Delivery Receipt</a></li>
                             </ul>
                         </li>
 
