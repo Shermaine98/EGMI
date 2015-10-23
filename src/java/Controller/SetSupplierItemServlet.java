@@ -50,6 +50,7 @@ public class SetSupplierItemServlet extends HttpServlet {
             for (int i = 0; i < RefSupplierItem.size(); i++) {
                 JSONObject obj = new JSONObject();
                 try {
+                    obj.put("supplier", RefSupplierItem.get(i).getSupplierID());
                     obj.put("itemName", RefSupplierItem.get(i).getItemName());
                     obj.put("itemCode", RefSupplierItem.get(i).getItemCode());
                     obj.put("unitPrice", RefSupplierItem.get(i).getUnitPrice());

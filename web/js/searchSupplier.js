@@ -67,14 +67,15 @@ function getSupplierItem() {
                                 $('#itemNameSupplier').val('');
                             });
                 }
+                
                 else if (i == 1) {
-                    $('#data').append('<tr><th></th><th>Item Name</th> <th> Unit Price</th> <th>Quantity</th> <th>Total Quantity Price </th> <th>Note</th></tr>');
+                    $('#data').append('<tr><th><input type="hidden" name="supplierId" value="' + data[0].supplier + '"/></th><th>Item Name</th> <th> Unit Price</th> <th>Quantity</th> <th>Total Quantity Price </th> <th>Note</th></tr>');
                     i++;
                     $('#supplierName').attr("disabled", "disabled");
                 }
                 if (data[0] != null) {
                     $('#data').append('<tr class="trclass"><td> <input type="checkbox" name="chk" /> </td>\n\
-                    <td><input type="hidden" name = "itemCode"/>\n\
+                    <td> <input type="hidden" name ="itemCode" value="' + data[0].itemCode + '" />\n\
                       <input type="text" class="transparentBg cellWidth readonlyWhite" readonly id= "itemName[]" value="' + data[0].itemName + '"/> </td>\n\
                     <td><input type="text" class="transparentBg readonlyWhite" readonly style="width:60px;" id="unitPrice[]" name = "unitPrice" value="' + data[0].unitPrice + '"/></td>\n\
                      <td> <input type="number" class="transparentBg" style="width:60px;" id="volumeQty[]" name="volumeQty" onChange="SolveTQP();"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"/> </td>\n\

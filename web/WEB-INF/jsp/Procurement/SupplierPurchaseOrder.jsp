@@ -52,7 +52,7 @@
                         <input type="text" name="deliveryDate" class="form-control readonlyWhite" id="datepicker" readonly /><br/>
                         <label class="" for="supplier">Supplier</label>
                         <input type="text" name="supplier" class="form-control" id="supplierName" onkeypress="autoCompleteSupplier()" placeholder="Search Supplier" /><br/>
-                        <input type="hidden" name="supplierName" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
+                        <input type="hidden" name="supplier" id ="supplierName" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
                     </div>
                 </div>
 

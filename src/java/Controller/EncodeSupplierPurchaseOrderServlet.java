@@ -36,36 +36,27 @@ public class EncodeSupplierPurchaseOrderServlet extends BaseServlet {
             ArrayList<SupplierPurchaseOrder> arrSupplierPurchaseOrder = new ArrayList<SupplierPurchaseOrder>();
             SupplierPurchaseOrderDAO supplierPurchaseOrderDAO = new SupplierPurchaseOrderDAO();
 
-            String[] poNumber = request.getParameterValues("poNumber");
+            String poNumber = request.getParameter("poNumber");
             String[] itemCode = request.getParameterValues("itemCode");
-            String[] inventoryType = request.getParameterValues("inventoryType");
-            String[] supplier = request.getParameterValues("supplier");
+            String supplier = request.getParameter("supplierId");
             String[] volumeQty = request.getParameterValues("volumeQty");
-            String[] unitPrice = request.getParameterValues("unitPrice");
-            String[] deliveryDate = request.getParameterValues("deliveryDate");
-            String[] preparedBy =  request.getParameterValues("preparedBy");
-            String[] approvedBy = request.getParameterValues("approvedBy");
+            String deliveryDate = request.getParameter("deliveryDate");
+            String preparedBy =  request.getParameter("preparedBy");
             String[] receivingStatus = request.getParameterValues("receivingStatus");
             String[] reconcileStatus = request.getParameterValues("reconcileStatus");
             String[] note = request.getParameterValues("note");
             
-            
+        
             boolean x = false;
-
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            
-            for (int i = 0; i < poNumber.length; i++) {
+            for (int i = 0; i < itemCode.length; i++) {
                 
-                supplierPurchaseOrder.setPoNumber(Integer.parseInt(poNumber[i]));
+                supplierPurchaseOrder.setPoNumber(Integer.parseInt(poNumber));
                 supplierPurchaseOrder.setItemCode(Integer.parseInt(itemCode[i]));
-                supplierPurchaseOrder.setInventoryType(inventoryType[i]);
-                supplierPurchaseOrder.setSupplier(Integer.parseInt(supplier[i]));
+                supplierPurchaseOrder.setSupplier(Integer.parseInt(supplier));
                 supplierPurchaseOrder.setVolumeQty(Double.parseDouble(volumeQty[i]));
-                supplierPurchaseOrder.setUnitPrice(Double.parseDouble(unitPrice[i]));
                 supplierPurchaseOrder.setDateMade();
-                supplierPurchaseOrder.setDeliveryDate(format.parse(deliveryDate[i]));
-                supplierPurchaseOrder.setPreparedBy(Integer.parseInt(preparedBy[i]));
-                supplierPurchaseOrder.setApprovedBy(Integer.parseInt(approvedBy[i]));
+                supplierPurchaseOrder.setDeliveryDate(deliveryDate);
+                supplierPurchaseOrder.setPreparedBy(Integer.parseInt(preparedBy));
                 supplierPurchaseOrder.setReceivingStatus(receivingStatus[i]);
                 supplierPurchaseOrder.setReconcileStatus(reconcileStatus[i]);
                 supplierPurchaseOrder.setNote(note[i]);
@@ -82,14 +73,14 @@ public class EncodeSupplierPurchaseOrderServlet extends BaseServlet {
 
             if (x == true) {
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/ViewSupplierPurchase.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/ViewSupplierPurhcaseOrder.jsp");
              
                 request.setAttribute("arrSupplierPurchaseOrder", arrSupplierPurchaseOrder);
                 rd.forward(request, response);
 
             } else {
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/SupplierPurchaseOrder.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/SupplierPurchaseOrder.jsp");
                 rd.forward(request, response);
 
             }

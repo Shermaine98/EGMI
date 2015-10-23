@@ -27,23 +27,21 @@ public class SupplierPurchaseOrderDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into supplier_purchase_order"
-                    + "(poNumber,itemCode,inventoryType, supplier,volumeQty,unitPrice, dateMade, deliveryDate, preparedBy, approvedBy, receivingStatus, reconcileStatus, note) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "(poNumber,itemCode, supplier,volumeQty, dateMade, deliveryDate, preparedBy, approvedBy, receivingStatus, reconcileStatus, notes) "
+                    + "values (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newSupplierPurchaseOrder.getPoNumber());
             pstmt.setInt(2, newSupplierPurchaseOrder.getItemCode());
-            pstmt.setString(3, newSupplierPurchaseOrder.getInventoryType());
-            pstmt.setInt(4, newSupplierPurchaseOrder.getSupplier());
-            pstmt.setDouble(5, newSupplierPurchaseOrder.getVolumeQty());
-            pstmt.setDouble(6, newSupplierPurchaseOrder.getUnitPrice());
-            pstmt.setDate(7, newSupplierPurchaseOrder.getDateMade());
-            pstmt.setDate(8, newSupplierPurchaseOrder.getDeliveryDate());
-            pstmt.setInt(9, newSupplierPurchaseOrder.getPreparedBy());
-            pstmt.setInt(10, newSupplierPurchaseOrder.getApprovedBy());
-            pstmt.setString(11, newSupplierPurchaseOrder.getReceivingStatus());
-            pstmt.setString(12, newSupplierPurchaseOrder.getReconcileStatus());
-            pstmt.setString(13, newSupplierPurchaseOrder.getNote());
+            pstmt.setInt(3, newSupplierPurchaseOrder.getSupplier());
+            pstmt.setDouble(4, newSupplierPurchaseOrder.getVolumeQty());
+            pstmt.setDate(5, newSupplierPurchaseOrder.getDateMade());
+            pstmt.setDate(6, newSupplierPurchaseOrder.getDeliveryDate());
+            pstmt.setInt(7, newSupplierPurchaseOrder.getPreparedBy());
+            pstmt.setInt(8, newSupplierPurchaseOrder.getApprovedBy());
+            pstmt.setString(9, newSupplierPurchaseOrder.getReceivingStatus());
+            pstmt.setString(10, newSupplierPurchaseOrder.getReconcileStatus());
+            pstmt.setString(11, newSupplierPurchaseOrder.getNote());
 
             int rows = pstmt.executeUpdate();
             conn.close();
@@ -68,10 +66,8 @@ public class SupplierPurchaseOrderDAO {
                 SupplierPurchaseOrder temp = new SupplierPurchaseOrder();
                 temp.setPoNumber(rs.getInt("poNumber"));
                 temp.setItemCode(rs.getInt("itemCode"));
-                temp.setInventoryType(rs.getString("inventoryType"));
                 temp.setSupplier(rs.getInt("supplier"));
                 temp.setVolumeQty(rs.getInt("volumeQty"));
-                temp.setUnitPrice(rs.getDouble("unitPrice"));
                 temp.setDateMade();
                 temp.setDeliveryDate(rs.getDate("deliveryDate"));
                 temp.setPreparedBy(rs.getInt("preparedBy"));

@@ -16,10 +16,10 @@ public class SupplierPurchaseOrder {
 
     private int poNumber;
     private int itemCode;
-    private String inventoryType;
+   
     private int supplier;
     private double volumeQty;
-    private double unitPrice;
+   
     private java.sql.Date dateMade;
     private java.sql.Date deliveryDate;
     private int preparedBy;
@@ -58,19 +58,7 @@ public class SupplierPurchaseOrder {
         this.itemCode = itemCode;
     }
 
-    /**
-     * @return the inventoryType
-     */
-    public String getInventoryType() {
-        return inventoryType;
-    }
-
-    /**
-     * @param inventoryType the inventoryType to set
-     */
-    public void setInventoryType(String inventoryType) {
-        this.inventoryType = inventoryType;
-    }
+   
 
     /**
      * @return the supplier
@@ -98,20 +86,6 @@ public class SupplierPurchaseOrder {
      */
     public void setVolumeQty(double volumeQty) {
         this.volumeQty = volumeQty;
-    }
-
-    /**
-     * @return the intPrice
-     */
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    /**
-     * @param unitPrice the intPrice to set
-     */
-    public void setUnitPrice(double intPrice) {
-        this.unitPrice = intPrice;
     }
 
     /**
@@ -151,7 +125,21 @@ public class SupplierPurchaseOrder {
         java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
         this.deliveryDate = sqlreceivedDate1;
     }
-
+    
+       /**
+     * @param deliveryDate the deliveryDate to set
+     * @throws java.text.ParseException
+     */
+    public void setDeliveryDate(String deliveryDate) throws ParseException {
+        @SuppressWarnings("deprecation")
+        java.util.Date deliveryDate2 = formatter.parse(deliveryDate);
+        java.sql.Date deliveryDate1 = new java.sql.Date(deliveryDate2.getTime());
+        this.setDeliveryDate(deliveryDate1);
+    }
+    
+    public void setDeliveryDate(java.sql.Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
     /**
      * @return the preparedBy
      */
