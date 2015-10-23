@@ -30,19 +30,21 @@
                             productionNumber: productionNumber
                         },
                         success: function (data) {
-                        
-                          
-                            $('#consumptionReportList tbody tr').remove();
-                            $('#consumptionReportList').append('<tr><td>ProductionNumber</td></tr>');
-                            $('#consumptionReportList').append('<tr><td>' + data[0].productionNumber + ' </td></tr>');
-                            $('#consumptionReportList').append('<tr><td>Date Made</td></tr>');
-                            $('#consumptionReportList').append('<tr><td>' + data[0].dateMade + ' </td></tr>');
-                            
-                            for(var i=0; i < data.length; i++){
-                                $('#consumptionReportList').append('<tr><td class"volumeQty">' + data[i].volumeQty + ' </td><tr>');
+
+
+                            $('#consumptionReportList').empty()
+                            $('#consumptionReportList').append('Production Number: ' + data[0].productionNumber + '<br/>');
+                            $('#consumptionReportList').append('Product ID: ' + data[0].productID + '<br/>');
+                            $('#consumptionReportList').append('Date Made: ' + data[0].dateMade + '<br/>');
+                            $('#consumptionReportList').append('Prepared By: ' + data[0].preparedBy + '<br/>');
+                            $('#consumptionReportList').append('Size Type: ' + data[0].SizeType + '<br/>');
+                            $('#consumptionReportList').append('Size Name: ' + data[0].SizeName + '<br/>');
+                            for (var i = 0; i < data.length; i++) {
+                                $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
                             }
-                             
-                                $('#consumptionReportList').append('<tr> <td><input id="TotalS" name="TotalS" onload="calculateTotalShirt()" /></td></tr>');
+                            $('#consumptionReportList').append('Item Code: ' + data[0].itemCode + '<br/>');
+
+                            $('#consumptionReportList').append('<input id="TotalS" class="transparentBg" name="TotalS" onload="calculateTotalShirt()" />');
                             //     $('#consumptionReportList').append('<tr><td>' + data[0].productionNumber + '</td><td>' + data[0].dateMade + '</td><td>' + data[0].productionNumber + '</td><td>' + data[0].preparedBy + '</td></tr>');
 
                         },
@@ -70,7 +72,7 @@
     <% String data = (String) request.getAttribute("data");
         if (data.equalsIgnoreCase("ViewConsumptionReport")) {
             ArrayList<ConsumptionReport> cr = (ArrayList<ConsumptionReport>) request.getAttribute("crList"); %>
-<!--View Consumption Report-->
+    <!--View Consumption Report-->
     <table id="view" class="table table-striped table-bordered table-hover table-responsive" style="width:80%">
         <thead>
             <tr>
@@ -100,12 +102,10 @@
     </table>
 
     <br/><br/>
-    <!-- To get the Click row-->               
-    <div align="center">
-        <table class="table table-striped table-bordered" style="width:80%" id="consumptionReportList">
-            <tbody > 
-            </tbody>
-        </table>
+    <!-- To get the Click row-->   
+    <div class="panel panel-default col-lg-6 col-md-6 col-sm-6">
+        <div class="panel-body" id="consumptionReportList">
+        </div>
     </div>
     <%
     } else if (data.equalsIgnoreCase("ConsumptionReportView")) {
@@ -214,16 +214,16 @@
 
     </div>
     <script>
-    $("#consumptionReportList").on("load", function() {
+        $("#consumptionReportList").on("load", function () {
             var totalS = 0;
             $('td.volumeQty').each(function () {
                 totalS = parseInt($(this).find(".volumeQty").text());
-                 console.log(totalS);
+                console.log(totalS);
             });
             //document.getElementById('TotalS').value = totalS;
-        //    SolveTotal(totalS);
-        
-});
+            //    SolveTotal(totalS);
+
+        });
 
         function calculateTotalPants() {
 
