@@ -26,64 +26,119 @@
         </script>
     </head>
     <body>  
-    
-    <br/><br/><br/>
-    <center><h1>Encode Delivery Order</h1></center>
-    <br/> 
-    <div>
-        <table class="table table-bordered" style="margin-left: 70px; width:35%">
-                <colgroup>
-                    <col style="width:40%"/>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>Delivery Order No.</th>
-                        <td class="value"><input class="input" type="text" name="doNumber" id="doNumber"/></td>
-                    </tr><tr>
-                        <th>Outlet</th>
-                        <td><input type="text" class="input" name="outlet" value="AUTO"/></td>
-                    </tr><tr>
-                        <th>Prepared By</th>
-                        <td><input type="text" class="input" name="preparedBy"  readonly/></td>  
-                    </tr><tr>
-                        <th>Delivery Date</th>
-                        <td><input type="text" class="input" name="deliveryDate" readonly/></td>
-                    </tr>
-                </thead>
-            </table>
-    </div>
 
-    <br/><br/>
+        <br/>
+        <div class="container-fluid" align="center" style="margin-left:20px;">
+            <h1>Encode Delivery Order</h1><br/>
+            <div class="panel panel-default col-md-4">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Delivery Order</h3>
+                </div>
+                <div class="panel-body">
+                    <label class="" for="doNumber">Delivery Order Number</label>
+                    <input type="text" name="doNumber" class="form-control readonlyWhite" id="doNumber" readonly /><br/>
+                    <label class="" for="outlet">Outlet</label>
+                    <input type="text" name="outlet" class="form-control readonlyWhite" id="outlet" readonly /><br/>
+                    <label class="" for="preparedBy">Prepared By</label>
+                    <input type="text" name="preparedBy" class="form-control readonlyWhite" id="preparedBy" readonly /><br/>
+                    <label class="" for="deliveryDate">Delivery Date</label>
+                    <input type="text" name="deliveryDate" class="form-control" id="datepicker" /><br/>
+                </div>
+            </div>
 
-    <div id= "center" align="center">
-        <form method="POST" action="EncodeDeliveryOrderServlet">
+            <div class="panel panel-default col-md-7">
+                <div class="panel-body">
+                    <form method="POST" action="EncodeDeliveryOrderServlet">
 
-            <table class="table detailsWidth table-bordered">
-                <thead>
-                    <tr>
-                        <th rowspan="2" style="vertical-align: middle; text-align: center">Product ID</th>
-                        <th colspan="4" style="text-align:center">Size</th>
-                        <th rowspan="2" style="vertical-align: middle; text-align: center">Total</th>
-                        <th rowspan="2" style="vertical-align: middle; text-align: center">Unit Price</th>
-                        <th rowspan="2" style="vertical-align: middle; text-align: center">Total Price</th>
-                    </tr>
-                    <tr>
-                        <th>S</th>
-                        <th>M</th>
-                        <th>L</th>
-                        <th>XL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- EDITABLE HERE (code?) -->
-                </tbody>
-            </table>
-            
-            <br/><br/>
-            <input type="submit" class="btn btn-danger" value="Create">
-            <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
+                        <!--TABLE FOR SHIRT-->
+                        <table class="table detailsWidth table-bordered">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center">Product ID</th>
+                                    <th colspan="4" style="text-align:center">Size</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center">Total</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center">Unit Price</th>
+                                    <th rowspan="2" style="vertical-align: middle; text-align: center">Total Price</th>
+                                </tr>
+                                <tr>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-        </form>
-    </div>
-</body>
+                        <!--TABLE FOR PANTS-->
+                        <table class="table detailsWidth table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="vertical-align: middle; text-align: center">Product ID</th>
+                                    <th style="vertical-align: middle; text-align: center">Total</th>
+                                    <th style="vertical-align: middle; text-align: center">Unit Price</th>
+                                    <th style="vertical-align: middle; text-align: center">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <table class="table detailsWidth table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="8" style="vertical-align: middle; text-align: center">Size</th>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle; text-align: center">29</th>
+                                    <th style="vertical-align: middle; text-align: center">30</th>
+                                    <th style="vertical-align: middle; text-align: center">31</th>
+                                    <th style="vertical-align: middle; text-align: center">32</th>
+                                    <th style="vertical-align: middle; text-align: center">33</th>
+                                    <th style="vertical-align: middle; text-align: center">34</th>
+                                    <th style="vertical-align: middle; text-align: center">36</th>
+                                    <th style="vertical-align: middle; text-align: center">38</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br/><br/>
+                        <input type="submit" class="btn btn-danger" value="Create">
+                        <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </body>
 </html>
