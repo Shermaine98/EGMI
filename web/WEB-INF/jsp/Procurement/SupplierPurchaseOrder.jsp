@@ -75,7 +75,7 @@
                         <div id="total" align="center" style="visibility:hidden;">
                             <div style="float:right">
                             TOTAL:
-                            <input type="text" class="form-control" name="Total" id="total" />
+                            <input type="text" class="form-control" name="Total1" id="total1" readonly />
                             </div>
                             <br/><br/><br/>
                             <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('data')" />

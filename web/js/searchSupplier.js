@@ -49,7 +49,7 @@ function getSupplierItem() {
     x = chk();
     var itemNameSupplier = document.getElementById('itemNameSupplier').value;
     var supplierName = document.getElementById('supplierName').value;
-     
+
     if (x == true) {
         $.ajax({
             url: "SetSupplierItemServlet",
@@ -70,20 +70,19 @@ function getSupplierItem() {
                 else if (i == 1) {
                     $('#data').append('<tr><th></th><th>Item Name</th> <th> Unit Price</th> <th>Quantity</th> <th>Total Quantity Price </th> <th>Note</th></tr>');
                     i++;
-                   $('#supplierName').attr("disabled","disabled");
+                    $('#supplierName').attr("disabled", "disabled");
                 }
                 if (data[0] != null) {
-                    $('#data').append('<tr><td> <input type="checkbox" name="chk" /> </td>\n\
-<td><input type="hidden" name = "itemCode"/>\n\
-<input type="text" class="transparentBg cellWidth readonlyWhite" readonly id= "itemName[]" value="' + data[0].itemName + '"/> </td>\n\
-<td><input type="text" class="transparentBg readonlyWhite" readonly style="width:60px;" id="unitPrice[]" name = "unitPrice" value="' + data[0].unitPrice + '"/></td>\n\
-<td><input type="number" class="transparentBg" style="width:60px;" id="volumeQty[]" name="volumeQty" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>\n\
-<td><input type="text" class="transparentBg cellWidth readonlyWhite" readonly name="Total Quantity Price" id="TQP[]"  /></td>\n\
-<td><input type="hidden" class="transparentBg cellWidth" name="receivingStatus" value="pending" />\n\
-<input type="hidden" name = "reconcileStatus" value="pending" />\n\
-<input type="text" class="transparentBg cellWidth" name = "note"/></td>' + '</tr>');
-                SolveTQP();
-                document.getElementById("total").style.visibility='visible';
+                    $('#data').append('<tr class="trclass"><td> <input type="checkbox" name="chk" /> </td>\n\
+                    <td><input type="hidden" name = "itemCode"/>\n\
+                      <input type="text" class="transparentBg cellWidth readonlyWhite" readonly id= "itemName[]" value="' + data[0].itemName + '"/> </td>\n\
+                    <td><input type="text" class="transparentBg readonlyWhite" readonly style="width:60px;" id="unitPrice[]" name = "unitPrice" value="' + data[0].unitPrice + '"/></td>\n\
+                     <td> <input type="number" class="transparentBg" style="width:60px;" id="volumeQty[]" name="volumeQty" onChange="SolveTQP();"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"/> </td>\n\
+                     <td><input type="text" class="transparentBg cellWidth readonlyWhite" readonly name="Total Quantity Price" id="TQP[]"  /></td>\n\
+                     <td><input type="hidden" class="transparentBg cellWidth" name="receivingStatus" value="pending" />\n\
+                     <input type="hidden" name = "reconcileStatus" value="pending" />\n\
+                      <input type="text" class="transparentBg cellWidth" name = "note"/></td>' + '</tr>');
+                    document.getElementById("total").style.visibility = 'visible';
                 }
 
             }, error: function (XMLHttpRequest, textStatus, exception) {
@@ -101,27 +100,28 @@ function getSupplierItem() {
 }
 
 
-
-// TODO: calucaltions
 function SolveTQP() {
-      $("#data").each(function () {
-                var $this = $(this);
-                var unitPrice = parseInt($this.find('[id="unitPrice\\[\\]"]').val());
-                var volumeQty = parseInt($this.find('[id="volumeQty\\[\\]"]').val());
-                var STotal = unitPrice * volumeQty;
-                $this.find('[id="TQP\\[\\]"]').val(STotal);
-            });
-            return false;
-    SolveTotal(STotal);
-}
-
-function SolveTotal(TQP) {
-    var total = 0;
-    $("#data").each(function () {
-        total = total+TQP;
-
+    $(".trclass").each(function () {
+        var $this = $(this);
+        var unitPrice = parseInt($this.find('[id="unitPrice\\[\\]"]').val());
+        var volumeQty = parseInt($this.find('[id="volumeQty\\[\\]"]').val());
+        var STotal = unitPrice * volumeQty;
+        $this.find('[id="TQP\\[\\]"]').val(STotal);
+        SolveTotal();
     });
-    parseInt(document.getElementById('total').val(total));
-
+    return false;
 }
 
+
+function SolveTotal() {
+    var STotal = 0;
+    $(".trclass").each(function () {
+        var $this = $(this);
+        var TQP = parseInt($this.find('[id="TQP\\[\\]"]').val());
+        STotal = STotal + TQP;
+        document.getElementById('total1').value = STotal;
+    }
+    );
+
+    return false;
+}
