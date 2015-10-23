@@ -65,7 +65,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="itemNameSupplier" id="itemNameSupplier" onkeypress="autoCompleteSupplierItem()" placeholder="Search Item"/>
                             <input type="hidden" name="itemNameSupplier" id="itemNameSupplier" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                            <span class="input-group-btn"><input type="Button"  id="button" onClick="getSupplierItem()"  style="height:34px" class="btn btn-danger" value="Add Item"></span>
+                            <span class="input-group-btn"><button onClick="getSupplierItem()" class="btn btn-default" ><span class="glyphicon glyphicon-search"></span></button></span>
                         </div>
                         <br/><br/>
 

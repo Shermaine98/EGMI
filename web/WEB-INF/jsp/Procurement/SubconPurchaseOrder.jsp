@@ -23,13 +23,6 @@
         <script src="bootstrap/js/jquery-ui.js"></script>
         <script src="js/searchSubcon.js"></script>
         <title>Encode Subcontractor Purchase Order</title>
-        <style>
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button { 
-                -webkit-appearance: none; 
-                margin: 0; 
-            }
-        </style>
         <script>
             $(document).ready(function () {
                 var subPONumber = '${SubPONumber}';
@@ -46,9 +39,10 @@
     <!--Search product-->
     <form action="SearchProductsServlet" method="POST" >
         <div align="center">
+            <div class="input-group"></div>
             <input type="text" style="width:35%; height:35px" name="productName" id="productName" onkeydown="autoComplete();" placeholder="Search Item"/>
             <input type="hidden" name="productName1" id="productName1" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-            <input type="submit" style="width:77px; height:34px" class="btn btn-danger" value="Search"/>
+            <span class="input-group-btn"><input type="submit" class="btn btn-danger" value="Search"/></span>
             <br/><br/>   
         </div> 
     </form>
