@@ -26,7 +26,7 @@
     </head>
     <body>  
         <div align="center">
-            <h2>Encode Bill of Materials</h2>
+            <h2>Encode Consumption Report</h2>
             <form method="POST" action="SearchProductServlet">
                 <div class="input-group col-md-3">
                     <input type="text" name="productName1" class="form-control" id="productName1" onkeypress="autoComplete();" placeholder="Search Item"/>
