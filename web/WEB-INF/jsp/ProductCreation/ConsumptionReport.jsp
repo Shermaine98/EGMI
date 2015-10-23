@@ -52,7 +52,8 @@
                             <label class="" for="productionNumber">Production Number</label>
                             <input type="text" name="productionNumber" class="form-control readonlyWhite" id="productionNumber" readonly /><br/>
                             <label class="" for="preparedBy">Prepared By</label>
-                            <input type="text" name="preparedBy" class="form-control readonlyWhite" id="preparedBy" readonly /><br/>
+                            <input type="hidden" name="preparedBy" id="preparedBy" value="<%=user.getEmployeeNumber()%> " />
+                            <input type="text" class="form-control readonlyWhite" value="<%=user.getFirstName()%> <%=user.getLastName()%> " readonly /><br/>
                         </div>
                     </div>
                     <%
