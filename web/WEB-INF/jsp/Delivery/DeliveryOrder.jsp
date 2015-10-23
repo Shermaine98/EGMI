@@ -50,6 +50,7 @@
                 <div class="panel-body">
                     <form method="POST" action="EncodeDeliveryOrderServlet">
 
+                        <!--TABLE FOR SHIRT-->
                         <table class="table detailsWidth table-bordered">
                             <thead>
                                 <tr>
@@ -67,7 +68,66 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- EDITABLE HERE (code?) -->
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--TABLE FOR PANTS-->
+                        <table class="table detailsWidth table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="vertical-align: middle; text-align: center">Product ID</th>
+                                    <th style="vertical-align: middle; text-align: center">Total</th>
+                                    <th style="vertical-align: middle; text-align: center">Unit Price</th>
+                                    <th style="vertical-align: middle; text-align: center">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <table class="table detailsWidth table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="8" style="vertical-align: middle; text-align: center">Size</th>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle; text-align: center">29</th>
+                                    <th style="vertical-align: middle; text-align: center">30</th>
+                                    <th style="vertical-align: middle; text-align: center">31</th>
+                                    <th style="vertical-align: middle; text-align: center">32</th>
+                                    <th style="vertical-align: middle; text-align: center">33</th>
+                                    <th style="vertical-align: middle; text-align: center">34</th>
+                                    <th style="vertical-align: middle; text-align: center">36</th>
+                                    <th style="vertical-align: middle; text-align: center">38</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
 
