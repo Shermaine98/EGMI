@@ -14,6 +14,10 @@ and open the template in the editor.
     vertical-align: middle;
 }*/
 
+.cellWidth{
+    width:70px;
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
