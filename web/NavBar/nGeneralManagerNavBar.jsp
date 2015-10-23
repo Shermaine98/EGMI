@@ -15,8 +15,8 @@
         <link rel="stylesheet" href="bootstrap/css/table-design.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap/css/sub-menu.css">
-        <!--<title>Welcome to Hammerhead!</title>-->
-        
+        <link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
         <!--JQUERY LIBRARIES-->
            <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>

@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.dataTables.min.css">
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <link href="bootstrap/css/table-design.css" rel="stylesheet" type="text/css"/>
         <title>View Consumption Report</title>
 
         <script>
@@ -66,171 +67,175 @@
 
     </head>
     <body>
-        <br/><br/><br/>
-    <center> <h2>View Consumption Report</h2></center>
-    <br/><br/><br/>    
-    <% String data = (String) request.getAttribute("data");
-        if (data.equalsIgnoreCase("ViewConsumptionReport")) {
-            ArrayList<ConsumptionReport> cr = (ArrayList<ConsumptionReport>) request.getAttribute("crList"); %>
-    <!--View Consumption Report-->
-    <table id="view" class="table table-striped table-bordered table-hover table-responsive" style="width:80%">
-        <thead>
-            <tr>
-                <th>Production No.</th>
-                <th>Product ID</th>
-                <th>Size Name</th>
-                <th>Size Type</th>
-                <th>Prepared By</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            <%
-                for (int i = 0; i < cr.size(); i++) {
-            %>
-            <tr class="production">
-                <td class="productionNumber"><%= cr.get(i).getProductionNumber()%></td>
-                <td><%= cr.get(i).getProductID()%></td>
-                <td><%= cr.get(i).getSizeName()%></td>
-                <td><%= cr.get(i).getDateMade()%></td>
-                <td><%= cr.get(i).getPreparedBy()%></td>
-            </tr>
-            <%
-                }
-            %>
-        </tbody>
-    </table>
-
-    <br/><br/>
-    <!-- To get the Click row-->   
-    <div class="panel panel-default col-lg-6 col-md-6 col-sm-6">
-        <div class="panel-body" id="consumptionReportList">
-        </div>
-    </div>
-    <%
-    } else if (data.equalsIgnoreCase("ConsumptionReportView")) {
-        ArrayList<ConsumptionReport> cr1 = (ArrayList<ConsumptionReport>) request.getAttribute("consumptionReport");
-        BillOfMaterialsDAO bmDAO = new BillOfMaterialsDAO();
-
-    %>
-    <!--Consumption Report View From Encode of Bill of Materials-->
-
-    <div align="center" class="container">
-        <table class="table width35 table-bordered">
-            <th>Production #</th>
-            <td><%= cr1.get(0).getProductID()%></td>
-            <tr>
-                <th>Prepared By</th> 
-                <td><%= cr1.get(0).getPreparedBy()%></td>
-            </tr>
-            <tr>
-                <th>Date Made</th>
-                <td><%=cr1.get(0).getDateMade()%></td>                 
-            </tr>
-        </table>
-
-        <table class="table detailsWidth table-bordered">
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <td><%=cr1.get(0).getProductID()%></td>
-                    <th>Product Name</th>
-                    <td><%= cr1.get(0).getProductName()%></td>
-                </tr>
-            </thead>
-        </table>
-        <%
-            if (cr1.get(0).getSizeName().equalsIgnoreCase("Shirt")) {
-        %>  
-        <table class="table table-bordered" style="width:40%">
-            <center><h2>Size Shirts</h2></center>
-            <tr>  
-                <%
-                    for (int m = 0; m < cr1.size(); m++) {
-                %>
-                <th><%=cr1.get(m).getSizeType()%>"</th>
-                <td class="volumeQty"><%=cr1.get(m).getVolumeQty()%>"</td>
-                <th><input id="TotalS" name="TotalS" value="0" onload="calculateTotalShirt()" /></th>
-            </tr>
-            <%
-                }
-            %>
-
-        </table>
-
-        <%
-        } else {
-        %>
-        <table  class="table table-bordered">
-            <center><h2>Size Pants</h2></center>
-            <tr>  
-                <%
-                    for (int m = 0; m < cr1.size(); m++) {
-                %>
-                <th><%=cr1.get(m).getSizeType()%></th>
-                    <%
-                        }
-
-                    %>
-            </tr>  <tr>
-                <%for (int m = 0; m < cr1.size(); m++) {%>
-
-                <td><%=cr1.get(m).getVolumeQty()%></td>
-
-
-                <%
-
-                    } %>
-            </tr> <%
-                }
-            %>
-            <table  id="dataTable3" class="table detailsWidth table-bordered">
+        <% String data = (String) request.getAttribute("data");
+            if (data.equalsIgnoreCase("ViewConsumptionReport")) {
+                ArrayList<ConsumptionReport> cr = (ArrayList<ConsumptionReport>) request.getAttribute("crList"); %>
+        <!--View Consumption Report-->
+        <div class="col-md-8 center1">
+            <h2>View Consumption Report</h2>
+            <br/><br/><br/>  
+            <table id="view" class="table table-striped table-bordered table-hover table-responsive dataTable">
                 <thead>
                     <tr>
-                        <th>Item Name</th>
-                        <th>Consumption Per Unit</th>
-                        <th>Total Consumption</th>
+                        <th>Production No.</th>
+                        <th>Product ID</th>
+                        <th>Size Name</th>
+                        <th>Size Type</th>
+                        <th>Prepared By</th>
                     </tr>
                 </thead>
-                <tbody >
+
+                <tbody>
                     <%
-                        ArrayList<Integer> itemCode = (ArrayList<Integer>) request.getAttribute("itemCode");
-                        for (int i = 0; i < itemCode.size(); i++) {
+                        for (int i = 0; i < cr.size(); i++) {
                     %>
-                    <tr>
-                        <td><input type="text" class="input" name="itemCode"  value = "<%=cr1.get(i).getItemCode()%>"  readonly/></td>
-                        <td><input name="itemConsumption" class="input" id="itemConsumption[]"   value="0" readonly/></td>               
-                        <td><input name="totalConsumption" class="input" id="totalConsumption[]" value="0"  readonly/></td>
-                    </tr> 
+                    <tr class="production">
+                        <td class="productionNumber"><%= cr.get(i).getProductionNumber()%></td>
+                        <td><%= cr.get(i).getProductID()%></td>
+                        <td><%= cr.get(i).getSizeName()%></td>
+                        <td><%= cr.get(i).getDateMade()%></td>
+                        <td><%= cr.get(i).getPreparedBy()%></td>
+                    </tr>
                     <%
                         }
                     %>
                 </tbody>
             </table>
+                <br/><br/>
+            <!-- To get the Click row-->
+            <div class="panel panel-default" style="margin-left:70px; margin-right:70px;">
+                <div class="panel-body" id="consumptionReportList">
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+
+
+        <%
+        } else if (data.equalsIgnoreCase("ConsumptionReportView")) {
+            ArrayList<ConsumptionReport> cr1 = (ArrayList<ConsumptionReport>) request.getAttribute("consumptionReport");
+            BillOfMaterialsDAO bmDAO = new BillOfMaterialsDAO();
+
+        %>
+        <!--Consumption Report View From Encode of Bill of Materials-->
+
+        <div align="center" class="container">
+            <table class="table width35 table-bordered">
+                <th>Production #</th>
+                <td><%= cr1.get(0).getProductID()%></td>
+                <tr>
+                    <th>Prepared By</th> 
+                    <td><%= cr1.get(0).getPreparedBy()%></td>
+                </tr>
+                <tr>
+                    <th>Date Made</th>
+                    <td><%=cr1.get(0).getDateMade()%></td>                 
+                </tr>
+            </table>
+
+            <table class="table detailsWidth table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <td><%=cr1.get(0).getProductID()%></td>
+                        <th>Product Name</th>
+                        <td><%= cr1.get(0).getProductName()%></td>
+                    </tr>
+                </thead>
+            </table>
             <%
-                }
+                if (cr1.get(0).getSizeName().equalsIgnoreCase("Shirt")) {
+            %>  
+            <table class="table table-bordered" style="width:40%">
+                <center><h2>Size Shirts</h2></center>
+                <tr>  
+                    <%
+                        for (int m = 0; m < cr1.size(); m++) {
+                    %>
+                    <th><%=cr1.get(m).getSizeType()%>"</th>
+                    <td class="volumeQty"><%=cr1.get(m).getVolumeQty()%>"</td>
+                    <th><input id="TotalS" name="TotalS" value="0" onload="calculateTotalShirt()" /></th>
+                </tr>
+                <%
+                    }
+                %>
+
+            </table>
+
+            <%
+            } else {
             %>
-            <br/><br/>
+            <table  class="table table-bordered">
+                <center><h2>Size Pants</h2></center>
+                <tr>  
+                    <%
+                        for (int m = 0; m < cr1.size(); m++) {
+                    %>
+                    <th><%=cr1.get(m).getSizeType()%></th>
+                        <%
+                            }
 
-    </div>
-    <script>
-        $("#consumptionReportList").on("load", function () {
-            var totalS = 0;
-            $('td.volumeQty').each(function () {
-                totalS = parseInt($(this).find(".volumeQty").text());
-                console.log(totalS);
+                        %>
+                </tr>  <tr>
+                    <%for (int m = 0; m < cr1.size(); m++) {%>
+
+                    <td><%=cr1.get(m).getVolumeQty()%></td>
+
+
+                    <%
+
+                        } %>
+                </tr> <%
+                    }
+                %>
+                <table  id="dataTable3" class="table detailsWidth table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Consumption Per Unit</th>
+                            <th>Total Consumption</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <%
+                            ArrayList<Integer> itemCode = (ArrayList<Integer>) request.getAttribute("itemCode");
+                            for (int i = 0; i < itemCode.size(); i++) {
+                        %>
+                        <tr>
+                            <td><input type="text" class="input" name="itemCode"  value = "<%=cr1.get(i).getItemCode()%>"  readonly/></td>
+                            <td><input name="itemConsumption" class="input" id="itemConsumption[]"   value="0" readonly/></td>               
+                            <td><input name="totalConsumption" class="input" id="totalConsumption[]" value="0"  readonly/></td>
+                        </tr> 
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+                <%
+                    }
+                %>
+                <br/><br/>
+
+        </div>
+        <script>
+            $("#consumptionReportList").on("load", function () {
+                var totalS = 0;
+                $('td.volumeQty').each(function () {
+                    totalS = parseInt($(this).find(".volumeQty").text());
+                    console.log(totalS);
+                });
+                //document.getElementById('TotalS').value = totalS;
+                //    SolveTotal(totalS);
+
             });
-            //document.getElementById('TotalS').value = totalS;
-            //    SolveTotal(totalS);
 
-        });
+            function calculateTotalPants() {
 
-        function calculateTotalPants() {
-
-            var totalP = size29 + size30 + size31 + size32 + size33 + size34 + size36 + size38;
-            document.getElementById('TotalP').value = totalP;
-            SolveTotal(totalP);
-        }
-    </script>
-</body>
+                var totalP = size29 + size30 + size31 + size32 + size33 + size34 + size36 + size38;
+                document.getElementById('TotalP').value = totalP;
+                SolveTotal(totalP);
+            }
+        </script>
+    </body>
 </html>
