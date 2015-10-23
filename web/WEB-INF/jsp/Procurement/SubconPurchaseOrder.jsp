@@ -51,114 +51,120 @@
             ArrayList<String> itemsize = (ArrayList<String>) request.getAttribute("itemSize");
             if (!consumptionReport.isEmpty()) {
         %>
-        <div align="center" class="container">
-            <form method="POST" action="EncodeSubcontractorPurchaseOrderServlet">
-                <!--Search Subcon-->
-                <div align="center">
-                    <input type="text" class="form-control" name="subconName" id="subconName" onkeypress="autoCompleteSubcon();" placeholder="Search Subcon"/>
-                    <input type="hidden" name="subcon" id="subcon" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                    <br/><br/>   
-                </div>  
-                <table class="table table-bordered" style="width:30%">
-                    <thead><tr>
-                            <th>Purchase Order No.</th>
-                            <td class="value"><input type="text" class="input" name="poNumber" id="poNumber"/></td>
-                        </tr><tr>
-                            <th>Production No.</th>
-                            <td><input type="text" class="input" name="itemCode" value="<%= consumptionReport.get(0).getProductionNumber()%>"/></td>
-                        </tr><tr>
-                            <th>Prepared By</th>
-                            <td><input type="hidden" value="<%= user.getEmployeeNumber()%>"/><%= user.getFirstName()%></td>
-                        </tr><tr>
-                        </tr><tr>
-                            <th>Delivery Date</th>
-                            <td><input type="text" class="input" name="deliveryDate" id="datepicker"></td>  
-                        </tr><tr>
-                        </tr>
-                    </thead>
-                </table>
+        <form method="POST" action="EncodeSubcontractorPurchaseOrderServlet">
+            <div align="center" class="container">
 
-                <!--Search product result-->  
-                <table class="table table-bordered" style="width:30%">
-                    <thead><tr>
-                            <th>Product Name </th>
-                            <td class="value"><input type="hidden" class="input" name="productID" id="productID" value="<%= consumptionReport.get(0).getProductID()%>"/><input type="text" class="input" name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductName()%>"/></td>
-                        </tr>
-                    </thead>
-                </table>   
-                <%
-                    if (consumptionReport.get(0).getSizeName().equalsIgnoreCase("Shirt")) {
-                %>  
-                <table class="table table-bordered" style="width:40%">
-                    <center><h2>Size Shirts</h2></center>
-                    <tr>
-                        <th><input name="sizeType" class="input" value="S" readonly/></th>
-                        <th><input name="sizeType" class="input" value="M" readonly/></th>
-                        <th><input name="sizeType" class="input" value="L" readonly/></th>
-                        <th><input name="sizeType" class="input" value="XL" readonly/></th>
-                        <th>Total</th>
-                    </tr>
-                    <tr>
-                    <input type="hidden" name="sizeName"  value="<%= consumptionReport.get(0).getSizeName()%>" />
-                    <%
-                        for (int i = 0; i < consumptionReport.size(); i++) {
-                            if (consumptionReport.get(i).getSizeType().equalsIgnoreCase("S")) {
-                    %>
-                    <td><input type="number" class="input" name="volumeQty" id="sizeS" value="<%= consumptionReport.get(i).getVolumeQty()%>"/></td>       
+                <div class="panel panel-default col-md-4">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Consumption Report</h3>
+                    </div>
+                    <div class="panel-body">
+                        <label class="" for="poNumber">Purchase Order Number</label>
+                        <input type="text" name="poNumber" class="form-control readonlyWhite" id="poNumber" readonly /><br/>
+                        <label class="" for="itemCode">Production Number</label>
+                        <input type="text" name="itemCode" class="form-control readonlyWhite" id="itemCode" readonly value="<%= consumptionReport.get(0).getProductionNumber()%>" /><br/>
+                        <label class="" for="preparedBy">Purchase Order Number</label>
+                        <input type="hidden" name="preparedBy" class="form-control readonlyWhite" id="preparedBy" value="<%= user.getEmployeeNumber()%> " /><br/>
+                        <input class="form-control readonlyWhite" value="<%= user.getFirstName()%> <%=user.getLastName()%> " readonly /><br/>
+                        <label class="" for="deliveryDate">Delivery Date</label>
+                        <input type="text" name="deliveryDate" class="form-control" id="datepicker"  /><br/>
+                    </div>
+                </div>
+
+                <div class="panel panel-default col-md-6" style="padding-top:20px">
+                    <div class="panel-body">
+
+                        <!--Search product result-->  
                         <%
-                        } else if (consumptionReport.get(i).getSizeType().equalsIgnoreCase("M")) {
-                        %>   
-                    <td><input type="number" class="input" name="volumeQty" id="sizeM"value="<%= consumptionReport.get(i).getVolumeQty()%>"/></td>
+                            if (consumptionReport.get(0).getSizeName().equalsIgnoreCase("Shirt")) {
+                        %>  
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Product Name: <input type="hidden" name="productID" id="productID" value="<%= consumptionReport.get(0).getProductID()%>"/>
+                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductName()%>"/></th>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="S" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="sizeS" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalShirt();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="M" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="sizeM" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalShirt();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="L" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="sizeL" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalShirt();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="XL" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="sizeXL" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalShirt();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td><input name="TotalS" class="transparentBg" id="TotalS" value="0" readonly/></td>
+                            </tr>
+                        </table>
+
                         <%
-                        } else if (consumptionReport.get(i).getSizeType().equalsIgnoreCase("L")) {
-                        %>   
-                    <td><input type="number" class="input" name="volumeQty" id="sizeL"value="<%= consumptionReport.get(i).getVolumeQty()%>"/></td>
+                        } else {
+                        %>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th colspan="2">Product Name: <input type="hidden" name="productID" id="productID" value="<%= consumptionReport.get(0).getProductID()%>"/>
+                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductName()%>"/></th>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="29" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size29" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="30" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size30" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="31" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size31" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="32" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size32" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="33" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size33" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="34" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size34" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="36" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size36" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th><input name="sizeType" class="transparentBg readonlyWhite" value="38" readonly/></th>
+                                <td><input type="number" class="transparentBg" name="volumeQty" id="size38" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onChange="calculateTotalPants();" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <td><input name="TotalP" class="transparentBg" id="TotalP" value="0" readonly/></td>
+                            </tr>
+                        </table>
                         <%
-                        } else if (consumptionReport.get(i).getSizeType().equalsIgnoreCase("XL")) {
-                        %>   
-                    <td><input type="number" class="input" name="volumeQty" id="sizeXL"value="<%= consumptionReport.get(i).getVolumeQty()%>"/></td>   
-                        <%
-                                }
                             }
                         %>
-                    <td><input name="TotalS" class="input" id="TotalS" readonly/></td>
-                    </tr>
-                </table>
 
-                <%
-                } else {
-                %>
-                <table  class="table table-bordered">
-                    <center><h2>Size Pants</h2></center>
-                    <tr>
-                        <th><input name="sizeType" class="input" value="29"/></th>
-                        <th><input name="sizeType" class="input" value="30"/></th>
-                        <th><input name="sizeType" class="input" value="31"/></th>
-                        <th><input name="sizeType" class="input" value="32"/></th>
-                        <th><input name="sizeType" class="input" value="33"/></th>
-                        <th><input name="sizeType" class="input" value="34"/></th>
-                        <th><input name="sizeType" class="input" value="36"/></th>
-                        <th><input name="sizeType" class="input" value="38"/></th>
-                        <th>TOTAL</th>
-                    </tr>
-                    <tr>
-                    <input type="hidden" name="sizeName"  value="<%=consumptionReport.get(0).getSizeName()%>" />
-                    <td><input type="number" class="input" name="volumeQty"  id="size29" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size30" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size31" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size32" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size33" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size34" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size36" /></td>
-                    <td><input type="number" class="input" name="volumeQty" id="size38" /></td>
-                    <td><input type="number" class="input" name="TotalP" id="TotalP"  value="0" readonly /></td>
-                    </tr>
-                </table>
-                <%
-                    }
-                %>
+                    </div>
+                </div>
+            </div>
+            <div class="container" align="center">
+                <!--Search Subcon-->
+                <div class="col-md-6" style="margin-top:30px">
+                    <input type="text" class="form-control" name="subconName" id="subconName" onkeypress="autoCompleteSubcon();" placeholder="Search Subcon"/>
+                    <input type="hidden" name="subcon" id="subcon" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
 
-
+                </div>
+                <br/><br/>   
                 <!--Result of Search-->    
                 <table id="dataSubconService" class="table table-bordered">
                     <!--                <thead>Service<thead>
@@ -173,8 +179,9 @@
                 <%
                     }
                 %>
-            </form>
-        </div>
+            </div>
+        </form>
+
         <br/><br/>
         <script>
             $(function () {
