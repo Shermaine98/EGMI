@@ -5,17 +5,19 @@
  */
 package DAO;
 
+import Model.AccessoriesInventory;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  *
  * @author shermainesy
  */
 public class main {
-    public static void main (String args[]) throws SQLException{
-    RefSupplierDAO refsupplier = new RefSupplierDAO();
-    refsupplier.searchSupplierItem("b", "Farbric and Co.");
-    System.out.print(refsupplier.searchSupplierItem("b", "Farbric and Co."));
+    public static void main (String args[]) throws SQLException, ParseException{
+   PurchaseOrderDAO refsupplier = new PurchaseOrderDAO();
+    refsupplier.GetAllPurchaseOrder();
+    System.out.print(refsupplier.GetAllPurchaseOrder());
     
     }
     

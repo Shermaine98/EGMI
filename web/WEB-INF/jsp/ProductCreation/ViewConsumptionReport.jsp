@@ -14,9 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.dataTables.min.css">
-        <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
         <title>View Consumption Report</title>
 
         <script>
@@ -25,7 +23,7 @@
                 $(".production").on("click", (function () {
                     var productionNumber = $(this).closest("tr").find(".productionNumber").text();
                     $.ajax({
-                        url: "ViewConsumptionServletJson",
+                        url: "GetConsumptionReportServlet",
                         type: 'POST',
                         dataType: "json",
                         data: {
@@ -70,12 +68,52 @@
     <center> <h2>View Consumption Report</h2></center>
     <br/><br/><br/>    
     <% String data = (String) request.getAttribute("data");
-        if (data.equalsIgnoreCase("consumptionReportView")) {
-        ArrayList<ConsumptionReport> cr1 = (ArrayList<ConsumptionReport>) request.getAttribute("consumptionReportView");
+        if (data.equalsIgnoreCase("ViewConsumptionReport")) {
+            ArrayList<ConsumptionReport> cr = (ArrayList<ConsumptionReport>) request.getAttribute("crList"); %>
+<!--View Consumption Report-->
+    <table id="view" class="table table-striped table-bordered table-hover table-responsive" style="width:80%">
+        <thead>
+            <tr>
+                <th>Production No.</th>
+                <th>Product ID</th>
+                <th>Size Name</th>
+                <th>Size Type</th>
+                <th>Prepared By</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <%
+                for (int i = 0; i < cr.size(); i++) {
+            %>
+            <tr class="production">
+                <td class="productionNumber"><%= cr.get(i).getProductionNumber()%></td>
+                <td><%= cr.get(i).getProductID()%></td>
+                <td><%= cr.get(i).getSizeName()%></td>
+                <td><%= cr.get(i).getDateMade()%></td>
+                <td><%= cr.get(i).getPreparedBy()%></td>
+            </tr>
+            <%
+                }
+            %>
+        </tbody>
+    </table>
+
+    <br/><br/>
+    <!-- To get the Click row-->               
+    <div align="center">
+        <table class="table table-striped table-bordered" style="width:80%" id="consumptionReportList">
+            <tbody > 
+            </tbody>
+        </table>
+    </div>
+    <%
+    } else if (data.equalsIgnoreCase("ConsumptionReportView")) {
+        ArrayList<ConsumptionReport> cr1 = (ArrayList<ConsumptionReport>) request.getAttribute("consumptionReport");
         BillOfMaterialsDAO bmDAO = new BillOfMaterialsDAO();
 
     %>
-    <!--Consumption Report View From Encode-->
+    <!--Consumption Report View From Encode of Bill of Materials-->
 
     <div align="center" class="container">
         <table class="table width35 table-bordered">

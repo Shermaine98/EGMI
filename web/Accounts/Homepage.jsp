@@ -65,7 +65,7 @@
     <body>
         <div class="padding">
             <p>Welcome, <%= user.getFirstName()%> <%= user.getLastName()%>! </p>
-            <p>Today is  <input type="text" id="Today" readonly /></p>
+            <p>Today is  <input type="text" class="transparentBg" id="Today" readonly /></p>
         </div>
     </body>
 

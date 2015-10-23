@@ -134,4 +134,44 @@ public class ConsumptionReportDAO {
         rs.close();
         return i;
     }
+    
+    public ArrayList<ConsumptionReport> searchProductName(String productName) throws ParseException {
+
+        ArrayList<ConsumptionReport> ConsumptionReport = new ArrayList<ConsumptionReport>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            
+            String search = productName + "%";
+            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, bm.productName, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
+                    + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where bm.productName LIKE ? Order by cr.productID;");
+ 
+            pstmt.setString(1, search);
+            
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                ConsumptionReport temp = new ConsumptionReport();
+                temp.setProductionNumber(rs.getInt("productionNumber"));
+                temp.setProductName(rs.getString("productName"));
+                temp.setProductID(rs.getInt("productID"));
+                temp.setSizeName(rs.getString("sizeName"));
+                temp.setSizeType(rs.getString("sizeType"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setVolumeQty(rs.getInt("sizeVolumeQty"));
+                temp.setDateMade(rs.getDate("dateMade"));
+                temp.setPreparedBy(rs.getInt("preparedBy"));
+                ConsumptionReport.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+
+            return ConsumptionReport;
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsumptionReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }

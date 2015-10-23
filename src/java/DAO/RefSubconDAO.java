@@ -2,6 +2,7 @@ package DAO;
 
 import Model.RefSubcon;
 import Database.DBConnectionFactory;
+import Model.RefSupplier;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ import java.util.logging.Logger;
  * @author Nunez
  *
  */
-
 public class RefSubconDAO {
 
     public boolean EncodeRefSubcon(RefSubcon newRefSubcon) {
@@ -65,7 +65,7 @@ public class RefSubconDAO {
                 newRefSubcon.setContactPerson(rs.getString("contactPerson"));
                 newRefSubcon.setContactNumber(rs.getInt("contactNumber"));
                 refSubcon.add(newRefSubcon);
-               
+
                 System.out.println(refSubcon.get(0).getCompanyName());
 
             }
@@ -80,28 +80,79 @@ public class RefSubconDAO {
         }
         return null;
     }
-    
-      public ArrayList<RefSubcon> getSubcon(int subconID) throws SQLException {
+
+    public ArrayList<RefSubcon> getSubcon(int subconID) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
 
         String query = "SELECT * FROM `ref_subcon`";
         PreparedStatement ps = conn.prepareStatement(query);
-     //   ps.setInt(0, supplierID);
+        //   ps.setInt(0, supplierID);
         ArrayList<RefSubcon> RefSubconList = new ArrayList();
         ResultSet rs = ps.executeQuery();
-       
+
         while (rs.next()) {
-             RefSubcon RefSubconListN = new RefSubcon();
-             RefSubconListN.setSubconID(rs.getInt("subconID"));
-             RefSubconListN.setService(rs.getString("service"));
-             RefSubconListN.setCompanyName(rs.getString("companyName"));
-             RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
-             RefSubconListN.setContactPerson(rs.getString("contactPerson"));
-             RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
-             if(RefSubconListN.getSubconID()==subconID){
-                 RefSubconList.add(RefSubconListN);  
-             }
+            RefSubcon RefSubconListN = new RefSubcon();
+            RefSubconListN.setSubconID(rs.getInt("subconID"));
+            RefSubconListN.setService(rs.getString("service"));
+            RefSubconListN.setCompanyName(rs.getString("companyName"));
+            RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
+            RefSubconListN.setContactPerson(rs.getString("contactPerson"));
+            RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
+            if (RefSubconListN.getSubconID() == subconID) {
+                RefSubconList.add(RefSubconListN);
+            }
+        }
+        rs.close();
+        return RefSubconList;
+
+    }
+
+    public ArrayList<RefSubcon> searchSubcon(String subconName) throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        
+        String search = subconName + "%";
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_subcon` WHERE companyName LIKE ? group by companyName");
+        ps.setString(1, search);
+        ArrayList<RefSubcon> RefSubconList = new ArrayList();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            RefSubcon RefSubconListN = new RefSubcon();
+            RefSubconListN.setSubconID(rs.getInt("subconID"));
+            RefSubconListN.setService(rs.getString("service"));
+            RefSubconListN.setCompanyName(rs.getString("companyName"));
+            RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
+            RefSubconListN.setContactPerson(rs.getString("contactPerson"));
+            RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
+
+            RefSubconList.add(RefSubconListN);
+        }
+        rs.close();
+        return RefSubconList;
+
+    }
+    
+    public ArrayList<RefSubcon> searchSubconAll(String subconName) throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_subcon` WHERE companyName ='" + subconName + "'");
+        ArrayList<RefSubcon> RefSubconList = new ArrayList();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+
+            RefSubcon RefSubconListN = new RefSubcon();
+            RefSubconListN.setSubconID(rs.getInt("subconID"));
+            RefSubconListN.setService(rs.getString("service"));
+            RefSubconListN.setCompanyName(rs.getString("companyName"));
+            RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
+            RefSubconListN.setContactPerson(rs.getString("contactPerson"));
+            RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
+
+            RefSubconList.add(RefSubconListN);
         }
         rs.close();
         return RefSubconList;

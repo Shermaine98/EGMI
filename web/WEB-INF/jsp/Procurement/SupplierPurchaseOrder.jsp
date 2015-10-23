@@ -14,6 +14,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
+         <link rel="stylesheet" type="text/css" href="bootstrap/css/searchStyle.css">
+          <script src="js/jquery.min.js"></script>
+          <script src="js/jquery.mockjax.js"></script>
+           <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+          <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <script src="js/searchSupplier.js"></script>
         <script src="js/deleteRow.js"></script>
@@ -64,7 +69,7 @@
                 </table>
                 <input type="text" style="width:35%; height:35px" name="itemNameSupplier" id="itemNameSupplier" onkeydown="autoCompleteSupplierItem()" placeholder="Search Item"/>
                 <input type="hidden" name="itemNameSupplier" id="itemNameSupplier" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                <input type="Button" onClick="getSupplierItem()" style="height:34px" class="btn btn-danger" value="ADD ITEM">
+                <input type="Button"  id="button" onClick="getSupplierItem()"  style="height:34px" class="btn btn-danger" value="ADD ITEM">
                 <br/><br/>
                 <table id ="data" class="table table-bordered width">
                     <!--                    <thead>
@@ -89,7 +94,7 @@
                 <table class="table table-bordered" style="width:20%;">
                     <tr>
                         <th>TOTAL</th>
-                        <td><input type="text" class="input" name="Total" value ="" readonly /></td>
+                        <td><input type="text" class="input" name="Total" id="total" readonly /></td>
                     </tr>
                 </table>
                 <br/><br/>
@@ -102,7 +107,8 @@
             </form>
         </div>
         <script>
-
+            
+         
             $(function () {
                 $("#datepicker").datepicker({minDate: 1, maxDate: "+4M +10D", dateFormat: 'yy-mm-dd'});
 

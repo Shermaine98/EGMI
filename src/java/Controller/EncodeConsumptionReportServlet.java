@@ -68,7 +68,7 @@ public class EncodeConsumptionReportServlet extends BaseServlet {
         }
         if (x) {
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/ViewConsumptionReport.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/ProductCreation/ViewConsumptionReport.jsp");
             try {
                 ConsumptionReportView = consumptionReportDAO.GetConsumptionReportList(Integer.parseInt(ProductionNumber));
             } catch (ParseException ex) {
@@ -81,14 +81,14 @@ public class EncodeConsumptionReportServlet extends BaseServlet {
                 }
             }
             
-            request.setAttribute("data", "consumptionReportView");
+            request.setAttribute("data", "ConsumptionReportView");
             request.setAttribute("itemCode", itemCode1 );
             request.setAttribute("consumptionReportView", ConsumptionReportView);
             request.setAttribute("consumptionReport", ConsumptionReportArray);
             rd.forward(request, response);
         } else {
             ServletContext context = getServletContext();
-            //request.setAttribute("consumptionReport","Incorrect password");
+           
             RequestDispatcher rd = context.getRequestDispatcher("/SearchProductServlet");
             rd.forward(request, response);
         }

@@ -6,7 +6,7 @@
 
 <%@page import="Model.SupplierPurchaseOrder"%>
 <%@page import="java.util.ArrayList"%>
-<%@include file="LevelOFAccess.jsp"%>
+<%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -15,70 +15,83 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Encode Delivery Order</title>
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/tableBoarder.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/table-design.css">
+        <title>Reconcile</title>
+
+        <script>
+            function showHide(divID) {
+                document.getElementById('AItable').style.display = "none";
+                document.getElementById('PItable').style.display = "none";
+                document.getElementById('WItable').style.display = "none";
+                if (document.getElementById(divID).style.display == "none") {
+                    document.getElementById(divID).style.display = "block";
+                }
+            }
+        </script>
+        <style>
+            img { 
+                cursor: pointer; 
+            }
+        </style>
+
     </head>
     <body>  
-        <br/><br/><br/>
-        <%            
-        ArrayList<SupplierPurchaseOrder> PurchaseOrder = (ArrayList<SupplierPurchaseOrder>) session.getAttribute("SupplierPurchaseOrderListR");
-        %>
-    <center><h2>Encode Delivery Receipt</h2></center>
-    <div id= "center" align="center">
-        <form method="POST" action="SupplierDeliveryReceiptServlet">
-            <table class="table table-bordered" width="50%" id="table">
-                <thead class="fixedHeader">
-                    <tr>
-                        <th>Purchase Order</th>
-                        <td><input name="poNumber" type="text" value="<%=PurchaseOrder.get(0).getPoNumber()%>"/></td>
-                        <th>Delivery Order Number</th>
-                        <td><input name="drNumber" type="text" value="dr Number"/></td>
-                        <th>Updated By</th>
-                        <td>updated by</td>
-                    </tr>
-                    <tr>
-                        <th>Date Made</th>
-                        <td><%= PurchaseOrder.get(0).getDateMade()%></td>
-                        <th>Reconcile Status</th>
-                        <td><%= PurchaseOrder.get(0).getReconcileStatus()%></td>
-                    </tr>
-                   
-                </thead>
-            </table>
-            <table class="table table-bordered">
-                <thead>
-                 
-                    <tr> 
-                        <td><input type="checkbox" name="chk" onClick="" checked />Select All</td>
-                    </tr>
-                </thead>
-                <tbody>
-                     <tr>
-                        <th></th>
-                        <th>Item Name</th>
-                        <th>Unit Price</th>
-                        <th>Qty</th>
-                        <th>Total Price</th>
-                    </tr>
-                    <%
-                        for (int y = 0; y < PurchaseOrder.size(); y++) {
-                    %>
-                    <tr>
-                        <td><input type="checkbox" name="chk" onClick="" checked/></td>
-                        <td><%=PurchaseOrder.get(y).getItemCode()%></td>
-                        <td><%= PurchaseOrder.get(y).getUnitPrice()%></td>
-                        <td><%=PurchaseOrder.get(y).getVolumeQty() %></td>
-                        <td>Total Price</td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                <tbody>
-            </table>
-            <br/><br/>
-            <input type="submit" class="btn btn-danger" value="Submit">
-            <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
-        </form>
-    </div>
-</body>
+        <div class="container" align="center">
+
+            <div style="margin-bottom: 50px;">
+                <img src="Images/AI.png" id="AccessoriesInv" onclick="showHide('AItable')" />
+                <img src="Images/PI.png" id="ProductionInv"  onclick="showHide('PItable')" />
+                <img src="Images/wi.png" id="WarehouseInv"  onclick="showHide('WItable')" />
+            </div>
+
+
+            <div id="AItable" style="display:none;">
+                <table class="table-bordered table">
+                    <thead>
+                        <tr>
+                            <th>Accessories Inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="PItable" style="display:none;">
+                <table class="table-bordered table">
+                    <thead>
+                        <tr>
+                            <th>Production Inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="WItable" style="display:none;">
+                <table class="table-bordered table">
+                    <thead>
+                        <tr>
+                            <th>Warehouse Inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </body>
 </html>

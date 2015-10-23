@@ -175,7 +175,7 @@ public class SubconPurchaseOrder {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date madeDate1 = getFormatter().parse(df.format(madeDate0));
         java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
-        this.dateMade = sqlreceivedDate1;
+        this.setDateMade(sqlreceivedDate1);
     }
 
     /**
@@ -215,7 +215,7 @@ public class SubconPurchaseOrder {
         @SuppressWarnings("deprecation")
         java.util.Date deliveryDate2 = formatter.parse(deliveryDate);
         java.sql.Date deliveryDate1 = new java.sql.Date(deliveryDate2.getTime());
-        this.deliveryDate = deliveryDate1;
+        this.setDeliveryDate(deliveryDate1);
     }
 
     /**
@@ -272,5 +272,19 @@ public class SubconPurchaseOrder {
      */
     public void setFormatter(DateFormat formatter) {
         this.formatter = formatter;
+    }
+
+    /**
+     * @param dateMade the dateMade to set
+     */
+    public void setDateMade(java.sql.Date dateMade) {
+        this.dateMade = dateMade;
+    }
+
+    /**
+     * @param deliveryDate the deliveryDate to set
+     */
+    public void setDeliveryDate(java.sql.Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }

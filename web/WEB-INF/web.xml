@@ -96,6 +96,66 @@
         <servlet-name>ViewSubcontractorAndServiceServlet</servlet-name>
         <servlet-class>Controller.ViewSubcontractorAndServiceServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewConsumptionReportServlet</servlet-name>
+        <servlet-class>Controller.ViewConsumptionReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetConsumptionReportServlet</servlet-name>
+        <servlet-class>Controller.GetConsumptionReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductsServlet</servlet-name>
+        <servlet-class>Controller.SearchProductsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchSubconServlet</servlet-name>
+        <servlet-class>Controller.SearchSubconServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <servlet-class>Controller.SignUp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetSubconServiceServlet</servlet-name>
+        <servlet-class>Controller.SetSubconServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAccessoriesInventoryServlet</servlet-name>
+        <servlet-class>Controller.ViewAccessoriesInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewWarehouseInventoryServlet</servlet-name>
+        <servlet-class>Controller.ViewWarehouseInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProductionInventoryServlet</servlet-name>
+        <servlet-class>Controller.ViewProductionInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBoutiqueInventoryServlet</servlet-name>
+        <servlet-class>Controller.ViewBoutiqueInventoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PurchaseOrderSerlvet</servlet-name>
+        <servlet-class>Controller.PurchaseOrderSerlvet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSubconPurchaseOrderServlet</servlet-name>
+        <servlet-class>Controller.ViewSubconPurchaseOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSupplierPurchaseOrderServlet</servlet-name>
+        <servlet-class>Controller.ViewSupplierPurchaseOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReconcileServlet</servlet-name>
+        <servlet-class>Controller.ReconcileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliveryScheduleServlet</servlet-name>
+        <servlet-class>Controller.DeliveryScheduleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -183,6 +243,66 @@
     <servlet-mapping>
         <servlet-name>ViewSubcontractorAndServiceServlet</servlet-name>
         <url-pattern>/ViewSubcontractorAndServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewConsumptionReportServlet</servlet-name>
+        <url-pattern>/ViewConsumptionReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetConsumptionReportServlet</servlet-name>
+        <url-pattern>/GetConsumptionReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductsServlet</servlet-name>
+        <url-pattern>/SearchProductsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchSubconServlet</servlet-name>
+        <url-pattern>/SearchSubconServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/SignUp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetSubconServiceServlet</servlet-name>
+        <url-pattern>/SetSubconServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAccessoriesInventoryServlet</servlet-name>
+        <url-pattern>/ViewAccessoriesInventoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewWarehouseInventoryServlet</servlet-name>
+        <url-pattern>/ViewWarehouseInventoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProductionInventoryServlet</servlet-name>
+        <url-pattern>/ViewProductionInventoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBoutiqueInventoryServlet</servlet-name>
+        <url-pattern>/ViewBoutiqueInventoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseOrderSerlvet</servlet-name>
+        <url-pattern>/PurchaseOrderSerlvet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSubconPurchaseOrderServlet</servlet-name>
+        <url-pattern>/ViewSubconPurchaseOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSupplierPurchaseOrderServlet</servlet-name>
+        <url-pattern>/ViewSupplierPurchaseOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReconcileServlet</servlet-name>
+        <url-pattern>/ReconcileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveryScheduleServlet</servlet-name>
+        <url-pattern>/DeliveryScheduleServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

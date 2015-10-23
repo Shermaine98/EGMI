@@ -58,9 +58,8 @@ public class EncodeBillOfMaterialsServlet extends BaseServlet {
         }
       
         if (x == true) {
-           
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("SetPDIDServlet");
+            RequestDispatcher rd = context.getRequestDispatcher("/SetPDIDServlet");
             request.setAttribute("BillofMaterials", arrBillOfMaterials);
             rd.forward(request, response);
         } else {

@@ -65,7 +65,7 @@
                 <form class="form-signin" role="form" action="Login" method="POST" name="sign-in">
                     <input type="text" name="username" placeholder="Email" class="form-control"/><br/>
                     <input type="password" name="password" placeholder="Password" class="form-control"><br/>
-                    <input type="submit" class="btn btn-danger width" value="Sign-in"/><br/><br/>
+                    <input type="submit" class="btn btn-danger  width" value="Sign-in"/><br/><br/>
                     <a href="sign_up.jsp"><i>No account yet? Sign-up now!</i></a><br/>
                 </form>
             </div>

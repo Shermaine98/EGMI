@@ -54,7 +54,7 @@ public class SupplierPurchaseOrderDAO {
         return false;
     }
 
-    public ArrayList<SupplierPurchaseOrder> GetAllPurchaseOrder() throws ParseException {
+    public ArrayList<SupplierPurchaseOrder> GetAllSupplierPurchaseOrder() throws ParseException {
 
         ArrayList<SupplierPurchaseOrder> newPurchaseOrder = new ArrayList<SupplierPurchaseOrder>();
 

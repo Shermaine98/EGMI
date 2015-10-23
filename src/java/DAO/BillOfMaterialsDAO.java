@@ -37,7 +37,9 @@ public class BillOfMaterialsDAO {
             pstmt.setString(6, newBillOfMaterials.getUnitMeasurement());
 
             int rows = pstmt.executeUpdate();
+            pstmt.close();
             conn.close();
+
             return rows == 1;
         } catch (SQLException ex) {
             Logger.getLogger(BillOfMaterialsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +61,7 @@ public class BillOfMaterialsDAO {
 
                 newBillOfMaterials.setProductID(rs.getInt("productID"));
                 newBillOfMaterials.setItemCode(rs.getInt("itemCode"));
-               newBillOfMaterials.setSizeName(rs.getString("sizeName"));
+                newBillOfMaterials.setSizeName(rs.getString("sizeName"));
                 newBillOfMaterials.setProductName(rs.getString("productName"));
                 newBillOfMaterials.setItemConsumption(rs.getDouble("itemConsumption"));
                 newBillOfMaterials.setUnitMeasurement(rs.getString("unitMeasurement"));
@@ -78,51 +80,59 @@ public class BillOfMaterialsDAO {
         }
         return null;
     }
-    
+
     public ArrayList<BillOfMaterials> searchProduct(String productID) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
 
-         String query = "SELECT * FROM `bill_of_materials` WHERE productName LIKE '%"+ productID + "%'";
-        PreparedStatement ps = conn.prepareStatement(query);
- 
+        String search = productID + "%";
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `bill_of_materials` WHERE productName LIKE ?");
+        ps.setString(1, search);
+
         ArrayList<BillOfMaterials> BillOfMaterialsList = new ArrayList();
-        ResultSet rs = ps.executeQuery();      
+        ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-             BillOfMaterials newBillOfMaterials = new BillOfMaterials();
-                newBillOfMaterials.setProductID(rs.getInt("productID"));
-                newBillOfMaterials.setItemCode(rs.getInt("itemCode"));
-                newBillOfMaterials.setSizeName(rs.getString("sizeName"));
-                newBillOfMaterials.setProductName(rs.getString("productName"));
-                newBillOfMaterials.setItemConsumption(rs.getDouble("itemConsumption"));
-                newBillOfMaterials.setUnitMeasurement(rs.getString("unitMeasurement"));
-              
-                BillOfMaterialsList.add(newBillOfMaterials);
-               
+            BillOfMaterials newBillOfMaterials = new BillOfMaterials();
+            newBillOfMaterials.setProductID(rs.getInt("productID"));
+            newBillOfMaterials.setItemCode(rs.getInt("itemCode"));
+            newBillOfMaterials.setSizeName(rs.getString("sizeName"));
+            newBillOfMaterials.setProductName(rs.getString("productName"));
+            newBillOfMaterials.setItemConsumption(rs.getDouble("itemConsumption"));
+            newBillOfMaterials.setUnitMeasurement(rs.getString("unitMeasurement"));
+
+            BillOfMaterialsList.add(newBillOfMaterials);
+
         }
+        ps.close();
         rs.close();
+        conn.close();
         return BillOfMaterialsList;
 
     }
-    
+
     public Integer getProductNumber() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-        Connection conn = myFactory.getConnection();
-        Integer i =0;
-         String query = "SELECT MAX(productID) from bill_of_materials";
-        PreparedStatement ps = conn.prepareStatement(query);
- 
-        ResultSet rs = ps.executeQuery();      
-        while (rs.next()) {
-                     i = rs.getInt("MAX(productID)");
+        Integer i;
+        try (Connection conn = myFactory.getConnection()) {
+            i = 0;
+            String query = "SELECT MAX(productID) from bill_of_materials";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                i = rs.getInt("MAX(productID)");
+            }   if (i == 0) {
+                i = 200000000;
+            } else if (i == 299999999) {
+                i = -1;
+            } else {
+                i += 1;
+            }  
+            conn.close();
+            pstmt.close();
+            rs.close();
         }
-         if(i ==0){
-            i=200000000;
-        }else if (i==299999999)
-            i=-1;
-         else{
-            i+=1;}
-        rs.close();
         return i;
     }
+
 }

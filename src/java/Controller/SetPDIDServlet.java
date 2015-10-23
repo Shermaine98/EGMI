@@ -33,7 +33,6 @@ public class SetPDIDServlet extends BaseServlet {
         }
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/ProductCreation/ConsumptionReport.jsp");
-        request.setAttribute("data", "none");
         request.setAttribute("CRPRNumber", productionnumber);
         rd.forward(request, response);
 

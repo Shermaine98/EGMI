@@ -14,7 +14,13 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/css/table-design.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap/css/sub-menu.css">
         <!--<title>Welcome to Hammerhead!</title>-->
+        
+        <!--JQUERY LIBRARIES-->
+        <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
     </head>
     <body>
 
@@ -28,15 +34,22 @@
                         <li> <a href="/EGMI/Login?action=goToHome">Home</a></li>
                         <!--Product Creation-->
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product Creation
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Product Creation
                                 <span class="caret"></span></a> 
+
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="">Bill Of Materials</a></li>
-                                <li><a href="/EGMI/SetPIDServlet">Encode Bill Of Materials</a></li>
-                                <li><a href="">View Bill of Materials</a></li>
-                                <li><a href="">Consumption Report</a></li>
-                                <li><a href="/EGMI/SetPDIDServlet">Encode Consumption Report</a></li>
-                                <li><a href="/EGMI/ViewConsumptionReportServlet">View Consumption Report</a></li>
+                                <!--SUB-MENU OF BILL OF MATERIALS-->
+                                <li><a href="#">Bill Of Materials</a>
+                                    <ul class="dropdown-menu sub-menu"><li><a href="/EGMI/SetPIDServlet">Encode Bill Of Materials</a></li></ul>
+                                </li>
+
+                                <!--SUB-MENU OF CONSUMPTION REPORT-->
+                                <li><a href="">Consumption Report</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        <li><a href="/EGMI/SearchProductServlet">Encode Consumption Report</a></li>
+                                        <li><a href="/EGMI/ViewConsumptionReportServlet">View Consumption Report</a></li></ul>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -45,16 +58,22 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Procurement
                                 <span class="caret"></span></a> 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="">Supplier Purchase Order</a></li>
-                                <li><a href="/EGMI/SetSPOServlet">Encode Supplier Purchase Order</a></li>
-                                <li><a href="">View Supplier Purchase Order</a></li>
-                                <li><a href="">Subcontractor Purchase Order</a></li>
-                                <li><a href="/EGMI/SetSubPOServlet">Encode Subcontractor Purchase Order</a></li>
-                                <li><a href="">View Subcontractor Purchase Order</a></li>
-                                <li><a href="Receiving.jsp">Receiving</a></li>
-                                <li class="divider"></li>
-                                <li><a href="CuttingReport.jsp">Encode Cutting Report</a></li>
-                                <li><a href="">View Cutting Report</a></li>
+                                <li><a href="">Supplier Purchase Order</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        <li><a href="/EGMI/SetSPOServlet">Encode Supplier Purchase Order</a></li>
+                                        <li><a href="/EGMI/ViewSupplierPurchaseOrderServlet">View Supplier Purchase Order</a></li></ul></li>
+
+                                <li><a href="">Subcontractor Purchase Order</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        <li><a href="/EGMI/SearchProductsServlet">Encode Subcontractor Purchase Order</a></li>
+                                        <li><a href="/EGMI/ViewSubconPurchaseOrderServlet">View Subcontractor Purchase Order</a></li></ul></li>
+
+                                <li><a href="/EGMI/PurchaseOrderSerlvet">Receiving</a></li>
+                                <li><a href="#">Cutting Report</a>
+                                    <ul class="dropdown-menu sub-menu" style="margin-top: 46%">
+                                        <li><a href="CuttingReport.jsp">Encode Cutting Report</a></li>
+                                        <li><a href="">View Cutting Report</a></li></ul></li>
+
                             </ul>
                         </li>
 
@@ -63,11 +82,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventory
                                 <span class="caret"></span></a> 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/EGMI/GetAccessoriesInventoryServlet">Accessories Inventory</a></li>
-                                <li><a href="/EGMI/GetProductionInventoryServlet">Production Inventory</a></li>
-                                <li><a href="/EGMI/GetWarehouseInventoryServlet">Warehouse Inventory</a></li>
+                                <li><a href="/EGMI/ReconcileServlet">Reconcile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="BoutiqueInventory.jsp">Boutique Inventory</a></li>
+                                <li><a href="/EGMI/ViewAccessoriesInventoryServlet">Accessories Inventory</a></li>
+                                <li><a href="/EGMI/ViewProductionInventoryServlet">Production Inventory</a></li>
+                                <li><a href="/EGMI/ViewWarehouseInventoryServlet">Warehouse Inventory</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/EGMI/ViewBoutiqueInventoryServlet">Boutique Inventory</a></li>
                             </ul>
                         </li>
 
@@ -79,6 +100,7 @@
                                 <li><a href="/EGMI/SetDONumberServlet">Delivery Order</a></li>
                                 <li><a href="">Replenishment Request</a></li>
                                 <li><a href="">Picking Form</a></li>
+                                <li><a href="/EGMI/SetDRNumberServlet">Delivery Schedule</a></li>
                                 <li><a href="/EGMI/SetDRNumberServlet">Delivery Receipt</a></li>
                             </ul>
                         </li>
@@ -97,7 +119,7 @@
 
                     <!--MAIL-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li>Today is <input type="text" name="dateMade" id="dateMade" readonly 
+                        <li>Today is <input type="text" class="transparentBg" name="dateMade" id="dateMade" readonly 
                                             style="height: 50px; 
                                             line-height: 15px;" /></li>
                         <li><a href="https://mail.google.com/"><span class="glyphicon glyphicon-envelope"></span></a></li>
@@ -109,7 +131,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="myaccount.jsp">View Account</a></li>
                                 <li><a href="editaccount.jsp">Edit Account</a></li>
-                                <li><a href="/EGMIInventoryManagementSystem/Logout">Log-Out</a></li>
+                                <li><a href="/EGMI/Logout">Log-Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -117,8 +139,7 @@
                 </div>
             </div>
         </nav>
-        <script src="bootstrap/js/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
         <script>
             function updateClock1( )
             {
@@ -146,7 +167,7 @@
                 var d = new Date();
                 var month = d.getMonth() + 1;
                 var day = d.getDate();
-                var output = 
+                var output =
                         (('' + month).length < 2 ? '0' : '') + month + '-' +
                         (('' + day).length < 2 ? '0' : '') + day + "-" + d.getFullYear();
                 document.getElementById('dateMade').value = output + "   " + currentTimeString;
@@ -156,6 +177,7 @@
             $(document).ready(function ()
             {
                 setInterval('updateClock1()', 1000);
+                // TODO:  $('[data-toggle="popover"]').popover();   
             });
 
         </script>

@@ -86,8 +86,12 @@ public class RefSupplierDAO {
      public ArrayList<RefSupplier> searchSupplier(String supplierName) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
+        
+        String search = supplierName + "%";
 
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_supplier` WHERE companyName LIKE '%"+ supplierName + "%' group by companyName");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_supplier` WHERE companyName LIKE ? group by companyName");
+        ps.setString(1, search);
+        
         ArrayList<RefSupplier> RefSupplierList = new ArrayList();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

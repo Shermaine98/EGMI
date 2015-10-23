@@ -33,7 +33,7 @@ public class RefItemDAO {
             pstmt.setInt(1, newRefItem.getitemCode());
             pstmt.setString(2, newRefItem.getItemName());
             pstmt.setString(3, newRefItem.getInventoryType());
-         
+
             int rows = pstmt.executeUpdate();
             conn.close();
             return rows == 1;
@@ -53,16 +53,15 @@ public class RefItemDAO {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                RefItem newRefItem= new RefItem();
-                
+                RefItem newRefItem = new RefItem();
+
                 newRefItem.setItemCode(rs.getInt("itemCode"));
                 newRefItem.setItemName(rs.getString("itemName"));
                 newRefItem.setInventoryType(rs.getString("inventoryType"));
-               
-            
+
                 RefItem.add(newRefItem);
             }
-                
+
             pstmt.close();
             rs.close();
             conn.close();
@@ -73,26 +72,29 @@ public class RefItemDAO {
         }
         return null;
     }
-    
-     public ArrayList<RefItem> searchItemName(String itemName) throws SQLException {
+
+    public ArrayList<RefItem> searchItemName(String itemName) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
-        
-        String query = "SELECT * FROM `ref_item` WHERE itemName LIKE '%"+ itemName + "%'";
-        PreparedStatement ps = conn.prepareStatement(query);
+
+        String search = itemName + "%";
+
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ref_item` WHERE itemName LIKE ?");
+        ps.setString(1, search);
+
         ArrayList<RefItem> RefItem = new ArrayList();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-             RefItem RefItemN = new RefItem();
-             RefItemN.setItemCode(rs.getInt("itemCode"));
-             RefItemN.setItemName(rs.getString("itemName"));
-             RefItemN.setInventoryType(rs.getString("inventoryType"));
-           
-                 RefItem.add(RefItemN);  
+            RefItem RefItemN = new RefItem();
+            RefItemN.setItemCode(rs.getInt("itemCode"));
+            RefItemN.setItemName(rs.getString("itemName"));
+            RefItemN.setInventoryType(rs.getString("inventoryType"));
+
+            RefItem.add(RefItemN);
         }
         rs.close();
         return RefItem;
 
     }
-    
+
 }

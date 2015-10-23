@@ -117,7 +117,6 @@ public class UserDAO {
                User.setUserName(rs.getString("email"));
                User.setPassword(rs.getString("password"));
 
-
             }
 
             pstmt.close();
