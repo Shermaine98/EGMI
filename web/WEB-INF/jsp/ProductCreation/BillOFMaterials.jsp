@@ -35,7 +35,7 @@
         <div>
             <center><h2>Encode Bill of Materials</h2></center>
             <br/>
-            <div align="center" class="container">
+            <div align="center" class="container-fluid" style="margin-left:50px">
                 <div class="panel panel-default col-md-4">
                     <div class="panel-heading">
                         <h3 class="panel-title">Bill of Materials</h3>
@@ -72,48 +72,50 @@
                             </tbody>
                         </table>
                         <br/>
-                        <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('dataTable')" />
-                        <br/><br/>
-                        <input type="button" class="btn btn-danger" onclick= "viewModal()" data-toggle="modal" data-target="#myModal" value="Create">
-                        <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
+                        <div id="buttons" style="visibility: hidden">
+                            <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('dataTable')" />
+                            <br/><br/>
+                            <input type="button" class="btn btn-danger" onclick= "viewModal()" data-toggle="modal" data-target="#myModal" value="Create">
+                            <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
+                        </div>
                     </div>
                 </div>
             </div> 
         </div> 
         <div  align="center" class="container">
-        <form method="POST" action="EncodeBillOfMaterialsServlet">
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div align="center" style="width:60%">
-                                <label class="" for="productIDModal">Product ID</label>
-                                <input type="text" name="productIDModal" class="form-control readonlyWhite" id="productIDModal" readonly /><br/>
-                                <label class="" for="productNameModal">Product Name</label>
-                                <input type="text" name="productNameModal" class="form-control readonlyWhite" id="productNameModal" readonly /><br/>
-                                <label class="" for="sizeTypeModal">Size Name</label>
-                                <input type="text" class="form-control readonlyWhite" name="sizeTypeModal" id="sizeTypeModal" readonly />
+            <form method="POST" action="EncodeBillOfMaterialsServlet">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
                             </div>
-                            <br/><br/>
+                            <div class="modal-body">
+                                <div align="center" style="width:60%">
+                                    <label class="" for="productIDModal">Product ID</label>
+                                    <input type="text" name="productIDModal" class="form-control readonlyWhite" id="productIDModal" readonly /><br/>
+                                    <label class="" for="productNameModal">Product Name</label>
+                                    <input type="text" name="productNameModal" class="form-control readonlyWhite" id="productNameModal" readonly /><br/>
+                                    <label class="" for="sizeTypeModal">Size Name</label>
+                                    <input type="text" class="form-control readonlyWhite" name="sizeTypeModal" id="sizeTypeModal" readonly />
+                                </div>
+                                <br/><br/>
 
-                            <table  id="thisTableModal" class="table table-bordered">
-                                <tbody id="dataTableModal">
-                                </tbody>
-                            </table>
+                                <table  id="thisTableModal" class="table table-bordered">
+                                    <tbody id="dataTableModal">
+                                    </tbody>
+                                </table>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
-                                <input type="submit" class="btn btn-danger" value="Create">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
+                                    <input type="submit" class="btn btn-danger" value="Create">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         </div>
     </body>
 </html>

@@ -65,7 +65,10 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="itemNameSupplier" id="itemNameSupplier" onkeypress="autoCompleteSupplierItem()" placeholder="Search Item"/>
                             <input type="hidden" name="itemNameSupplier" id="itemNameSupplier" disabled="disabled" style="color: #CCC; position: absolute; background: transparent;"/>
-                            <span class="input-group-btn"><input onClick="getSupplierItem()" class="btn btn-default" value="Search" /></span>
+                            <span class="input-group-btn">
+                                <a href="#" onClick="getSupplierItem()" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </a></span>
                         </div>
                         <br/><br/>
 
@@ -75,7 +78,7 @@
                         <div id="total" align="center" style="visibility:hidden;">
                             <div style="float:right">
                             TOTAL:
-                            <input type="text" class="form-control" name="Total1" id="total1" readonly />
+                            <input type="text" class="form-control readonlyWhite" name="Total1" id="total1" readonly />
                             </div>
                             <br/><br/><br/>
                             <input type="button" class="btn btn-danger" value="Delete Row" onclick="deleteRow('data')" />

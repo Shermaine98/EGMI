@@ -45,7 +45,7 @@ function getItem() {
                 <th style="vertical-align: middle">Item Name</th> \n\
                 <th style="vertical-align: middle">Consumption</th>\n\
                 <th style="vertical-align: middle">Unit Measurement</th></tr>');
-                       i++;
+                    i++;
                 }
 
                 $('#dataTable').append('<tr> <td ><input type="checkbox" name="chk" />\n\
@@ -56,7 +56,8 @@ function getItem() {
                 <td><input class="transparentBg" type="number" id="itemConsumption[]" name="itemConsumption" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  /></td> \n\
             <td><input class="transparentBg" name="unitMeasurement" id="unitMeasurement[]" value="cm" /> </td>'
                         + '</tr>');
-             
+                document.getElementById("buttons").style.visibility = 'visible';
+
             }, error: function (XMLHttpRequest, textStatus, exception) {
                 alert(XMLHttpRequest.responseText);
             }
