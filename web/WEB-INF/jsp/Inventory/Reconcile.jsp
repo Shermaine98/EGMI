@@ -38,15 +38,12 @@
 
     </head>
     <body>  
-        <div class="container" align="center">
-
+        <div class="container" align="center" style="margin-top:50px;">
             <div style="margin-bottom: 50px;">
-                <img src="Images/AI.png" id="AccessoriesInv" onclick="showHide('AItable')" />
-                <img src="Images/PI.png" id="ProductionInv"  onclick="showHide('PItable')" />
+                <img src="Images/AI.png" id="AccessoriesInv" onclick="showHide('AItable')" style="margin-right:15px;" />
+                <img src="Images/PI.png" id="ProductionInv"  onclick="showHide('PItable')" style="margin-right:15px;" />
                 <img src="Images/wi.png" id="WarehouseInv"  onclick="showHide('WItable')" />
             </div>
-
-
             <div id="AItable" style="display:none;">
                 <table class="table-bordered table">
                     <thead>
