@@ -1,7 +1,9 @@
 package Controller;
 
+import DAO.PurchaseOrderDAO;
 import DAO.SubconPurchaseOrderDAO;
 import DAO.SupplierPurchaseOrderDAO;
+import Model.PurchaseOrder;
 import Model.SubconPurchaseOrder;
 import Model.SupplierPurchaseOrder;
 import java.io.IOException;
@@ -25,38 +27,54 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SupplierPurchaseOrderDAO SupplierPurchaseOrderDAO = new SupplierPurchaseOrderDAO();
-         SubconPurchaseOrderDAO SubconPurchaseOrderDAO = new SubconPurchaseOrderDAO();
-        ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrderList = new  ArrayList<> ();
-        ArrayList<SubconPurchaseOrder> subconPurchaseOrderList = new  ArrayList<> ();
-       
-        String poNumber = request.getParameter("purchaseOrderNum");
-         System.out.println("this"+poNumber);
+        SubconPurchaseOrderDAO SubconPurchaseOrderDAO = new SubconPurchaseOrderDAO();
+        ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrderList = new ArrayList<>();
+        ArrayList<SubconPurchaseOrder> subconPurchaseOrderList = new ArrayList<>();
+
+        String poNumber = request.getParameter("hiddenValue");
+        System.out.println("this" + poNumber);
+        
+        ArrayList<PurchaseOrder> PurchaseOrderList = new  ArrayList<> ();
+        PurchaseOrderDAO PurchaseOrderDAO= new PurchaseOrderDAO();
+        
+        try {
+            PurchaseOrderList = PurchaseOrderDAO.GetAllPurchaseOrder();
+        } catch (ParseException ex) {
+            Logger.getLogger(PurchaseOrderSerlvet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //supplier
-        if(poNumber.startsWith("7")){
+        if (poNumber.startsWith("7")) {
             System.out.println("HELOO");
             try {
                 SupplierPurchaseOrderList = SupplierPurchaseOrderDAO.GetSupplierPurchaseOrder(poNumber);
             } catch (ParseException ex) {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-             
+
+            ServletContext context = getServletContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
+             request.setAttribute("PurchaseOrderList", PurchaseOrderList);
             request.setAttribute("data", "supplier");
             request.setAttribute("SupplierPurchaseOrderReceiving", SupplierPurchaseOrderList);
-   
-        }
-      
-         //subcon   
-        else if(poNumber.startsWith("5")){
+            rd.forward(request, response);
+            
+        } //subcon   
+        else if (poNumber.startsWith("5")) {
             try {
                 subconPurchaseOrderList = SubconPurchaseOrderDAO.getSubconPurchaseOrder(poNumber);
             } catch (ParseException ex) {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-          
-             request.setAttribute("data", "subcon");
-            request.setAttribute("subconPurchaseOrderReceiving", subconPurchaseOrderList);
-          
+
+            ServletContext context = getServletContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
+           request.setAttribute("PurchaseOrderList", PurchaseOrderList);
+           request.setAttribute("subconPurchaseOrderReceiving", subconPurchaseOrderList);
+           request.setAttribute("data", "subcon");
+            rd.forward(request, response);
+
         }
-           
+
     }
 }

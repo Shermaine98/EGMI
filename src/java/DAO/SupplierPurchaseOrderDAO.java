@@ -86,7 +86,7 @@ public class SupplierPurchaseOrderDAO {
         return null;
     }
     
-      public ArrayList<SupplierPurchaseOrder> GetSupplierPurchaseOrder(String poNumber) throws ParseException {
+      public ArrayList<SupplierPurchaseOrder> GetSupplierPurchaseOrders(String poNumber) throws ParseException {
 
         ArrayList<SupplierPurchaseOrder> newPurchaseOrder = new ArrayList<SupplierPurchaseOrder>();
 
@@ -120,6 +120,54 @@ public class SupplierPurchaseOrderDAO {
         }
         return null;
     }
+  
+      public ArrayList<SupplierPurchaseOrder> GetSupplierPurchaseOrder(String poNumber) throws ParseException {
+
+        ArrayList<SupplierPurchaseOrder> newPurchaseOrder = new ArrayList<SupplierPurchaseOrder>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT SPO.poNumber, SPO.itemCode, SPO.volumeQty, S.companyName, SPO.dateMade, SPO.deliveryDate, U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, S.unitPrice, I.unitMeasurement, I.inventoryType, SPO.receivingStatus\n" +
+            "FROM supplier_purchase_order SPO\n" +
+            "JOIN ref_supplier S \n" +
+            "ON SPO.supplier = S.supplierID \n" +
+            "JOIN ref_item I \n" +
+            "ON S.itemCode = I.itemCode\n" +
+            "JOIN user U\n" +
+            "ON SPO.preparedBy = U.employeeID\n" +
+            "WHERE SPO.itemcode = S.itemcode && SPO.poNumber = ?;");
+            pstmt.setString(1, poNumber);
+            
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SupplierPurchaseOrder temp = new SupplierPurchaseOrder();
+                temp.setPoNumber(rs.getInt("poNumber"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setCompanyName(rs.getString("companyName"));
+                temp.setDateMade(rs.getDate("dateMade"));
+                temp.setDeliveryDate(rs.getDate("deliveryDate"));
+                temp.setItemName(rs.getString("itemName"));
+                 temp.setVolumeQty(rs.getDouble("volumeQty"));
+                temp.setPreaparedLastName(rs.getString("preparedbyLastName"));
+                temp.setPreparedFirstName(rs.getString("preparedbyFirstName"));
+                temp.setUnitPrice(rs.getInt("unitPrice"));
+                temp.setUnitMeasurement(rs.getString("unitMeasurement"));
+                temp.setInventoryType(rs.getString("inventoryType"));
+                temp.setReceivingStatus(rs.getString("receivingStatus"));
+                temp.setNote(rs.getString("notes"));
+                newPurchaseOrder.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            rs.close();
+
+            return newPurchaseOrder;
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierPurchaseOrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }    
     
       public Integer getSupplierPurchaseOrderNumber() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

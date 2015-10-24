@@ -16,10 +16,8 @@ public class SupplierPurchaseOrder {
 
     private int poNumber;
     private int itemCode;
-   
     private int supplier;
     private double volumeQty;
-   
     private java.sql.Date dateMade;
     private java.sql.Date deliveryDate;
     private int preparedBy;
@@ -27,7 +25,15 @@ public class SupplierPurchaseOrder {
     private String receivingStatus;
     private String reconcileStatus;
     private String note;
-
+    //Receving
+    
+    private String companyName;
+    private double unitPrice;
+    private String itemName;
+    private String preaparedLastName;
+    private String  preaparedfirstName;
+    private String unitMeasurement;
+    private String inventoryType;
     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -36,7 +42,8 @@ public class SupplierPurchaseOrder {
     public int getPoNumber() {
         return poNumber;
     }
-
+    
+    
     /**
      * @param poNumber the poNumber to set
      */
@@ -222,6 +229,104 @@ public class SupplierPurchaseOrder {
      */
     public void setNote(String note) {
         this.note = note;
+    }
+
+    /**
+     * @return the companyName
+     */
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    /**
+     * @param companyName the companyName to set
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    /**
+     * @return the unitPrice
+     */
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    /**
+     * @param unitPrice the unitPrice to set
+     */
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    /**
+     * @return the itemName
+     */
+    public String getItemName() {
+        return itemName;
+    }
+
+    /**
+     * @param itemName the itemName to set
+     */
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    /**
+     * @return the preaparedLastName
+     */
+    public String getPreaparedLastName() {
+        return preaparedLastName;
+    }
+
+    /**
+     * @param preaparedLastName the preaparedLastName to set
+     */
+    public void setPreaparedLastName(String preaparedLastName) {
+        this.preaparedLastName = preaparedLastName;
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getPreparedFirstName() {
+        return preaparedfirstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setPreparedFirstName(String firstName) {
+        this.preaparedfirstName = preaparedfirstName;
+    }
+
+    /**
+     * @return the unitMeasurement
+     */
+    public String getUnitMeasurement() {
+        return unitMeasurement;
+    }
+
+    /**
+     * @param unitMeasurement the unitMeasurement to set
+     */
+    public void setUnitMeasurement(String unitMeasurement) {
+        this.unitMeasurement = unitMeasurement;
+    }
+
+    /**
+     * @return the inventoryType
+     */
+    public String getInventoryType() {
+        return inventoryType;
+    }
+
+    /**
+     * @param inventoryType the inventoryType to set
+     */
+    public void setInventoryType(String inventoryType) {
+        this.inventoryType = inventoryType;
     }
 
 }
