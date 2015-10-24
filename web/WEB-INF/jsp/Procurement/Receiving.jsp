@@ -29,28 +29,24 @@
                     "dom": '<"pull-left "f>'
                 });
             });
-            
-            
+      
             $(document).ready(function () {
-
                 $(".viewpurchaseOrder").on("click", (function () {
                     var purchaseOrderNum = $(this).closest("tr").find(".purchaseOrderNum").text();
                     console.log(purchaseOrderNum);
                         $.ajax({
                         url: "GetPurchaseOrderSpecificServlet",
-                        type: 'POST',
-                        param: {
+                        method: 'GET',
+                        data: {
                           purchaseOrderNum: purchaseOrderNum
                          },
                          success: function(){    
-                          location.reload();   
+                         
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {
                             alert(XMLHttpRequest.responseText);
                         }
-                       
                     });
-                  
                 }));
             });
         </script>
@@ -80,7 +76,7 @@
                     for (int i = 0; i < PurchaseOrderList.size(); i++) {
                 %> 
                 <tr class="viewpurchaseOrder">
-                    <td class="purchaseOrderNum"> <input type="text" name="purchaseOrderNum1" value="<%=PurchaseOrderList.get(i).getPoNumber()%>"/></td>
+                    <td class="purchaseOrderNum"><%=PurchaseOrderList.get(i).getPoNumber()%></td>
                     <td><%= PurchaseOrderList.get(i).getDateMade()%></td>
                     <td><%= PurchaseOrderList.get(i).getDeliveryDate()%></td>
                     <td><%= PurchaseOrderList.get(i).getPreparedBy()%></td>

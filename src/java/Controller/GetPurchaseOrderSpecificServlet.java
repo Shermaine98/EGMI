@@ -29,7 +29,7 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
         ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrderList = new  ArrayList<> ();
         ArrayList<SubconPurchaseOrder> subconPurchaseOrderList = new  ArrayList<> ();
        
-        String poNumber = request.getParameter("productionNumber1");
+        String poNumber = request.getParameter("purchaseOrderNum");
          System.out.println("this"+poNumber);
         //supplier
         if(poNumber.startsWith("7")){
