@@ -33,6 +33,7 @@ public class PurchaseOrderSerlvet extends BaseServlet {
         }
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
+         request.setAttribute("data", "null");
         request.setAttribute("PurchaseOrderList", PurchaseOrderList);
         rd.forward(request, response); 
     }

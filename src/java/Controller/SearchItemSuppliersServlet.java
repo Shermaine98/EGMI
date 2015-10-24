@@ -40,10 +40,8 @@ public class SearchItemSuppliersServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
       response.setContentType("text/html;charset=UTF-8");
     
-          String supplierName = request.getParameter("supplierName1");
-            System.out.println(supplierName);
+            String supplierName = request.getParameter("supplierName1");
             String itemName = request.getParameter("query");
-            System.out.println(itemName);
             ArrayList<RefSupplier> refSupplierItem = new RefSupplierDAO().searchSupplierItem(itemName,supplierName);
             ArrayList<String> refItem = new ArrayList<String>();
             for (int i=0; i<refSupplierItem.size();i++){

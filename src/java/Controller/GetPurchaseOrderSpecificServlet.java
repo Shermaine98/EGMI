@@ -25,21 +25,23 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
          SubconPurchaseOrderDAO SubconPurchaseOrderDAO = new SubconPurchaseOrderDAO();
         ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrderList = new  ArrayList<> ();
         ArrayList<SubconPurchaseOrder> subconPurchaseOrderList = new  ArrayList<> ();
+            System.out.println("PUMASOK");
+         String poNumber = request.getParameter("param1");
+         System.out.println("this" + poNumber);
        
-        String poNumber = request.getParameter("productionNumber1");
-         System.out.println("this"+poNumber);
-        //supplier
+         //supplier
         if(poNumber.startsWith("7")){
             System.out.println("HELOO");
             try {
                 SupplierPurchaseOrderList = SupplierPurchaseOrderDAO.GetSupplierPurchaseOrder(poNumber);
             } catch (ParseException ex) {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-             
+            }      
             request.setAttribute("data", "supplier");
             request.setAttribute("SupplierPurchaseOrderReceiving", SupplierPurchaseOrderList);
-   
+            response.setCharacterEncoding("UTF-8"); 
+            response.getWriter().print("supplier");
+            response.getWriter().print(SupplierPurchaseOrderList);
         }
       
          //subcon   
@@ -50,8 +52,11 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
           
-             request.setAttribute("data", "subcon");
+            request.setAttribute("data", "subcon");
             request.setAttribute("subconPurchaseOrderReceiving", subconPurchaseOrderList);
+            response.setCharacterEncoding("UTF-8"); 
+            response.getWriter().print("subcon");
+            response.getWriter().print(subconPurchaseOrderList);
           
         }
            
