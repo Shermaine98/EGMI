@@ -149,8 +149,8 @@ public class ConsumptionReportDAO {
             Connection conn = myFactory.getConnection();
 
             String search = productName + "%";
-            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
-                    + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where bm.productName LIKE ? Order by cr.productID;");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productionNumber, productID, sizeType, itemCode, sizeName, sizeVolumeQty, preparedBy, dateMade\n"
+                    + "FROM consumption_report where productID LIKE ? Order by productID;");
 
             pstmt.setString(1, search);
 

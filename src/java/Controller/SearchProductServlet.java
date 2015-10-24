@@ -56,10 +56,10 @@ public class SearchProductServlet extends BaseServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(SearchProductServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ArrayList<String> productNameN = new ArrayList<String>();
+            ArrayList<String> productID = new ArrayList<String>();
             for (int i = 0; i < BillOfMaterialsListALL.size(); i++) {
-                if (!productNameN.contains(BillOfMaterialsListALL.get(i).getProductName())) {
-                    productNameN.add(BillOfMaterialsListALL.get(i).getProductName());
+                if (!productID.contains(String.valueOf(BillOfMaterialsListALL.get(i).getProductID()))) {
+                    productID.add(String.valueOf(BillOfMaterialsListALL.get(i).getProductID()));
                 }
             }
             //Create Production Number
@@ -74,7 +74,7 @@ public class SearchProductServlet extends BaseServlet {
             Gson gson = new Gson();
             request.setAttribute("CRPRNumber", numberCR);
             request.setAttribute("BillofMaterials", BillOfMaterialsListALL);
-            String json = gson.toJson(productNameN);
+            String json = gson.toJson(productID);
             response.getWriter().write("{\"suggestions\":" + json + "}");
         }
 

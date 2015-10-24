@@ -41,6 +41,7 @@
                           purchaseOrderNum: purchaseOrderNum
                          },
                          success: function(){    
+                             location.reload();
                          
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {

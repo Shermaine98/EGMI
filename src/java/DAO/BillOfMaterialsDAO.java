@@ -83,7 +83,7 @@ public class BillOfMaterialsDAO {
 
         String search = productID + "%";
 
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `bill_of_materials` WHERE productName LIKE ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM `bill_of_materials` WHERE productID LIKE ?");
         ps.setString(1, search);
 
         ArrayList<BillOfMaterials> BillOfMaterialsList = new ArrayList();
