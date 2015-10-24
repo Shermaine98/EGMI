@@ -43,8 +43,6 @@
                     <div class="panel-body">
                         <label class="" for="productID">Product ID</label>
                         <input type="text" name="productID" class="form-control readonlyWhite" id="productID" readonly /><br/>
-                        <label class="" for="productName">Product Name</label>
-                        <input type="text" name="productName" class="form-control" id="productName"/><br/>
                         <label class="" for="sizeName">Size Name</label>
                         <select name="sizeName" class="form-control" id="sizeName">
                             <option value="Pants">Pants</option>
@@ -95,8 +93,6 @@
                                 <div align="center" style="width:60%">
                                     <label class="" for="productIDModal">Product ID</label>
                                     <input type="text" name="productIDModal" class="form-control readonlyWhite" id="productIDModal" readonly /><br/>
-                                    <label class="" for="productNameModal">Product Name</label>
-                                    <input type="text" name="productNameModal" class="form-control readonlyWhite" id="productNameModal" readonly /><br/>
                                     <label class="" for="sizeTypeModal">Size Name</label>
                                     <input type="text" class="form-control readonlyWhite" name="sizeTypeModal" id="sizeTypeModal" readonly />
                                 </div>

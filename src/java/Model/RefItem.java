@@ -5,6 +5,7 @@ public class RefItem {
     private int itemCode;
     private String itemName;
     private String inventoryType;
+    private String unitMeasurement;
 
     /**
      * @return the itemNumber
@@ -46,5 +47,19 @@ public class RefItem {
      */
     public void setInventoryType(String inventoryType) {
         this.inventoryType = inventoryType;
+    }
+
+    /**
+     * @return the unitMeasurement
+     */
+    public String getUnitMeasurement() {
+        return unitMeasurement;
+    }
+
+    /**
+     * @param unitMeasurement the unitMeasurement to set
+     */
+    public void setUnitMeasurement(String unitMeasurement) {
+        this.unitMeasurement = unitMeasurement;
     }
 }

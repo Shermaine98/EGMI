@@ -50,6 +50,7 @@ public class SetItemServlet extends HttpServlet {
                 try {
                     obj.put("itemName", RefItemList.get(i).getItemName());
                     obj.put("ItemCode", RefItemList.get(i).getitemCode());
+                    obj.put("unitMeasurement", RefItemList.get(i).getUnitMeasurement());
                    
                     array.put(obj);
 

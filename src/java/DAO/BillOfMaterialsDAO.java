@@ -25,16 +25,14 @@ public class BillOfMaterialsDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into bill_of_materials"
-                    + "(productID, itemCode, sizeName, productName, itemConsumption, unitMeasurement) "
-                    + "values (?,?,?,?,?,?)";
+                    + "(productID, itemCode, sizeName, itemConsumption) "
+                    + "values (?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newBillOfMaterials.getProductID());
             pstmt.setInt(2, newBillOfMaterials.getItemCode());
             pstmt.setString(3, newBillOfMaterials.getSizeName());
-            pstmt.setString(4, newBillOfMaterials.getProductName());
-            pstmt.setDouble(5, newBillOfMaterials.getItemConsumption());
-            pstmt.setString(6, newBillOfMaterials.getUnitMeasurement());
+            pstmt.setDouble(4, newBillOfMaterials.getItemConsumption());
 
             int rows = pstmt.executeUpdate();
             pstmt.close();
@@ -62,9 +60,7 @@ public class BillOfMaterialsDAO {
                 newBillOfMaterials.setProductID(rs.getInt("productID"));
                 newBillOfMaterials.setItemCode(rs.getInt("itemCode"));
                 newBillOfMaterials.setSizeName(rs.getString("sizeName"));
-                newBillOfMaterials.setProductName(rs.getString("productName"));
                 newBillOfMaterials.setItemConsumption(rs.getDouble("itemConsumption"));
-                newBillOfMaterials.setUnitMeasurement(rs.getString("unitMeasurement"));
 
                 billOfMaterials.add(newBillOfMaterials);
 
@@ -97,9 +93,7 @@ public class BillOfMaterialsDAO {
             newBillOfMaterials.setProductID(rs.getInt("productID"));
             newBillOfMaterials.setItemCode(rs.getInt("itemCode"));
             newBillOfMaterials.setSizeName(rs.getString("sizeName"));
-            newBillOfMaterials.setProductName(rs.getString("productName"));
             newBillOfMaterials.setItemConsumption(rs.getDouble("itemConsumption"));
-            newBillOfMaterials.setUnitMeasurement(rs.getString("unitMeasurement"));
 
             BillOfMaterialsList.add(newBillOfMaterials);
 

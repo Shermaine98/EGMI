@@ -34,19 +34,15 @@ public class EncodeBillOfMaterialsServlet extends BaseServlet {
         BillOfMaterialsDAO billOfMaterialsDAO = new BillOfMaterialsDAO();
 
         String productID = request.getParameter("productIDModal");
-        String productName = request.getParameter("productNameModal");
         String sizeName = request.getParameter("sizeTypeModal");
         String[] itemCode = request.getParameterValues("itemCodeModal");
         String[] itemConsumption = request.getParameterValues("itemConsumptionModal");
-        String[] unitMeasurement = request.getParameterValues("unitMeasurementModal");
 
         boolean x = false;
         for (int i = 0; i < itemCode.length; i++) {
             billOfMaterials.setProductID(Integer.parseInt(productID));
             billOfMaterials.setItemCode(Integer.parseInt(itemCode[i]));
-            billOfMaterials.setProductName(productName);
             billOfMaterials.setItemConsumption(Double.parseDouble(itemConsumption[i]));
-            billOfMaterials.setUnitMeasurement(unitMeasurement[i]);
             billOfMaterials.setSizeName(sizeName);
 
             if (billOfMaterialsDAO.EncodeBillOfMaterials(billOfMaterials)) {

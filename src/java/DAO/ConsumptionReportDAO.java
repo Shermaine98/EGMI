@@ -58,7 +58,7 @@ public class ConsumptionReportDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, bm.productName, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
+            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
                     + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where cr.productionNumber =" + productionNumber + "\n"
                     + "Order by cr.productID;");
 
@@ -67,7 +67,6 @@ public class ConsumptionReportDAO {
             while (rs.next()) {
                 ConsumptionReport temp = new ConsumptionReport();
                 temp.setProductionNumber(rs.getInt("productionNumber"));
-                temp.setProductName(rs.getString("productName"));
                 temp.setProductID(rs.getInt("productID"));
                 temp.setSizeName(rs.getString("sizeName"));
                 temp.setSizeType(rs.getString("sizeType"));
@@ -150,7 +149,7 @@ public class ConsumptionReportDAO {
             Connection conn = myFactory.getConnection();
 
             String search = productName + "%";
-            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, bm.productName, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
+            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
                     + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where bm.productName LIKE ? Order by cr.productID;");
 
             pstmt.setString(1, search);
@@ -160,7 +159,6 @@ public class ConsumptionReportDAO {
             while (rs.next()) {
                 ConsumptionReport temp = new ConsumptionReport();
                 temp.setProductionNumber(rs.getInt("productionNumber"));
-                temp.setProductName(rs.getString("productName"));
                 temp.setProductID(rs.getInt("productID"));
                 temp.setSizeName(rs.getString("sizeName"));
                 temp.setSizeType(rs.getString("sizeType"));

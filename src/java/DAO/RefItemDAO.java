@@ -26,13 +26,14 @@ public class RefItemDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into ref_item(itemCode, "
-                    + "sizeName, inventoryType) "
-                    + "values (?,?,?)";
+                    + "sizeName, inventoryType, unitMeasurement) "
+                    + "values (?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newRefItem.getitemCode());
             pstmt.setString(2, newRefItem.getItemName());
             pstmt.setString(3, newRefItem.getInventoryType());
+            pstmt.setString(4, newRefItem.getUnitMeasurement());
 
             int rows = pstmt.executeUpdate();
             conn.close();
@@ -58,6 +59,8 @@ public class RefItemDAO {
                 newRefItem.setItemCode(rs.getInt("itemCode"));
                 newRefItem.setItemName(rs.getString("itemName"));
                 newRefItem.setInventoryType(rs.getString("inventoryType"));
+                newRefItem.setUnitMeasurement(rs.getString("unitMeasurement"));
+                
 
                 RefItem.add(newRefItem);
             }
@@ -89,6 +92,7 @@ public class RefItemDAO {
             RefItemN.setItemCode(rs.getInt("itemCode"));
             RefItemN.setItemName(rs.getString("itemName"));
             RefItemN.setInventoryType(rs.getString("inventoryType"));
+            RefItemN.setUnitMeasurement(rs.getString("unitMeasurement"));
 
             RefItem.add(RefItemN);
         }

@@ -54,7 +54,7 @@ function getItem() {
                     <input type="hidden" name = "itemCode" id="itemCode[]" value="' + data[0].ItemCode + '"/> \n\
                  <input type="text" class="transparentBg" readonly id="itemName[]" name = "itemName" value="' + data[0].itemName + '"/></td> \n\
                 <td><input class="transparentBg" type="number" id="itemConsumption[]" name="itemConsumption" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  /></td> \n\
-            <td><input class="transparentBg" name="unitMeasurement" id="unitMeasurement[]" value="cm" /> </td>'
+            <td><input class="transparentBg" name="unitMeasurement" id="unitMeasurement[]" value="'+data[0].unitMeasurement +'" /> </td>'
                         + '</tr>');
                 document.getElementById("buttons").style.visibility = 'visible';
 
@@ -76,12 +76,10 @@ function getItem() {
 function viewModal() {
     var productID = document.getElementById('productID').value;
     var sizeName = document.getElementById('sizeName').value;
-    var productName = "shirt78";
 
 
     document.getElementById('productIDModal').value = productID;
     document.getElementById('sizeTypeModal').value = sizeName;
-    document.getElementById('productNameModal').value = productName;
 
 
     eraseModal();

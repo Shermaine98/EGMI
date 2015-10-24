@@ -4,6 +4,8 @@ import DAO.PurchaseOrderDAO;
 import DAO.RefSupplierDAO;
 import Model.PurchaseOrder;
 import Model.RefSupplier;
+import Model.SubconPurchaseOrder;
+import Model.SupplierPurchaseOrder;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class PurchaseOrderSerlvet extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PurchaseOrderDAO PurchaseOrderDAO = new PurchaseOrderDAO();
         ArrayList<PurchaseOrder> PurchaseOrderList = new  ArrayList<> ();
-       
+        
         try {
             PurchaseOrderList = PurchaseOrderDAO.GetAllPurchaseOrder();
         } catch (ParseException ex) {
@@ -33,7 +35,7 @@ public class PurchaseOrderSerlvet extends BaseServlet {
         }
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
-         request.setAttribute("data", "null");
+        request.setAttribute("data", "null");
         request.setAttribute("PurchaseOrderList", PurchaseOrderList);
         rd.forward(request, response); 
     }
