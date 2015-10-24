@@ -2,12 +2,18 @@ package DAO;
 
 import Database.DBConnectionFactory;
 import Model.ConsumptionReport;
+import java.awt.Dimension;
+import java.io.InputStream;
 import java.sql.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 /**
  *
  * @author Atayan
@@ -125,16 +131,16 @@ public class ConsumptionReportDAO {
         }
         if (i == 0) {
             i = 300000000;
-        } else if (i==399999999)
-            i= -1;
-        else {
+        } else if (i == 399999999) {
+            i = -1;
+        } else {
             i += 1;
         }
 
         rs.close();
         return i;
     }
-    
+
     public ArrayList<ConsumptionReport> searchProductName(String productName) throws ParseException {
 
         ArrayList<ConsumptionReport> ConsumptionReport = new ArrayList<ConsumptionReport>();
@@ -142,13 +148,13 @@ public class ConsumptionReportDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            
+
             String search = productName + "%";
             PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, bm.productName, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
                     + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where bm.productName LIKE ? Order by cr.productID;");
- 
+
             pstmt.setString(1, search);
-            
+
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -173,5 +179,40 @@ public class ConsumptionReportDAO {
         }
         return null;
     }
-    
+
+    public void showReport(int productionNumber) {
+
+        //Path to your .jasper file in your package
+        String reportName = "../Reports/ConsumptionReport.jasper";
+
+        //Get a stream to read the file
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream(reportName);
+
+        Map parametersMap = new HashMap();
+        parametersMap.put("prodNum", productionNumber);
+
+        try {
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            
+            //Fill the report with parameter, connection and the stream reader     
+            JasperPrint jp = JasperFillManager.fillReport(is, parametersMap, conn);
+
+            //Viewer for JasperReport
+            JRViewer jv = new JRViewer(jp);
+
+            //Insert viewer to a JFrame to make it showable
+            JFrame jf = new JFrame();
+            jf.getContentPane().add(jv);
+            jf.validate();
+            jf.setVisible(true);
+            jf.setSize(new Dimension(800, 600));
+            jf.setLocation(300, 100);
+            jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
