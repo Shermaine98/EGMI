@@ -4,6 +4,9 @@
     Author     : Geraldine
 --%>
 
+<%@page import="Model.SupplierPurchaseOrder"%>
+<%@page import="Model.SubconPurchaseOrder"%>
+<%@page import="Model.SubconPurchaseOrder"%>
 <%@page import="Model.PurchaseOrder"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,13 +21,34 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.dataTables.min.css">
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
         <title>Receiving</title>
-        <script>
+        <script>           
             $(document).ready(function () {
+                
                 $('#dataTable').DataTable({
                     "paging": false,
                     "info": false,
                     "dom": '<"pull-left "f>'
                 });
+
+                $(".viewpurchaseOrder").on("click", (function () {
+                    var purchaseOrderNum = $(this).closest("tr").find(".purchaseOrderNum").text();
+                    console.log(purchaseOrderNum);
+                        $.ajax({
+                        url: "GetPurchaseOrderSpecificServlet",
+                        type: 'POST',
+                        param: {
+                          purchaseOrderNum: purchaseOrderNum
+                         },
+                         success: function(){    
+                          location.reload();   
+                        },
+                        error: function (XMLHttpRequest, textStatus, exception) {
+                            alert(XMLHttpRequest.responseText);
+                        }
+                       
+                    });
+                  
+                }));
             });
         </script>
     </head>
@@ -33,7 +57,8 @@
     <center><h2>Receiving</h2></center>
 
     <br/><br/>
-    <%        ArrayList<PurchaseOrder> PurchaseOrderList = (ArrayList<PurchaseOrder>) request.getAttribute("PurchaseOrderList");
+    <%        
+    ArrayList<PurchaseOrder> PurchaseOrderList = (ArrayList<PurchaseOrder>) request.getAttribute("PurchaseOrderList");
     %>
     <div align="center" class="container">
         <table id="dataTable" class="table table-bordered" style="width:80%">
@@ -43,7 +68,6 @@
                     <th>Date Made</th>
                     <th>Delivery Date</th>
                     <th>Prepared By</th>
-                    <th>Approved By</th>
                     <th>Receiving Status</th>
                     <th>Reconcile Status</th>
                 </tr>
@@ -52,14 +76,13 @@
                 <%
                     for (int i = 0; i < PurchaseOrderList.size(); i++) {
                 %> 
-                <tr>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getPoNumber()%>"/></td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getDateMade()%>"/></td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getDeliveryDate()%>"/> </td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getPreparedBy()%>" /></td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getApprovedBy()%>" /></td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getReceivingStatus()%>" /></td>
-                    <td><input type="text" value="<%= PurchaseOrderList.get(i).getReconcileStatus()%>" /></td>
+                <tr class="viewpurchaseOrder">
+                    <td class="purchaseOrderNum"> <input type="text" name="purchaseOrderNum1" value="<%=PurchaseOrderList.get(i).getPoNumber()%>"/></td>
+                    <td><%= PurchaseOrderList.get(i).getDateMade()%></td>
+                    <td><%= PurchaseOrderList.get(i).getDeliveryDate()%></td>
+                    <td><%= PurchaseOrderList.get(i).getPreparedBy()%></td>
+                    <td><%= PurchaseOrderList.get(i).getReceivingStatus()%></td>
+                    <td><%= PurchaseOrderList.get(i).getReconcileStatus()%></td>
                 </tr>
                 <%
                     }
@@ -67,11 +90,16 @@
             </tbody>
         </table>
     </div>
-    <!--
-         <br/>
-      
-        <center><h2>Encode Supplier Purchase Order</h2></center>
-        <form method="POST" action="EncodeSupplierPurchaseOrderServlet">
+  
+   <!--Subcon Delivery Receipt--> 
+   <%
+        String data = (String) request.getAttribute("data");          
+        if(!data.equalsIgnoreCase("null")){
+             if(data.equalsIgnoreCase("supplier")){
+             ArrayList<SubconPurchaseOrder> SubconPurchaseOrder = (ArrayList<SubconPurchaseOrder>) request.getAttribute("SubconPurchaseOrderList");
+    %>
+    <center><h2>Encode Supplier Purchase Order</h2></center>
+        <form method="POST" action="">
             <div align="center" class="container width35">
                 <table class="table table-bordered">
                     <colgroup>
@@ -147,8 +175,11 @@
                 <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
             </div>
         </form>
-    
-    <--
+        <%
+        }else if(data.equalsIgnoreCase("subcon")){
+            ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrder = (ArrayList<SupplierPurchaseOrder>) request.getAttribute("SubconPurchaseOrderList");
+        %>
+  <!--Subcon Delivery Receipt-->  
         <br/>
      
         <center><h2>Encode Supplier Purchase Order</h2></center>
@@ -242,7 +273,10 @@
                 <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
             </div>
         </form>
-    -->
+   <%
+    }
+    }
+   %>
     <script></script>
 </body>
 

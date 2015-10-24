@@ -63,21 +63,56 @@ public class SupplierPurchaseOrderDAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                SupplierPurchaseOrder temp = new SupplierPurchaseOrder();
+                 SupplierPurchaseOrder temp = new SupplierPurchaseOrder();
                 temp.setPoNumber(rs.getInt("poNumber"));
                 temp.setItemCode(rs.getInt("itemCode"));
                 temp.setSupplier(rs.getInt("supplier"));
-                temp.setVolumeQty(rs.getInt("volumeQty"));
-                temp.setDateMade();
+                temp.setDateMade(rs.getDate("dateMade"));
                 temp.setDeliveryDate(rs.getDate("deliveryDate"));
                 temp.setPreparedBy(rs.getInt("preparedBy"));
                 temp.setApprovedBy(rs.getInt("approvedBy"));
                 temp.setReceivingStatus(rs.getString("receivingStatus"));
                 temp.setReconcileStatus(rs.getString("reconcileStatus"));
+                temp.setNote(rs.getString("notes"));
                 newPurchaseOrder.add(temp);
             }
             pstmt.close();
             conn.close();
+
+            return newPurchaseOrder;
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierPurchaseOrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+      public ArrayList<SupplierPurchaseOrder> GetSupplierPurchaseOrder(String poNumber) throws ParseException {
+
+        ArrayList<SupplierPurchaseOrder> newPurchaseOrder = new ArrayList<SupplierPurchaseOrder>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("select * from supplier_purchase_order where poNumber = ?");
+            pstmt.setString(1, poNumber);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SupplierPurchaseOrder temp = new SupplierPurchaseOrder();
+                temp.setPoNumber(rs.getInt("poNumber"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setSupplier(rs.getInt("supplier"));
+                temp.setDateMade(rs.getDate("dateMade"));
+                temp.setDeliveryDate(rs.getDate("deliveryDate"));
+                temp.setPreparedBy(rs.getInt("preparedBy"));
+                temp.setApprovedBy(rs.getInt("approvedBy"));
+                temp.setReceivingStatus(rs.getString("receivingStatus"));
+                temp.setReconcileStatus(rs.getString("reconcileStatus"));
+                temp.setNote(rs.getString("notes"));
+                newPurchaseOrder.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            rs.close();
 
             return newPurchaseOrder;
         } catch (SQLException ex) {

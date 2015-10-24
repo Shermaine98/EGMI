@@ -71,11 +71,49 @@ public class SubconPurchaseOrderDAO {
                 newSubconPurchaseOrder.setProductionNumber(rs.getInt("productionNumber"));
                 newSubconPurchaseOrder.setProductID(rs.getInt("productID"));
                 newSubconPurchaseOrder.setSize(rs.getString("size"));
-                newSubconPurchaseOrder.setQty(rs.getInt("qty"));
-                newSubconPurchaseOrder.setUnitPrice(rs.getDouble("unitPrice"));
-                newSubconPurchaseOrder.setDateMade();
+                newSubconPurchaseOrder.setDateMade(rs.getDate("dataMade"));
                 newSubconPurchaseOrder.setDeliveryDate(rs.getString("deliveryDate"));
                 newSubconPurchaseOrder.setUnitPrice(rs.getDouble("unitPrice"));
+                newSubconPurchaseOrder.setPreparedBy(rs.getInt("preparedBy"));
+                newSubconPurchaseOrder.setApprovedby(rs.getInt("approvedBy"));
+                newSubconPurchaseOrder.setReceivingStatus(rs.getString("receivingStatus"));
+                newSubconPurchaseOrder.setReconcileStatus(rs.getString("reconcilingStatus"));
+                newSubconPurchaseOrder.setSubcon(rs.getInt("subcon"));
+                newSubconPurchaseOrder.setService(rs.getString("service"));
+
+                SubconPurchaseOrder.add(newSubconPurchaseOrder);
+
+            }
+
+            pstmt.close();
+            rs.close();
+            conn.close();
+
+            return SubconPurchaseOrder;
+        } catch (SQLException ex) {
+            Logger.getLogger(SubconPurchaseOrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+      public ArrayList<SubconPurchaseOrder> getSubconPurchaseOrder(String poNumber) throws ParseException {
+        ArrayList<SubconPurchaseOrder> SubconPurchaseOrder = new ArrayList<SubconPurchaseOrder>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM subcon_purchase_order where poNumber = ?");
+            pstmt.setString(1, poNumber);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SubconPurchaseOrder newSubconPurchaseOrder = new SubconPurchaseOrder();
+
+                newSubconPurchaseOrder.setPoNumber(rs.getInt("poNumber"));
+                newSubconPurchaseOrder.setProductionNumber(rs.getInt("productionNumber"));
+                newSubconPurchaseOrder.setProductID(rs.getInt("productID"));
+                newSubconPurchaseOrder.setSize(rs.getString("size"));
+                newSubconPurchaseOrder.setDateMade(rs.getDate("dataMade"));
+                newSubconPurchaseOrder.setDeliveryDate(rs.getString("deliveryDate"));
                 newSubconPurchaseOrder.setPreparedBy(rs.getInt("preparedBy"));
                 newSubconPurchaseOrder.setApprovedby(rs.getInt("approvedBy"));
                 newSubconPurchaseOrder.setReceivingStatus(rs.getString("receivingStatus"));

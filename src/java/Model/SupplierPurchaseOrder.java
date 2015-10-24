@@ -106,6 +106,18 @@ public class SupplierPurchaseOrder {
         java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
         this.dateMade = sqlreceivedDate1;
     }
+    
+         /**
+     * @param deliveryDate the deliveryDate to set
+     */
+    public void setDateMade(java.util.Date dateMade) throws ParseException {
+        @SuppressWarnings("deprecation")
+        java.util.Date madeDate0 = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
+        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
+        this.dateMade = sqlreceivedDate1;
+    }
 
     /**
      * @return the deliveryDate
@@ -140,6 +152,8 @@ public class SupplierPurchaseOrder {
     public void setDeliveryDate(java.sql.Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
+    
+   
     /**
      * @return the preparedBy
      */

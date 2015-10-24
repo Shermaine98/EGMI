@@ -148,6 +148,10 @@
         <servlet-name>ReconcileServlet</servlet-name>
         <servlet-class>Controller.ReconcileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetPurchaseOrderSpecificServlet</servlet-name>
+        <servlet-class>Controller.GetPurchaseOrderSpecificServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>ReconcileServlet</servlet-name>
         <url-pattern>/ReconcileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPurchaseOrderSpecificServlet</servlet-name>
+        <url-pattern>/GetPurchaseOrderSpecificServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
