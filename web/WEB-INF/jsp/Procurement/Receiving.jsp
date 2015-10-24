@@ -37,11 +37,12 @@
                         url: "GetPurchaseOrderSpecificServlet",
                         type: 'POST',
                         dataType: "json",
-                        data: {
+                        param: {
                             purchaseOrderNum: purchaseOrderNum
                         },
-                        success: function () {
-                            console.log(purchaseOrderNum);
+                        success: function (response) {
+                           $('#data').html(response); 
+                           $('#SupplierPurchaseOrderReceiving').html(response); 
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {
                             alert(XMLHttpRequest.responseText);
