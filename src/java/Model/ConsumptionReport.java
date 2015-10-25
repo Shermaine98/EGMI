@@ -24,6 +24,11 @@ public class ConsumptionReport {
     private java.sql.Date dateMade;
     private int preparedBy;
     private String productName;
+    
+    //added 
+    private String itemName;
+    private Double itemConsumption;
+    
    
 
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -178,6 +183,34 @@ public class ConsumptionReport {
      */
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    /**
+     * @return the itemName
+     */
+    public String getItemName() {
+        return itemName;
+    }
+
+    /**
+     * @param itemName the itemName to set
+     */
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    /**
+     * @return the itemConsumption
+     */
+    public Double getItemConsumption() {
+        return itemConsumption;
+    }
+
+    /**
+     * @param itemConsumption the itemConsumption to set
+     */
+    public void setItemConsumption(Double itemConsumption) {
+        this.itemConsumption = itemConsumption;
     }
     
 }

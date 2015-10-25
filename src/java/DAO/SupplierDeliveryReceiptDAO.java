@@ -148,4 +148,19 @@ public class SupplierDeliveryReceiptDAO {
         rs.close();
         return i;
     }
+    
+     public boolean check(String poNumber) throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        
+        String query = "SELECT poNumber from supplier_delivery_receipt where poNumber = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, poNumber);
+         ResultSet rs = ps.executeQuery();
+         while(rs.next()){
+          return true;
+         }
+       
+        return false;
+    }
 }

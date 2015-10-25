@@ -15,9 +15,9 @@ import java.text.ParseException;
  */
 public class main {
     public static void main (String args[]) throws SQLException, ParseException{
-    SupplierPurchaseOrderDAO refsupplier = new SupplierPurchaseOrderDAO();
+    SupplierDeliveryReceiptDAO refsupplier = new SupplierDeliveryReceiptDAO();
     
-    System.out.print(refsupplier.GetSupplierPurchaseOrder("70000000"));
+     System.out.print(refsupplier.check("70000000"));
     
     }
     

@@ -19,6 +19,15 @@
         <title>View Consumption Report</title>
 
         <script>
+            Object.size = function (obj) {
+                var size = 0, key;
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key))
+                        size++;
+                }
+                return size;
+            };
+
             $(document).ready(function () {
 
                 $(".production").on("click", (function () {
@@ -32,31 +41,54 @@
                         },
                         success: function (data) {
 
-
-                            $('#consumptionReportList').empty()
+                            $('#consumptionReportList').empty();
                             $('#consumptionReportList').append('Production Number: ' + data[0].productionNumber + '<br/>');
                             $('#consumptionReportList').append('Product ID: ' + data[0].productID + '<br/>');
                             $('#consumptionReportList').append('Date Made: ' + data[0].dateMade + '<br/>');
                             $('#consumptionReportList').append('Prepared By: ' + data[0].preparedBy + '<br/>');
                             $('#consumptionReportList').append('Size Type: ' + data[0].SizeType + '<br/>');
-                            $('#consumptionReportList').append('Size Name: ' + data[0].SizeName + '<br/>');
-                            for (var i = 0; i < data.length; i++) {
-                                $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
+                            var container = [];
+                            var temp = true;
+                            for (var i = 0; i < Object.size(data); i++) {
+                                if (container.length == 0) {
+                                    container[i] = data[i].SizeName;
+                                    $('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
+                                    $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
+                                }
+
+                                else {
+                                    for (var x = 0; x < container.length; x++) {
+                                        console.log("2" + container[x]);
+                                        if (container[x] == data[i].SizeName) {
+                                            temp = false;
+                                        }
+                                    }
+                                    if (temp) {
+                                        container[i] = data[i].SizeName;
+                                        $('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
+                                        $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
+                                    }
+                                    temp = true;
+                                }
+                                /*$('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
+                                 $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');*/
+                            }
+                            for(var y = 0; y < Object.size(data); y++){
+                                $('#consumptionReportList').append('Item Code: ' + data[y].itemCode + '<br/>');
+                                $('#consumptionReportList').append('Item Name: ' + data[y].itemName + '<br/>');
+                                $('#consumptionReportList').append('Item Consumption:' + data[y].itemConsumption + '<br/>');
+                                
                             }
                             $('#consumptionReportList').append('Item Code: ' + data[0].itemCode + '<br/>');
 
                             $('#consumptionReportList').append('<input id="TotalS" class="transparentBg" name="TotalS" onload="calculateTotalShirt()" />');
-                            //     $('#consumptionReportList').append('<tr><td>' + data[0].productionNumber + '</td><td>' + data[0].dateMade + '</td><td>' + data[0].productionNumber + '</td><td>' + data[0].preparedBy + '</td></tr>');
-
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {
                             alert(XMLHttpRequest.responseText);
                         }
                     });
                 }));
-            });
 
-            $(document).ready(function () {
                 $('#view').DataTable({
                     "paging": false,
                     "info": false,
@@ -102,7 +134,7 @@
                     %>
                 </tbody>
             </table>
-                <br/><br/>
+            <br/><br/>
             <!-- To get the Click row-->
             <div class="panel panel-default" style="margin-left:70px; margin-right:70px;">
                 <div class="panel-body" id="consumptionReportList">
@@ -110,8 +142,6 @@
             </div>
         </div>
         <br/><br/>
-
-
         <%
         } else if (data.equalsIgnoreCase("ConsumptionReportView")) {
             ArrayList<ConsumptionReport> cr1 = (ArrayList<ConsumptionReport>) request.getAttribute("consumptionReport");
@@ -160,9 +190,7 @@
                 <%
                     }
                 %>
-
             </table>
-
             <%
             } else {
             %>
@@ -179,10 +207,7 @@
                         %>
                 </tr>  <tr>
                     <%for (int m = 0; m < cr1.size(); m++) {%>
-
                     <td><%=cr1.get(m).getVolumeQty()%></td>
-
-
                     <%
 
                         } %>
@@ -216,26 +241,6 @@
                     }
                 %>
                 <br/><br/>
-
         </div>
-        <script>
-            $("#consumptionReportList").on("load", function () {
-                var totalS = 0;
-                $('td.volumeQty').each(function () {
-                    totalS = parseInt($(this).find(".volumeQty").text());
-                    console.log(totalS);
-                });
-                //document.getElementById('TotalS').value = totalS;
-                //    SolveTotal(totalS);
-
-            });
-
-            function calculateTotalPants() {
-
-                var totalP = size29 + size30 + size31 + size32 + size33 + size34 + size36 + size38;
-                document.getElementById('TotalP').value = totalP;
-                SolveTotal(totalP);
-            }
-        </script>
     </body>
 </html>

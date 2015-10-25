@@ -38,26 +38,31 @@ public class Login extends HttpServlet {
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-            User user = new User();
+        User user = new User();
         try {
 
             user.setUserName(request.getParameter("username"));
             user.setPassword(request.getParameter("password"));
             String action = request.getParameter("action");
-            
+            String viewAccount = request.getParameter("viewaccount");
+
             UserDAO UserDAO = new UserDAO();
             boolean successful = UserDAO.authenticate(user);
             if (successful) {
-                user = UserDAO.getUser(user.getEmail(),user.getPassword());
+                user = UserDAO.getUser(user.getEmail(), user.getPassword());
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Accounts/Homepage.jsp");
                 HttpSession session = request.getSession();
                 session.setAttribute("login", user);
                 session.setAttribute("successful", "successful");
                 rd.forward(request, response);
-            } else if(action.equals("goToHome")) {
+            } else if (action.equals("goToHome")) {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Accounts/Homepage.jsp");
+                rd.forward(request, response);
+            } else if (action.equals("viewAccounts")) {
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/Accounts/ViewAccount.jsp");
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();

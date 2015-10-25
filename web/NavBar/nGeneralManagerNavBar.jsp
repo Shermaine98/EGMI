@@ -15,8 +15,7 @@
         <link rel="stylesheet" href="bootstrap/css/table-design.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap/css/sub-menu.css">
-        <link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+       <link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--JQUERY LIBRARIES-->
            <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
@@ -129,8 +128,7 @@
                                 <span class="glyphicon glyphicon-user"></span>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="myaccount.jsp">View Account</a></li>
-                                <li><a href="editaccount.jsp">Edit Account</a></li>
+                                <li><a href="/EGMI/Login?action=viewAccounts">View Account</a></li>
                                 <li><a href="/EGMI/Logout">Log-Out</a></li>
                             </ul>
                         </li>

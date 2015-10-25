@@ -58,9 +58,16 @@ public class ConsumptionReportDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, cr.sizeType, cr.itemCode, cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade\n"
-                    + "FROM consumption_report cr JOIN bill_of_materials bm ON cr.productID=bm.productID  where cr.productionNumber =" + productionNumber + "\n"
-                    + "Order by cr.productID;");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT cr.productionNumber, cr.productID, cr.sizeType, \n"
+                            + "cr.sizeName, cr.sizeVolumeQty, cr.preparedBy, cr.dateMade,\n"
+                            + "cr.itemCode, i.itemName, bm.itemConsumption\n"
+                            + "FROM consumption_report cr \n"
+                            + "JOIN bill_of_materials bm \n"
+                            + "ON cr.itemCode=bm.itemCode  \n"
+                            + "JOIN ref_item i\n"
+                            + "ON bm.itemCode = i.itemCode\n"
+                            + "where cr.productionNumber =" + productionNumber + "\n"
+                            + "ORDER BY i.itemName;");
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -74,6 +81,8 @@ public class ConsumptionReportDAO {
                 temp.setVolumeQty(rs.getInt("sizeVolumeQty"));
                 temp.setDateMade(rs.getDate("dateMade"));
                 temp.setPreparedBy(rs.getInt("preparedBy"));
+                temp.setItemName(rs.getString("itemName"));
+                temp.setItemConsumption(rs.getDouble("itemConsumption"));
                 ConsumptionReport.add(temp);
             }
             pstmt.close();

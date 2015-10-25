@@ -71,12 +71,14 @@ public class SearchProductsServlet extends BaseServlet {
             }
 
             ArrayList<String> productIDResult = new ArrayList<String>();
+           
             for (int i = 0; i < ConsumptionReportArray.size(); i++) {
                 if (!productIDResult.contains(String.valueOf(ConsumptionReportArray.get(i).getProductID()))) {
                     productIDResult.add(String.valueOf(ConsumptionReportArray.get(i).getProductID()));
                 }
             }
-            //Create Production Number
+            
+//Create Production Number
               
         Integer subconPurchaseNumber=0;
         try {

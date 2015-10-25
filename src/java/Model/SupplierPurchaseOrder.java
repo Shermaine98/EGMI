@@ -34,6 +34,11 @@ public class SupplierPurchaseOrder {
     private String  preaparedfirstName;
     private String unitMeasurement;
     private String inventoryType;
+    
+    //
+    private int drNumber;
+    private double receivedQty;
+    private double rejectedQty;
     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -327,6 +332,48 @@ public class SupplierPurchaseOrder {
      */
     public void setInventoryType(String inventoryType) {
         this.inventoryType = inventoryType;
+    }
+
+    /**
+     * @return the drNumber
+     */
+    public int getDrNumber() {
+        return drNumber;
+    }
+
+    /**
+     * @param drNumber the drNumber to set
+     */
+    public void setDrNumber(int drNumber) {
+        this.drNumber = drNumber;
+    }
+
+    /**
+     * @return the receivedQty
+     */
+    public double getReceivedQty() {
+        return receivedQty;
+    }
+
+    /**
+     * @param receivedQty the receivedQty to set
+     */
+    public void setReceivedQty(double receivedQty) {
+        this.receivedQty = receivedQty;
+    }
+
+    /**
+     * @return the rejectedQty
+     */
+    public double getRejectedQty() {
+        return rejectedQty;
+    }
+
+    /**
+     * @param rejectedQty the rejectedQty to set
+     */
+    public void setRejectedQty(double rejectedQty) {
+        this.rejectedQty = rejectedQty;
     }
 
 }

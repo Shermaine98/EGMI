@@ -56,6 +56,8 @@ public class GetConsumptionReportServlet extends HttpServlet {
                     obj.put("SizeName", ConsumptionReport.get(i).getSizeName());
                     obj.put("volumeQty", ConsumptionReport.get(i).getVolumeQty());
                      obj.put("itemCode", ConsumptionReport.get(i).getItemCode());
+                     obj.put("itemName", ConsumptionReport.get(i).getItemName());
+                     obj.put("itemConsumption", ConsumptionReport.get(i).getItemConsumption());
                     
 
                     array.put(obj);

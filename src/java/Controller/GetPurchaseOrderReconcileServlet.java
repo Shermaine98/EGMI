@@ -48,6 +48,8 @@ public class GetPurchaseOrderReconcileServlet extends BaseServlet {
                 supplierInventorylist = SupplierPurchaseOrderDAO.GetSupplierPurchaseOrder(poNumber);
             } catch (ParseException ex) {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(GetPurchaseOrderReconcileServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             ServletContext context = getServletContext();
