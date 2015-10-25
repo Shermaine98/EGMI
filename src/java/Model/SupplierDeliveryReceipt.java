@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,8 +23,11 @@ public class SupplierDeliveryReceipt {
     private int receivedBy;
     private int approvedBy;
     private String status;
+    private String notes;
+     private Double rejectedQty;
+     private Double receivedQty;
 
-    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * @return the drNumber
@@ -70,10 +74,10 @@ public class SupplierDeliveryReceipt {
     /**
      * @return the dateReceived
      */
-    public java.sql.Date getDateReceived() {
+    public Date getDateReceived() {
         return dateReceived;
     }
-
+    
     /**
      * @param dateReceived the dateReceived to set
      */
@@ -81,9 +85,17 @@ public class SupplierDeliveryReceipt {
         @SuppressWarnings("deprecation")
         java.util.Date madeDate0 = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
+        java.util.Date madeDate1 = getFormatter().parse(df.format(madeDate0));
         java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
         this.dateReceived = sqlreceivedDate1;
+    }
+    
+      public void setDateReceived() throws ParseException {
+        java.util.Date currentDate = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date currentDate1 = getFormatter().parse(df.format(currentDate));
+        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
+        this.dateReceived = sqlDate;
     }
 
     /**
@@ -140,6 +152,62 @@ public class SupplierDeliveryReceipt {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    /**
+     * @return the rejectedQty
+     */
+    public Double getRejectedQty() {
+        return rejectedQty;
+    }
+
+    /**
+     * @param rejectedQty the rejectedQty to set
+     */
+    public void setRejectedQty(Double rejectedQty) {
+        this.rejectedQty = rejectedQty;
+    }
+
+    /**
+     * @return the receivedQty
+     */
+    public Double getReceivedQty() {
+        return receivedQty;
+    }
+
+    /**
+     * @param receivedQty the receivedQty to set
+     */
+    public void setReceivedQty(Double receivedQty) {
+        this.receivedQty = receivedQty;
+    }
+
+    /**
+     * @return the formatter
+     */
+    public DateFormat getFormatter() {
+        return formatter;
+    }
+
+    /**
+     * @param formatter the formatter to set
+     */
+    public void setFormatter(DateFormat formatter) {
+        this.formatter = formatter;
     }
 
 }

@@ -91,7 +91,7 @@
     %>
     <center><h2>Encode Supplier Purchase Order</h2></center>
 
-    <form method="POST">
+    <form method="POST" action="EncodeSupplierDeliveryReceiptServlet">
         <div align="center" class="container width35">
 
             <div class="panel panel-default col-md-4">
@@ -100,14 +100,14 @@
                 </div>
                 <div class="panel-body">
                     <label class="" for="deliveryNumber">Delivery Number</label>
-                    <input type="text" name="deliveryNumber" class="form-control readonlyWhite" value="" readonly /><br/>
+                    <input type="text" name="doNumber" class="form-control readonlyWhite" value="" readonly /><br/>
                     <label class="" for="poNumber">Purchase Order Number</label>
                     <input type="text" name="poNumber" class="form-control readonlyWhite" value="<%=SupplierPurchaseOrder.get(0).getPoNumber()%>" readonly /><br/>
                     <label class="" for="preparedBy">Prepared By</label>
                     <input type="text" class="form-control readonlyWhite" readonly value="<%=SupplierPurchaseOrder.get(0).getPreparedFirstName()%> <%=SupplierPurchaseOrder.get(0).getPreaparedLastName()%>" /><br/>
                     <label class="" for="dateCreated">Date Created</label>
                     <input type="text" class="form-control readonlyWhite" readonly value="<%=SupplierPurchaseOrder.get(0).getDateMade()%>" /><br/>
-                    <label class="" for="preparedBy">Received By</label>
+                    <label class="" for="receivedBy">Received By</label>
                     <input type="hidden" name="receivedBy"  value="<%=user.getEmployeeNumber()%>" /><br/>
                     <input type="text" class="form-control readonlyWhite" readonly value="<%=user.getFirstName()%> <%=user.getLastName()%>" /><br/>
                     <label class="" for="deliveryDate">Delivery</label>
@@ -124,7 +124,7 @@
                 <div class="panel-body">
                     <br/><br/>
                     <table id="data" class="table table-bordered">
-                        
+
                         <thead>
                         <th>Item Name</th>
                         <th>Current Status</th>
@@ -135,21 +135,27 @@
                         <th>Note</th>
                         <th>Received Quantity</th>
                         <th>Rejected Quantity</th>
+                        <th>Add notes</th>
                         </thead>
-                        <% for(int i = 0; i < SupplierPurchaseOrder.size(); i++) { %>   
+                        <% for (int i = 0; i < SupplierPurchaseOrder.size(); i++) {%>   
                         <td><input type="hidden" name="itemCode" value="<%=SupplierPurchaseOrder.get(i).getItemCode()%>"><%= SupplierPurchaseOrder.get(i).getItemName()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getReceivingStatus()%></td>
+                        <td><input type="hidden" name="status" value="<%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>"/><%= SupplierPurchaseOrder.get(i).getReceivingStatus()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getVolumeQty()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getUnitPrice()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getUnitMeasurement()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getInventoryType()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getNote()%></td>
+                        <td><input name="rejectQty"></td>
                         <td><input name="receivedQty"></td>
-                        <td><input name="rejectedQty"></td>
-                        <%
-                          }
-                        %>
-                    </table>                   
+                        <td><input name="notes"></td>
+                            <%
+                                }
+                            %>
+                    </table> 
+                    <div style="float:right">
+                        TOTAL:
+                        <input type="text" class="form-control readonlyWhite" name="Total1" id="total1" readonly />
+                    </div>
                 </div>
             </div>
             <input type="submit" style="width:77px; height:34px" class="btn btn-danger" value="Submit"> 

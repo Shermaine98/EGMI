@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -16,8 +17,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author Atayan
@@ -36,30 +35,48 @@ public class EncodeSupplierDeliveryReceiptServlet extends BaseServlet {
             SupplierDeliveryReceipt supplierDeliveryReceipt = new SupplierDeliveryReceipt();
             ArrayList<SupplierDeliveryReceipt> arrSupplierDeliveryReceipt = new ArrayList<SupplierDeliveryReceipt>();
             SupplierDeliveryReceiptDAO supplierDeliveryReceiptDAO = new SupplierDeliveryReceiptDAO();
-
-            String[] drNumber = request.getParameterValues("drNumber");
-            String[] poNumber = request.getParameterValues("poNumber");
-            String[] itemCode = request.getParameterValues("itemCode");
-            String[] dateReceived = request.getParameterValues("dateReceived");
-            String[] qty = request.getParameterValues("qty");
-            String[] receivedBy = request.getParameterValues("receivedBy");
-            String[] approvedBy = request.getParameterValues("approvedBy");
-            String[] status = request.getParameterValues("status");
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+           
+            String drNumber = request.getParameter("drNumber");
+            String poNumber = request.getParameter("poNumber");
+            String receivedBy = request.getParameter("receivedBy");
+           
+            String [] status = request.getParameterValues("status");
+            String [] itemCode = request.getParameterValues("itemCode");
+            String [] rejectQty = request.getParameterValues("rejectQty");
+            String [] receivedQty = request.getParameterValues("receivedQty");
+            String [] notes = request.getParameterValues("notes");
             
+        //    Date[] dateReceived = format.parse(request.getParameterValues("dateReceived"));
+            
+            
+             Date[] dateReceived = new Date [itemCode.length];
+            
+            for(int y=0; y <itemCode.length;y++){
+                 if(!status[y].equalsIgnoreCase("completed")){
+                     dateReceived[y] = format.parse("9999-99-99");
+                 }
+                 else{
+                     supplierDeliveryReceipt.setDateReceived();
+                    dateReceived[y] = supplierDeliveryReceipt.getDateReceived();
+                 }
+            }
             boolean x = false;
 
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+           
             
-            for (int i = 0; i < drNumber.length; i++) {
+            for (int i = 0; i < itemCode.length; i++) {
                 
-                supplierDeliveryReceipt.setDrNumber(Integer.parseInt(drNumber[i]));
-                supplierDeliveryReceipt.setPoNumber(Integer.parseInt(poNumber[i]));
+                supplierDeliveryReceipt.setDrNumber(Integer.parseInt(drNumber));
+                supplierDeliveryReceipt.setPoNumber(Integer.parseInt(poNumber));
                 supplierDeliveryReceipt.setItemCode(Integer.parseInt(itemCode[i]));
-                supplierDeliveryReceipt.setDateReceived(format.parse(dateReceived[i]));
-                supplierDeliveryReceipt.setQty(Integer.parseInt(qty[i]));
-                supplierDeliveryReceipt.setReceivedBy(Integer.parseInt(receivedBy[i]));
-                supplierDeliveryReceipt.setApprovedBy(Integer.parseInt(approvedBy[i]));
+                supplierDeliveryReceipt.setDateReceived(dateReceived[i]);
+                
+                supplierDeliveryReceipt.setReceivedBy(Integer.parseInt(receivedBy));
                 supplierDeliveryReceipt.setStatus(status[i]);
+                supplierDeliveryReceipt.setNotes(notes[i]);
+                supplierDeliveryReceipt.setReceivedQty(Double.parseDouble(receivedQty[i]));
+                supplierDeliveryReceipt.setRejectedQty(Double.parseDouble(rejectQty[i]));
                 
                 
                 if (supplierDeliveryReceiptDAO.EncodeSupplierDeliveryReceipt(supplierDeliveryReceipt)) {
@@ -73,14 +90,14 @@ public class EncodeSupplierDeliveryReceiptServlet extends BaseServlet {
             if (x == true) {
                
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/SupplierDeliveryReceipt.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receving.jsp");
                 
                 request.setAttribute("arrSupplierDeliveryReceipt", arrSupplierDeliveryReceipt);
                 rd.forward(request, response);
 
             } else {
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/SupplierDeliveryReceipt.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Accounts/Homepage.jsp");
                 rd.forward(request, response);
 
             }

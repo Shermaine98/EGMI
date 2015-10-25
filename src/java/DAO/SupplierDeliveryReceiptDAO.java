@@ -26,19 +26,20 @@ public class SupplierDeliveryReceiptDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into supplier_delivery_receipt"
-                    + "(drNumber,poNumber,itemCode,dateReceived,qty,"
-                    + "receivedBy,approvedBy,status) "
-                    + "values (?,?,?,?,?,?,?,?)";
+                    + "(drNumber,poNumber,itemCode,receivedQty,rejectedQty,receivedBy,approvedby,status,dateReceived,notes) "
+                    + "values (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newSupplierDeliveryReceipt.getDrNumber());
             pstmt.setInt(2, newSupplierDeliveryReceipt.getPoNumber());
             pstmt.setInt(3, newSupplierDeliveryReceipt.getItemCode());
-            pstmt.setDate(4, newSupplierDeliveryReceipt.getDateReceived());
-            pstmt.setInt(5, newSupplierDeliveryReceipt.getQty());
+            pstmt.setDouble(4, newSupplierDeliveryReceipt.getReceivedQty());
+            pstmt.setDouble(5, newSupplierDeliveryReceipt.getRejectedQty());
             pstmt.setInt(6, newSupplierDeliveryReceipt.getReceivedBy());
             pstmt.setInt(7, newSupplierDeliveryReceipt.getApprovedBy());
             pstmt.setString(8, newSupplierDeliveryReceipt.getStatus());
+             pstmt.setDate(9, newSupplierDeliveryReceipt.getDateReceived());
+              pstmt.setString(10, newSupplierDeliveryReceipt.getNotes());
 
             int rows = pstmt.executeUpdate();
             conn.close();
@@ -64,11 +65,13 @@ public class SupplierDeliveryReceiptDAO {
                 newSupplierDeliveryReceipt.setDrNumber(rs.getInt("drNumber"));
                 newSupplierDeliveryReceipt.setPoNumber(rs.getInt("poNumber"));
                 newSupplierDeliveryReceipt.setItemCode(rs.getInt("itemCode"));
+                newSupplierDeliveryReceipt.setReceivedQty(rs.getDouble("receivedQty"));
+                newSupplierDeliveryReceipt.setRejectedQty(rs.getDouble("rejectedQty"));
                 newSupplierDeliveryReceipt.setDateReceived(rs.getDate("dateReceived"));
-                newSupplierDeliveryReceipt.setQty(rs.getInt("qty"));
                 newSupplierDeliveryReceipt.setReceivedBy(rs.getInt("recievedBy"));
                 newSupplierDeliveryReceipt.setApprovedBy(rs.getInt("approvedBy"));
                 newSupplierDeliveryReceipt.setStatus(rs.getString("status"));
+                newSupplierDeliveryReceipt.setStatus(rs.getString("notes"));
 
                 supplierDeliveryReceipt.add(newSupplierDeliveryReceipt);
 
@@ -98,14 +101,18 @@ public class SupplierDeliveryReceiptDAO {
             while (rs.next()) {
 
                 SupplierDeliveryReceipt temp = new SupplierDeliveryReceipt();
+                
                 temp.setDrNumber(rs.getInt("drNumber"));
                 temp.setPoNumber(rs.getInt("poNumber"));
                 temp.setItemCode(rs.getInt("itemCode"));
+                temp.setReceivedQty(rs.getDouble("receivedQty"));
+                temp.setRejectedQty(rs.getDouble("rejectedQty"));
                 temp.setDateReceived(rs.getDate("dateReceived"));
-                temp.setQty(rs.getInt("qty"));
-                temp.setReceivedBy(rs.getInt("receivedBy"));
+                temp.setReceivedBy(rs.getInt("recievedBy"));
                 temp.setApprovedBy(rs.getInt("approvedBy"));
                 temp.setStatus(rs.getString("status"));
+                temp.setStatus(rs.getString("notes"));
+
 
                 DeliveryReceipt.add(temp);
             }
