@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author shermainesy
  */
-public class EcodeSubconDeliveryReceiptSerlvet extends HttpServlet {
+public class EncodeSubconDeliveryReceiptSerlvet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
