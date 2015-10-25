@@ -126,7 +126,7 @@ public class RefSubconDAO {
             RefSubconListN.setCompanyName(rs.getString("companyName"));
             RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
             RefSubconListN.setContactPerson(rs.getString("contactPerson"));
-            RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
+            RefSubconListN.setContactNumber(rs.getFloat("contactNumber"));
 
             RefSubconList.add(RefSubconListN);
         }
@@ -150,7 +150,7 @@ public class RefSubconDAO {
             RefSubconListN.setCompanyName(rs.getString("companyName"));
             RefSubconListN.setCompanyAddress(rs.getString("companyAddress"));
             RefSubconListN.setContactPerson(rs.getString("contactPerson"));
-            RefSubconListN.setContactNumber(rs.getInt("contactNumber"));
+            RefSubconListN.setContactNumber(rs.getFloat("contactNumber"));
 
             RefSubconList.add(RefSubconListN);
         }

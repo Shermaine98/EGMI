@@ -61,10 +61,10 @@
                     <div class="panel-body">
                         <label class="" for="poNumber">Purchase Order Number</label>
                         <input type="text" name="poNumber" class="form-control readonlyWhite" id="poNumber" readonly /><br/>
-                        <label class="" for="itemCode">Production Number</label>
-                        <input type="text" name="itemCode" class="form-control readonlyWhite" id="itemCode" readonly value="<%= consumptionReport.get(0).getProductionNumber()%>" /><br/>
+                        <label class="" for="productionNumber">Production Number</label>
+                        <input type="text" name="productionNumber" class="form-control readonlyWhite"  value="<%=consumptionReport.get(0).getProductionNumber()%>"/><br/>
                         <label class="" for="preparedBy">Purchase Order Number</label>
-                        <input type="hidden" name="preparedBy" class="form-control readonlyWhite" id="preparedBy" value="<%= user.getEmployeeNumber()%> " /><br/>
+                        <input type="hidden" name="preparedBy" class="form-control readonlyWhite" id="preparedBy" value="<%= user.getEmployeeNumber()%>" /><br/>
                         <input class="form-control readonlyWhite" value="<%= user.getFirstName()%> <%=user.getLastName()%> " readonly /><br/>
                         <label class="" for="deliveryDate">Delivery Date</label>
                         <input type="text" name="deliveryDate" class="form-control" id="datepicker"  /><br/>
@@ -81,7 +81,7 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th colspan="2">Product Name: <input type="hidden" name="productID" id="productID" value="<%= consumptionReport.get(0).getProductID()%>"/>
-                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductName()%>"/></th>
+                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductID()%>"/></th>
                             </tr>
                             <tr>
                                 <th><input name="sizeType" class="transparentBg readonlyWhite" value="S" readonly/></th>
@@ -111,7 +111,7 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th colspan="2">Product Name: <input type="hidden" name="productID" id="productID" value="<%= consumptionReport.get(0).getProductID()%>"/>
-                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductName()%>"/></th>
+                                    <input type="text" class="transparentBg readonlyWhite" readonly name="ProductName" id="ProductName" value="<%= consumptionReport.get(0).getProductID()%>"/></th>
                             </tr>
                             <tr>
                                 <th><input name="sizeType" class="transparentBg readonlyWhite" value="29" readonly/></th>
@@ -175,11 +175,11 @@
                 <input type="submit" style="width:77px; height:34px" class="btn btn-danger" value="Submit">
                 <a href="dashboard.jsp"><button type="button" class="btn btn-danger">Cancel</button></a>
 
-
+        </div>
                 <%
                     }
                 %>
-            </div>
+          
         </form>
 
         <br/><br/>

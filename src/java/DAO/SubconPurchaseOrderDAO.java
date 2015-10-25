@@ -26,25 +26,23 @@ public class SubconPurchaseOrderDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into subcon_purchase_order"
-                    + "(poNumber,productionNumber,productID,size,qty,unitPrice,dateMade,"
-                    + "deliveryDate,preparedBy,approvedBy,receivingStatus,reconcileStatus,subcon,service) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "(poNumber,productionNumber,approvedBy,productID,sizeType,subcon,service,dateMade,"
+                    + "deliveryDate,preparedBy,receivingStatus, reconcileStatus) "
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newSubconPurchaseOrder.getPoNumber());
             pstmt.setInt(2, newSubconPurchaseOrder.getProductionNumber());
-            pstmt.setInt(3, newSubconPurchaseOrder.getProductID());
-            pstmt.setString(4, newSubconPurchaseOrder.getSize());
-            pstmt.setInt(5, newSubconPurchaseOrder.getQty());
-            pstmt.setDouble(6, newSubconPurchaseOrder.getUnitPrice());
-            pstmt.setDate(7, newSubconPurchaseOrder.getDateMade());
+            pstmt.setInt(3, newSubconPurchaseOrder.getApprovedby());
+            pstmt.setInt(4, newSubconPurchaseOrder.getProductID());
+            pstmt.setString(5, newSubconPurchaseOrder.getSize());
+            pstmt.setInt(6, newSubconPurchaseOrder.getSubcon());
+            pstmt.setString(7, newSubconPurchaseOrder.getService());
             pstmt.setDate(8, newSubconPurchaseOrder.getDateMade());
-            pstmt.setDouble(9, newSubconPurchaseOrder.getPreparedBy());
-            pstmt.setInt(10, newSubconPurchaseOrder.getApprovedby());
+            pstmt.setDate(9, newSubconPurchaseOrder.getDeliveryDate());
+            pstmt.setDouble(10, newSubconPurchaseOrder.getPreparedBy());
             pstmt.setString(11, newSubconPurchaseOrder.getReceivingStatus());
             pstmt.setString(12, newSubconPurchaseOrder.getReconcileStatus());
-            pstmt.setInt(13, newSubconPurchaseOrder.getSubcon());
-            pstmt.setString(14, newSubconPurchaseOrder.getService());
 
             int rows = pstmt.executeUpdate();
             conn.close();
@@ -70,14 +68,13 @@ public class SubconPurchaseOrderDAO {
                 newSubconPurchaseOrder.setPoNumber(rs.getInt("poNumber"));
                 newSubconPurchaseOrder.setProductionNumber(rs.getInt("productionNumber"));
                 newSubconPurchaseOrder.setProductID(rs.getInt("productID"));
-                newSubconPurchaseOrder.setSize(rs.getString("size"));
-                newSubconPurchaseOrder.setDateMade(rs.getDate("dataMade"));
+                newSubconPurchaseOrder.setSize(rs.getString("sizeType"));
+                newSubconPurchaseOrder.setDateMade(rs.getDate("dateMade"));
                 newSubconPurchaseOrder.setDeliveryDate(rs.getString("deliveryDate"));
-                newSubconPurchaseOrder.setUnitPrice(rs.getDouble("unitPrice"));
                 newSubconPurchaseOrder.setPreparedBy(rs.getInt("preparedBy"));
                 newSubconPurchaseOrder.setApprovedby(rs.getInt("approvedBy"));
                 newSubconPurchaseOrder.setReceivingStatus(rs.getString("receivingStatus"));
-                newSubconPurchaseOrder.setReconcileStatus(rs.getString("reconcilingStatus"));
+                newSubconPurchaseOrder.setReconcileStatus(rs.getString("reconcileStatus"));
                 newSubconPurchaseOrder.setSubcon(rs.getInt("subcon"));
                 newSubconPurchaseOrder.setService(rs.getString("service"));
 
@@ -111,7 +108,7 @@ public class SubconPurchaseOrderDAO {
                 newSubconPurchaseOrder.setPoNumber(rs.getInt("poNumber"));
                 newSubconPurchaseOrder.setProductionNumber(rs.getInt("productionNumber"));
                 newSubconPurchaseOrder.setProductID(rs.getInt("productID"));
-                newSubconPurchaseOrder.setSize(rs.getString("size"));
+                newSubconPurchaseOrder.setSize(rs.getString("sizeType"));
                 newSubconPurchaseOrder.setDateMade(rs.getDate("dataMade"));
                 newSubconPurchaseOrder.setDeliveryDate(rs.getString("deliveryDate"));
                 newSubconPurchaseOrder.setPreparedBy(rs.getInt("preparedBy"));

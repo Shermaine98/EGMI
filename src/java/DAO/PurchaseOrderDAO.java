@@ -63,4 +63,21 @@ public class PurchaseOrderDAO {
         return null;
     }
 
+    public ArrayList<PurchaseOrder> GetWarehousePurchaseOrder() throws ParseException {
+        ArrayList<PurchaseOrder> purchaseOrder = new ArrayList<PurchaseOrder>();
+        return purchaseOrder;
+
+    }
+
+    public ArrayList<PurchaseOrder> GetAccessoriesPurchaseOrder() throws ParseException {
+        ArrayList<PurchaseOrder> purchaseOrder = new ArrayList<PurchaseOrder>();
+        return purchaseOrder;
+
+    }
+
+    public ArrayList<PurchaseOrder> GetProductionPurchaseOrder() throws ParseException {
+        ArrayList<PurchaseOrder> purchaseOrder = new ArrayList<PurchaseOrder>();
+        return purchaseOrder;
+
+    }
 }

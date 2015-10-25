@@ -145,8 +145,8 @@
         <servlet-class>Controller.ViewSupplierPurchaseOrderServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReconcileServlet</servlet-name>
-        <servlet-class>Controller.ReconcileServlet</servlet-class>
+        <servlet-name>ReconcileProductionServlet</servlet-name>
+        <servlet-class>Controller.ReconcileProductionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetPurchaseOrderSpecificServlet</servlet-name>
@@ -159,6 +159,22 @@
     <servlet>
         <servlet-name>EncodeSupplierDeliveryReceiptServlet</servlet-name>
         <servlet-class>Controller.EncodeSupplierDeliveryReceiptServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPurchaseOrderReconcileServlet</servlet-name>
+        <servlet-class>Controller.GetPurchaseOrderReconcileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReconcileAccessoriesServlet</servlet-name>
+        <servlet-class>Controller.ReconcileAccessoriesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReconcileWarehouseServlet</servlet-name>
+        <servlet-class>Controller.ReconcileWarehouseServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeSubcontractorPurchaseOrderServlet</servlet-name>
+        <servlet-class>Controller.EncodeSubcontractorPurchaseOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
@@ -297,8 +313,8 @@
         <url-pattern>/ViewSupplierPurchaseOrderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ReconcileServlet</servlet-name>
-        <url-pattern>/ReconcileServlet</url-pattern>
+        <servlet-name>ReconcileProductionServlet</servlet-name>
+        <url-pattern>/ReconcileProductionServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetPurchaseOrderSpecificServlet</servlet-name>
@@ -311,6 +327,22 @@
     <servlet-mapping>
         <servlet-name>EncodeSupplierDeliveryReceiptServlet</servlet-name>
         <url-pattern>/EncodeSupplierDeliveryReceiptServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPurchaseOrderReconcileServlet</servlet-name>
+        <url-pattern>/GetPurchaseOrderReconcileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReconcileAccessoriesServlet</servlet-name>
+        <url-pattern>/ReconcileAccessoriesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReconcileWarehouseServlet</servlet-name>
+        <url-pattern>/ReconcileWarehouseServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeSubcontractorPurchaseOrderServlet</servlet-name>
+        <url-pattern>/EncodeSubcontractorPurchaseOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

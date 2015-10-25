@@ -82,7 +82,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventory
                                 <span class="caret"></span></a> 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/EGMI/ReconcileServlet">Reconcile</a></li>
+                                <li><a href="/EGMI/ReconcileProductionServlet">Reconcile Production</a></li>
+                                <li><a href="/EGMI/ReconcileAccessoriesServlet">Reconcile Accessories</a></li>
+                                <li><a href="/EGMI/ReconcileWarehouseServlet">Reconcile Warehouse</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/EGMI/ViewAccessoriesInventoryServlet">Accessories Inventory</a></li>
                                 <li><a href="/EGMI/ViewProductionInventoryServlet">Production Inventory</a></li>

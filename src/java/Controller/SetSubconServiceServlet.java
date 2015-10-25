@@ -50,6 +50,7 @@ public class SetSubconServiceServlet extends HttpServlet {
             for (int i = 0; i < RefSubcon.size(); i++) {
                 JSONObject obj = new JSONObject();
                 try {
+                     obj.put("subconId", RefSubcon.get(i).getSubconID());
                     obj.put("subconName", RefSubcon.get(i).getCompanyName());
                     obj.put("service", RefSubcon.get(i).getService());
                     obj.put("companyAddress", RefSubcon.get(i).getCompanyAddress());

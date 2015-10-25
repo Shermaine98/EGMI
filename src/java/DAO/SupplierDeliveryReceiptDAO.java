@@ -26,7 +26,7 @@ public class SupplierDeliveryReceiptDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into supplier_delivery_receipt"
-                    + "(drNumber,poNumber,itemCode,receivedQty,rejectedQty,receivedBy,approvedby,status,dateReceived,notes) "
+                    + "(drNumber,poNumber,itemCode,receivedQty,rejectedQty,receivedBy,approvedby,status,dateRecieved,notes) "
                     + "values (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -67,7 +67,7 @@ public class SupplierDeliveryReceiptDAO {
                 newSupplierDeliveryReceipt.setItemCode(rs.getInt("itemCode"));
                 newSupplierDeliveryReceipt.setReceivedQty(rs.getDouble("receivedQty"));
                 newSupplierDeliveryReceipt.setRejectedQty(rs.getDouble("rejectedQty"));
-                newSupplierDeliveryReceipt.setDateReceived(rs.getDate("dateReceived"));
+                newSupplierDeliveryReceipt.setDateReceived(rs.getDate("dateRecieved"));
                 newSupplierDeliveryReceipt.setReceivedBy(rs.getInt("recievedBy"));
                 newSupplierDeliveryReceipt.setApprovedBy(rs.getInt("approvedBy"));
                 newSupplierDeliveryReceipt.setStatus(rs.getString("status"));
@@ -107,7 +107,7 @@ public class SupplierDeliveryReceiptDAO {
                 temp.setItemCode(rs.getInt("itemCode"));
                 temp.setReceivedQty(rs.getDouble("receivedQty"));
                 temp.setRejectedQty(rs.getDouble("rejectedQty"));
-                temp.setDateReceived(rs.getDate("dateReceived"));
+                temp.setDateReceived(rs.getDate("dateRecieved"));
                 temp.setReceivedBy(rs.getInt("recievedBy"));
                 temp.setApprovedBy(rs.getInt("approvedBy"));
                 temp.setStatus(rs.getString("status"));
@@ -124,5 +124,28 @@ public class SupplierDeliveryReceiptDAO {
             Logger.getLogger(SupplierDeliveryReceiptDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public Integer getSupplierDeliveryReceipt() throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        Integer i = 0;
+        String query = "SELECT MAX(drNumber) from supplier_delivery_receipt";
+        PreparedStatement ps = conn.prepareStatement(query);
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            i = rs.getInt("MAX(drNumber)");
+        }
+        if (i == 0) {
+            i = 60000000;
+        } else if (i==69999999)
+            i=-1;
+        else {
+            i += 1;
+        }
+
+        rs.close();
+        return i;
     }
 }

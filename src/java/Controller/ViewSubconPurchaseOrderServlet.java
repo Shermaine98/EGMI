@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author shermainesy
  */
-public class ViewSubconPurchaseOrder extends BaseServlet {
+public class ViewSubconPurchaseOrderServlet extends BaseServlet {
 
      @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class ViewSubconPurchaseOrder extends BaseServlet {
         try {
             SubconPurchaseOrderList = SubconPurchaseOrderDAO.MonitorSubconPurchaseOrder();
         } catch (ParseException ex) {
-            Logger.getLogger(ViewSubconPurchaseOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewSubconPurchaseOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         ServletContext context = getServletContext();
        

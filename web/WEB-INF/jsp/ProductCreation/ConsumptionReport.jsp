@@ -17,7 +17,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
         <title>Encode Consumption Report</title>
-       >
     </head>
     <body>  
         <div align="center">
@@ -35,7 +34,6 @@
             if (!billOfMaterialspID.isEmpty()) {
         %>
 
-
         <div align="center" class="container">
             <form method="POST" action="EncodeConsumptionReportServlet">
                 <div class="container">
@@ -49,7 +47,15 @@
                             <label class="" for="preparedBy">Prepared By</label>
                             <input type="hidden" name="preparedBy" id="preparedBy" value="<%=user.getEmployeeNumber()%> " />
                             <input type="text" class="form-control readonlyWhite" value="<%=user.getFirstName()%> <%=user.getLastName()%> " readonly /><br/>
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Bill of Materials</h3>
                         </div>
+                        <div class="panel-body">
+                            <label class="" for="productID">Product ID</label>
+                            <input name="productID" class="form-control transparentBg readonlyWhite" readonly value="<%=billOfMaterialspID.get(0).getProductID()%>"/>
+                        </div>
+                        </div>
+                       
                     </div>
                     <%
                         if (billOfMaterialspID.get(0).getSizeName().equalsIgnoreCase("Shirt")) {
@@ -139,16 +145,10 @@
                 %>
 
                 <div class="container" align="center" style="margin-top:35px;">
-                    <div class="panel panel-default col-md-4">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Bill of Materials</h3>
-                        </div>
-                        <div class="panel-body">
-                            <label class="" for="productID">Product ID</label>
-                            <input name="productID" class="form-control transparentBg readonlyWhite" readonly value="<%=billOfMaterialspID.get(0).getProductID()%>"/>
-                        </div>
-                    </div>
                     <div class="panel panel-default col-md-6" style="padding:10px; padding-top:10px;">
+                       <div class="panel-heading">
+                            <h3 class="panel-title">Bill of Materials Details</h3>
+                        </div>
                         <div class="panel-body">
                             <table id="dataTable3" class="table table-bordered">
                                 <thead>

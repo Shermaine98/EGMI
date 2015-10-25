@@ -40,12 +40,30 @@ public class EncodeSupplierDeliveryReceiptServlet extends BaseServlet {
             String drNumber = request.getParameter("drNumber");
             String poNumber = request.getParameter("poNumber");
             String receivedBy = request.getParameter("receivedBy");
-           
+            
+            
+            String [] orderedqty = request.getParameterValues("qty");
             String [] status = request.getParameterValues("status");
             String [] itemCode = request.getParameterValues("itemCode");
             String [] rejectQty = request.getParameterValues("rejectQty");
             String [] receivedQty = request.getParameterValues("receivedQty");
             String [] notes = request.getParameterValues("notes");
+        
+            
+ // if(statuspending) {          
+            
+//        //changestatus
+//         for(int z=0; z <itemCode.length;z++) {
+//           //  double result = Double.parseDouble(orderedqty[z])-Double.parseDouble(receivedQty[z]);
+//             if(Double.parseDouble(orderedqty[z])){
+//                 status[z] = "Complete";
+//             } else if(result!=0 && result != Double.parseDouble(orderedqty[z]) ){
+//                 status[z] = "Partial";
+//              } else if(receivedQty[z]==0){
+//                 status[z]
+//             }
+//             
+//             }
             
         //    Date[] dateReceived = format.parse(request.getParameterValues("dateReceived"));
             
@@ -53,7 +71,7 @@ public class EncodeSupplierDeliveryReceiptServlet extends BaseServlet {
              Date[] dateReceived = new Date [itemCode.length];
             
             for(int y=0; y <itemCode.length;y++){
-                 if(!status[y].equalsIgnoreCase("completed")){
+                 if(!status[y].equalsIgnoreCase("Complete")){
                      dateReceived[y] = format.parse("9999-99-99");
                  }
                  else{
@@ -86,11 +104,18 @@ public class EncodeSupplierDeliveryReceiptServlet extends BaseServlet {
                     x = false;
                 }
             }
-
+ //}else{         
+          // get Delivery Receipt - receivedQty
+            
+            //add user entered
+            // if statementchangestatus
+            // update SQL
+            
+        //}        
             if (x == true) {
                
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receving.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
                 
                 request.setAttribute("arrSupplierDeliveryReceipt", arrSupplierDeliveryReceipt);
                 rd.forward(request, response);

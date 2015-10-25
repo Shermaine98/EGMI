@@ -8,6 +8,7 @@ function autoCompleteSupplier() {
         noSuggestionNotice: 'No Exsiting Suppplier',
     });
 }
+
 function autoCompleteSupplierItem() {
     var supplierName = document.getElementById('supplierName').value;
     if (supplierName == "") {

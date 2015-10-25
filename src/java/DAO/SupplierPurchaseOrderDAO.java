@@ -128,7 +128,10 @@ public class SupplierPurchaseOrderDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT SPO.poNumber, SPO.itemCode, SPO.volumeQty, S.companyName, SPO.dateMade, SPO.deliveryDate, U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, S.unitPrice,I.itemName, I.unitMeasurement, I.inventoryType, SPO.notes, SPO.receivingStatus\n" +
+            
+  
+            PreparedStatement pstmt = conn.prepareStatement(
+            "SELECT SPO.poNumber, SPO.itemCode, SPO.volumeQty, S.companyName, SPO.dateMade, SPO.deliveryDate, U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, S.unitPrice,I.itemName, I.unitMeasurement, I.inventoryType, SPO.notes, SPO.receivingStatus\n" +
             "FROM supplier_purchase_order SPO\n" +
             "JOIN ref_supplier S \n" +
             "ON SPO.supplier = S.supplierID \n" +
@@ -158,6 +161,8 @@ public class SupplierPurchaseOrderDAO {
                 temp.setNote(rs.getString("notes"));
                 newPurchaseOrder.add(temp);
             }
+            
+        
             pstmt.close();
             conn.close();
             rs.close();

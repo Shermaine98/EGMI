@@ -140,7 +140,7 @@ public class ConsumptionReportDAO {
         return i;
     }
 
-    public ArrayList<ConsumptionReport> searchProductName(String productName) throws ParseException {
+    public ArrayList<ConsumptionReport> searchProductName(String productID) throws ParseException {
 
         ArrayList<ConsumptionReport> ConsumptionReport = new ArrayList<ConsumptionReport>();
 
@@ -148,7 +148,7 @@ public class ConsumptionReportDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
 
-            String search = productName + "%";
+            String search = productID + "%";
             PreparedStatement pstmt = conn.prepareStatement("SELECT productionNumber, productID, sizeType, itemCode, sizeName, sizeVolumeQty, preparedBy, dateMade\n"
                     + "FROM consumption_report where productID LIKE ? Order by productID;");
 

@@ -2,12 +2,14 @@ package Controller;
 
 import DAO.PurchaseOrderDAO;
 import DAO.SubconPurchaseOrderDAO;
+import DAO.SupplierDeliveryReceiptDAO;
 import DAO.SupplierPurchaseOrderDAO;
 import Model.PurchaseOrder;
 import Model.SubconPurchaseOrder;
 import Model.SupplierPurchaseOrder;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,6 +29,7 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SupplierPurchaseOrderDAO SupplierPurchaseOrderDAO = new SupplierPurchaseOrderDAO();
+        SupplierDeliveryReceiptDAO SupplierDeliveryReceiptDAO = new SupplierDeliveryReceiptDAO();
         SubconPurchaseOrderDAO SubconPurchaseOrderDAO = new SubconPurchaseOrderDAO();
         ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrderList = new ArrayList<>();
         ArrayList<SubconPurchaseOrder> subconPurchaseOrderList = new ArrayList<>();
@@ -45,16 +48,18 @@ public class GetPurchaseOrderSpecificServlet extends BaseServlet {
         
         //supplier
         if (poNumber.startsWith("7")) {
-            System.out.println("HELOO");
+           Integer x =0;
             try {
+                x = SupplierDeliveryReceiptDAO.getSupplierDeliveryReceipt();
                 SupplierPurchaseOrderList = SupplierPurchaseOrderDAO.GetSupplierPurchaseOrder(poNumber);
-            } catch (ParseException ex) {
+            } catch (ParseException | SQLException ex) {
                 Logger.getLogger(GetPurchaseOrderSpecificServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Procurement/Receiving.jsp");
-             request.setAttribute("PurchaseOrderList", PurchaseOrderList);
+            request.setAttribute("drNumber", x);
+            request.setAttribute("PurchaseOrderList", PurchaseOrderList);
             request.setAttribute("data", "supplier");
             request.setAttribute("SupplierPurchaseOrderReceiving", SupplierPurchaseOrderList);
             rd.forward(request, response);

@@ -87,6 +87,7 @@
     <%
         String data = (String) request.getAttribute("data");
         if (data.equalsIgnoreCase("supplier")) {
+            Integer x = (Integer) request.getAttribute("drNumber");
             ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrder = (ArrayList<SupplierPurchaseOrder>) request.getAttribute("SupplierPurchaseOrderReceiving");
     %>
     <center><h2>Encode Supplier Purchase Order</h2></center>
@@ -100,7 +101,7 @@
                 </div>
                 <div class="panel-body">
                     <label class="" for="deliveryNumber">Delivery Number</label>
-                    <input type="text" name="doNumber" class="form-control readonlyWhite" value="" readonly /><br/>
+                    <input type="text" name="drNumber" class="form-control readonlyWhite" value="<%=x%>" readonly /><br/>
                     <label class="" for="poNumber">Purchase Order Number</label>
                     <input type="text" name="poNumber" class="form-control readonlyWhite" value="<%=SupplierPurchaseOrder.get(0).getPoNumber()%>" readonly /><br/>
                     <label class="" for="preparedBy">Prepared By</label>
@@ -139,8 +140,10 @@
                         </thead>
                         <% for (int i = 0; i < SupplierPurchaseOrder.size(); i++) {%>   
                         <td><input type="hidden" name="itemCode" value="<%=SupplierPurchaseOrder.get(i).getItemCode()%>"><%= SupplierPurchaseOrder.get(i).getItemName()%></td>
-                        <td><input type="hidden" name="status" value="<%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>"/><%= SupplierPurchaseOrder.get(i).getReceivingStatus()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getVolumeQty()%></td>
+                        <td><input type="hidden" name="status" value="<%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>"/>
+                            <%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>
+                        </td>
+                        <td><input type="hidden" name="qty" value="<%= SupplierPurchaseOrder.get(i).getVolumeQty()%>"/><%= SupplierPurchaseOrder.get(i).getVolumeQty()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getUnitPrice()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getUnitMeasurement()%></td>
                         <td><%= SupplierPurchaseOrder.get(i).getInventoryType()%></td>

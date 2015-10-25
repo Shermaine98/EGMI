@@ -27,15 +27,15 @@ public class SearchProductsServlet extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String productName = request.getParameter("query");
-        String productName1 = request.getParameter("productName");
+        String productID = request.getParameter("query");
+        String productID1 = request.getParameter("productName");
          SubconPurchaseOrderDAO DAO = new SubconPurchaseOrderDAO();
         ArrayList<ConsumptionReport> ConsumptionReportArray = new ArrayList<ConsumptionReport>();
-        if (productName == null) {
+        if (productID == null) {
             ServletContext context = getServletContext();
           
             try {
-                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productName1);
+                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productID1);
             } catch (ParseException ex) {
                 Logger.getLogger(SearchProductsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -65,15 +65,15 @@ public class SearchProductsServlet extends BaseServlet {
         } else {
            
             try {
-                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productName);
+                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productID);
             } catch (ParseException ex) {
                 Logger.getLogger(SearchProductsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            ArrayList<String> productNameN = new ArrayList<String>();
+            ArrayList<String> productIDResult = new ArrayList<String>();
             for (int i = 0; i < ConsumptionReportArray.size(); i++) {
-                if (!productNameN.contains(ConsumptionReportArray.get(i).getProductName())) {
-                    productNameN.add(ConsumptionReportArray.get(i).getProductName());
+                if (!productIDResult.contains(String.valueOf(ConsumptionReportArray.get(i).getProductID()))) {
+                    productIDResult.add(String.valueOf(ConsumptionReportArray.get(i).getProductID()));
                 }
             }
             //Create Production Number
@@ -89,7 +89,7 @@ public class SearchProductsServlet extends BaseServlet {
             Gson gson = new Gson();
             request.setAttribute("SubPONumber", subconPurchaseNumber);
             request.setAttribute("ConsumptionReportArray", ConsumptionReportArray);
-            String json = gson.toJson(productNameN);
+            String json = gson.toJson(productIDResult);
             response.getWriter().write("{\"suggestions\":" + json + "}");
         }
 

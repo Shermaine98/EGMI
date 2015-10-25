@@ -19,21 +19,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gcla109
  */
-public class ReconcileServlet extends BaseServlet {
+public class ReconcileProductionServlet extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PurchaseOrderDAO PurchaseOrderDAO = new PurchaseOrderDAO();
-        ArrayList<PurchaseOrder> PurchaseOrderList = new  ArrayList<> ();
+        ArrayList<PurchaseOrder> pPurchaseOrderList = new  ArrayList<> ();
        
         try {
-            PurchaseOrderList = PurchaseOrderDAO.GetAllPurchaseOrder();
+            pPurchaseOrderList = PurchaseOrderDAO.GetProductionPurchaseOrder();
         } catch (ParseException ex) {
             Logger.getLogger(PurchaseOrderSerlvet.class.getName()).log(Level.SEVERE, null, ex);
         }
         ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Inventory/Reconcile.jsp");
-        request.setAttribute("PurchaseOrderRList", PurchaseOrderList);
+        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/Inventory/ReconcileProduction.jsp");
+        request.setAttribute("productionPurchaseOrder", pPurchaseOrderList);
         rd.forward(request, response); 
     }
 }
