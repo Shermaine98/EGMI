@@ -18,7 +18,7 @@ public class main {
     SupplierDeliveryReceiptDAO refsupplier = new SupplierDeliveryReceiptDAO();
     
      System.out.print(refsupplier.check("70000000"));
-    
+     
     }
     
 }

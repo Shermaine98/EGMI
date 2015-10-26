@@ -176,6 +176,10 @@
         <servlet-name>EncodeSubcontractorPurchaseOrderServlet</servlet-name>
         <servlet-class>Controller.EncodeSubcontractorPurchaseOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PrintConsumption</servlet-name>
+        <servlet-class>Controller_Reports.PrintConsumption</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -343,6 +347,10 @@
     <servlet-mapping>
         <servlet-name>EncodeSubcontractorPurchaseOrderServlet</servlet-name>
         <url-pattern>/EncodeSubcontractorPurchaseOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintConsumption</servlet-name>
+        <url-pattern>/PrintConsumption</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

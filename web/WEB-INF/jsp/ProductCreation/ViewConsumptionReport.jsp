@@ -79,9 +79,13 @@
                                 $('#consumptionReportList').append('Item Consumption:' + data[y].itemConsumption + '<br/>');
                                 
                             }
-                            $('#consumptionReportList').append('Item Code: ' + data[0].itemCode + '<br/>');
-
-                            $('#consumptionReportList').append('<input id="TotalS" class="transparentBg" name="TotalS" onload="calculateTotalShirt()" />');
+                            
+                          
+                            $('#consumptionReportList').append( '<form method="POST" action="PrintConsumption"> \n\
+                                                                <input type="hidden" id="printPONumber" name="printPONumber" value=""/>\n\
+                                                                <input type="submit" class="btn btn-default" > </form> ');                    
+                            document.getElementById('printPONumber').value =productionNumber;
+                          
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {
                             alert(XMLHttpRequest.responseText);
@@ -141,6 +145,7 @@
                 </div>
             </div>
         </div>
+                
         <br/><br/>
         <%
         } else if (data.equalsIgnoreCase("ConsumptionReportView")) {

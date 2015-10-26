@@ -2,18 +2,22 @@ package DAO;
 
 import Database.DBConnectionFactory;
 import Model.ConsumptionReport;
-import java.awt.Dimension;
-import java.io.InputStream;
+import java.io.File;
 import java.sql.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import javax.faces.context.FacesContext;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+
 /**
  *
  * @author Atayan
@@ -187,39 +191,6 @@ public class ConsumptionReportDAO {
         return null;
     }
 
-    public void showReport(int productionNumber) {
-
-        //Path to your .jasper file in your package
-        String reportName = "../Reports/ConsumptionReport.jasper";
-
-        //Get a stream to read the file
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream(reportName);
-
-        Map parametersMap = new HashMap();
-        parametersMap.put("prodNum", productionNumber);
-
-        try {
-
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            
-            //Fill the report with parameter, connection and the stream reader     
-            JasperPrint jp = JasperFillManager.fillReport(is, parametersMap, conn);
-
-            //Viewer for JasperReport
-            JRViewer jv = new JRViewer(jp);
-
-            //Insert viewer to a JFrame to make it showable
-            JFrame jf = new JFrame();
-            jf.getContentPane().add(jv);
-            jf.validate();
-            jf.setVisible(true);
-            jf.setSize(new Dimension(800, 600));
-            jf.setLocation(300, 100);
-            jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        } catch (JRException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-}
+}   
+    
+   
