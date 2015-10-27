@@ -81,9 +81,9 @@
                             }
                             
                           
-                            $('#consumptionReportList').append( '<form method="POST" action="PrintConsumption"> \n\
+                            $('#consumptionReportList').append( '<form method="POST" action="PrintConsumption" target="_blank"> \n\
                                                                 <input type="hidden" id="printPONumber" name="printPONumber" value=""/>\n\
-                                                                <input type="submit" class="btn btn-default" > </form> ');                    
+                                                                <input type="submit" class="btn btn-default"> </form> ');                    
                             document.getElementById('printPONumber').value =productionNumber;
                           
                         },

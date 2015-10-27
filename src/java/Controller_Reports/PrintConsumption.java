@@ -7,8 +7,12 @@ package Controller_Reports;
 
 import Controller.BaseServlet;
 import Database.DBConnectionFactory;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,59 +32,63 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
-
 /**
  *
  * @author Geraldine
  */
 public class PrintConsumption extends BaseServlet {
-  
+
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   
-         String productionNumber = request.getParameter("printPONumber");
+
         try {
-            showReport(Integer.parseInt(productionNumber));
+            String productionNumber = request.getParameter("printPONumber");
+            showReport(Integer.parseInt(productionNumber), response);
+
+            String pdfFileName = "C:\\Users\\Geraldine\\Desktop\\EGMI\\web\\Reports\\ProcurementReports\\ConsumptionReport.pdf";
+            File pdfFile = new File(pdfFileName);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=ConsumptionReport.pdf");
+            response.setContentLength((int) pdfFile.length());
+
+            FileInputStream fileInputStream = new FileInputStream(pdfFile);
+            OutputStream responseOutputStream = response.getOutputStream();
+            int bytes;
+            while ((bytes = fileInputStream.read()) != -1) {
+                responseOutputStream.write(bytes);
+            }
+            
+//            ServletContext context = getServletContext();
+//            RequestDispatcher rd = context.getRequestDispatcher("/Reports/ProcurementReports/ConsumptionReport.jsp");
+//            rd.forward(request, response);
         } catch (JRException ex) {
             Logger.getLogger(PrintConsumption.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/ViewConsumptionReportServlet");
-        rd.forward(request, response);
     }
 
- public void showReport(int productionNumber) throws JRException {           
+    public void showReport(int productionNumber, HttpServletResponse response) throws JRException {
         try {
-            
+
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            
-          //watever this is
-            HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.setContentType("application/pdf");
 
-          //get absolute path  
+            //get absolute path  
             String relativeWebPath = "/Reports";
             String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
             File f = new File(absoluteDiskPath, "ConsumptionReport.jrxml");
-          
-            JasperReport jr = JasperCompileManager.compileReport(f.getAbsolutePath()); 
-  
+
+            JasperReport jr = JasperCompileManager.compileReport(f.getAbsolutePath());
+
+            //Fill the report with parameter, connection and the stream reader   
             Map map = new HashMap();
             map.put("prodNum", productionNumber);
-            //Fill the report with parameter, connection and the stream reader   
-  
-           // printing
-           JasperPrint jp = JasperFillManager.fillReport(jr, map, conn);
-             
-        
-          httpServletResponse.addHeader("Content-disposition", "attachment; filename=ConsumptionReport.pdf");
-          ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
-          JasperExportManager.exportReportToPdfStream(jp,servletOutputStream);
-          FacesContext.getCurrentInstance().responseComplete();
-            
-          //  JasperExportManager.exportReportToPdfFile(jp, "ConsumptionReport.pdf");
-            //            JasperViewer.viewReport(jp, true);
+
+            // printing
+            JasperPrint jp = JasperFillManager.fillReport(jr, map, conn);
+            JasperExportManager.exportReportToPdfFile(jp, "C:\\Users\\Geraldine\\Desktop\\EGMI\\web\\Reports\\ProcurementReports\\ConsumptionReport.pdf");
+            FacesContext.getCurrentInstance().responseComplete();
         } catch (Exception e) {
             e.printStackTrace();
         }
