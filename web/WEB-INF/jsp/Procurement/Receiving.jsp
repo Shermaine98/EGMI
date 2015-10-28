@@ -87,6 +87,8 @@
     <%
         String data = (String) request.getAttribute("data");
         if (data.equalsIgnoreCase("supplier")) {
+            //fix drNumber
+        
             Integer x = (Integer) request.getAttribute("drNumber");
             ArrayList<SupplierPurchaseOrder> SupplierPurchaseOrder = (ArrayList<SupplierPurchaseOrder>) request.getAttribute("SupplierPurchaseOrderReceiving");
     %>
@@ -125,35 +127,55 @@
                 <div class="panel-body">
                     <br/><br/>
                     <table id="data" class="table table-bordered">
-
                         <thead>
-                        <th>Item Name</th>
-                        <th>Current Status</th>
-                        <th>Volume Ordered</th>
-                        <th>Unit Price</th>
-                        <th>Unit Measurement</th>
-                        <th>Inventory Type</th>
-                        <th>Note</th>
-                        <th>Received Quantity</th>
-                        <th>Rejected Quantity</th>
-                        <th>Add notes</th>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Current Status</th>
+                                <th>Volume Ordered</th>
+                                <th>Unit Price</th>
+                                <th>Unit Measurement</th>
+                                <th>Inventory Type</th>
+                                <th>Note</th>
+                                <th>Received Quantity</th>
+                                <th>Rejected Quantity</th>
+                                <th>Add notes</th>
+                            <tr>
                         </thead>
-                        <% for (int i = 0; i < SupplierPurchaseOrder.size(); i++) {%>   
-                        <td><input type="hidden" name="itemCode" value="<%=SupplierPurchaseOrder.get(i).getItemCode()%>"><%= SupplierPurchaseOrder.get(i).getItemName()%></td>
-                        <td><input type="hidden" name="status" value="<%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>"/>
-                            <%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>
-                        </td>
-                        <td><input type="hidden" name="qty" value="<%= SupplierPurchaseOrder.get(i).getVolumeQty()%>"/><%= SupplierPurchaseOrder.get(i).getVolumeQty()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getUnitPrice()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getUnitMeasurement()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getInventoryType()%></td>
-                        <td><%= SupplierPurchaseOrder.get(i).getNote()%></td>
-                        <td><input name="rejectQty"></td>
-                        <td><input name="receivedQty"></td>
-                        <td><input name="notes"></td>
-                            <%
-                                }
-                            %>
+                        <% 
+                        for (int i = 0; i < SupplierPurchaseOrder.size(); i++) { 
+                        %>  
+                        <tr>
+                            <td><input type="hidden" name="itemCode" value="<%=SupplierPurchaseOrder.get(i).getItemCode()%>"><%= SupplierPurchaseOrder.get(i).getItemName()%></td>
+                            <td><input type="hidden" name="status" value="<%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>"/>
+                                <%= SupplierPurchaseOrder.get(i).getReceivingStatus()%>
+                            </td>
+                            <td><input type="hidden" name="qty" value="<%= SupplierPurchaseOrder.get(i).getVolumeQty()%>"/><%= SupplierPurchaseOrder.get(i).getVolumeQty()%></td>
+                            <td><%= SupplierPurchaseOrder.get(i).getUnitPrice()%></td>
+                            <td><%= SupplierPurchaseOrder.get(i).getUnitMeasurement()%></td>
+                            <td><%= SupplierPurchaseOrder.get(i).getInventoryType()%></td>
+                            <td><%= SupplierPurchaseOrder.get(i).getNote()%></td>
+                                <% 
+                                double maximum = 0;
+                                System.out.print("received" + SupplierPurchaseOrder.get(i).getReceivedQty());
+                                    if (SupplierPurchaseOrder.get(i).getReceivedQty() == 0) {
+                                        System.out.print("max 1" + SupplierPurchaseOrder.get(i).getReceivedQty());
+                                        
+                                        maximum = SupplierPurchaseOrder.get(i).getVolumeQty();
+                                        System.out.print("volumeQty" + maximum);
+                                    } else {
+                                        maximum = SupplierPurchaseOrder.get(i).getVolumeQty() - SupplierPurchaseOrder.get(i).getReceivedQty();
+                                        System.out.print("volume qty" + SupplierPurchaseOrder.get(i).getVolumeQty() );
+                                        System.out.print("volume received" + SupplierPurchaseOrder.get(i).getReceivedQty() );
+                                        System.out.print("volume" + maximum );
+                                    }
+                                %> 
+                                <td><input type="number" name="receivedQty"  min="0" max="5.2"></td>
+                             <td><input type="number" name="rejectQty"/></td>
+                            <td><input name="notes"></td>
+                        </tr>
+                        <%                  
+                            }
+                        %>
                     </table> 
                     <div style="float:right">
                         TOTAL:
@@ -167,7 +189,10 @@
     <!--Supplier Delivery Receipt END-->    
 
     <%
-    } else if (data.equalsIgnoreCase("subcon")) {
+        }
+
+        else if (data.equalsIgnoreCase ( 
+            "subcon")) {
         ArrayList<SubconPurchaseOrder> SubconPurchaseOrder = (ArrayList<SubconPurchaseOrder>) request.getAttribute("subconPurchaseOrderReceiving");
     %>
     <!--Subcon Delivery Receipt-->  

@@ -1,9 +1,7 @@
 package Controller;
 
-import DAO.BillOfMaterialsDAO;
 import DAO.ConsumptionReportDAO;
 import DAO.SubconPurchaseOrderDAO;
-import Model.BillOfMaterials;
 import Model.ConsumptionReport;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -35,7 +33,7 @@ public class SearchProductsServlet extends BaseServlet {
             ServletContext context = getServletContext();
           
             try {
-                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productID1);
+                ConsumptionReportArray = new ConsumptionReportDAO().searchConsumptionReport(productID1);
             } catch (ParseException ex) {
                 Logger.getLogger(SearchProductsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -65,7 +63,7 @@ public class SearchProductsServlet extends BaseServlet {
         } else {
            
             try {
-                ConsumptionReportArray = new ConsumptionReportDAO().searchProductName(productID);
+                ConsumptionReportArray = new ConsumptionReportDAO().searchConsumptionReport(productID);
             } catch (ParseException ex) {
                 Logger.getLogger(SearchProductsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -73,8 +71,8 @@ public class SearchProductsServlet extends BaseServlet {
             ArrayList<String> productIDResult = new ArrayList<String>();
            
             for (int i = 0; i < ConsumptionReportArray.size(); i++) {
-                if (!productIDResult.contains(String.valueOf(ConsumptionReportArray.get(i).getProductID()))) {
-                    productIDResult.add(String.valueOf(ConsumptionReportArray.get(i).getProductID()));
+                if (!productIDResult.contains(String.valueOf(ConsumptionReportArray.get(i).getProductionNumber()))) {
+                    productIDResult.add(String.valueOf(ConsumptionReportArray.get(i).getProductionNumber()));
                 }
             }
             

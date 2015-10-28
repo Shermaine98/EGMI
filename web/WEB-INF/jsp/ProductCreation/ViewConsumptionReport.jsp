@@ -15,9 +15,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.dataTables.min.css">
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-        <link href="bootstrap/css/table-design.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/table-design.css" rel="stylesheet" type="text/css">
         <title>View Consumption Report</title>
-
         <script>
             Object.size = function (obj) {
                 var size = 0, key;

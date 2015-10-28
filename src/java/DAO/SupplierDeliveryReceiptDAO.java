@@ -68,7 +68,7 @@ public class SupplierDeliveryReceiptDAO {
                 newSupplierDeliveryReceipt.setReceivedQty(rs.getDouble("receivedQty"));
                 newSupplierDeliveryReceipt.setRejectedQty(rs.getDouble("rejectedQty"));
                 newSupplierDeliveryReceipt.setDateReceived(rs.getDate("dateRecieved"));
-                newSupplierDeliveryReceipt.setReceivedBy(rs.getInt("recievedBy"));
+                newSupplierDeliveryReceipt.setReceivedBy(rs.getInt("receivedBy"));
                 newSupplierDeliveryReceipt.setApprovedBy(rs.getInt("approvedBy"));
                 newSupplierDeliveryReceipt.setStatus(rs.getString("status"));
                 newSupplierDeliveryReceipt.setStatus(rs.getString("notes"));
@@ -108,7 +108,7 @@ public class SupplierDeliveryReceiptDAO {
                 temp.setReceivedQty(rs.getDouble("receivedQty"));
                 temp.setRejectedQty(rs.getDouble("rejectedQty"));
                 temp.setDateReceived(rs.getDate("dateRecieved"));
-                temp.setReceivedBy(rs.getInt("recievedBy"));
+                temp.setReceivedBy(rs.getInt("receivedBy"));
                 temp.setApprovedBy(rs.getInt("approvedBy"));
                 temp.setStatus(rs.getString("status"));
                 temp.setStatus(rs.getString("notes"));
@@ -163,4 +163,129 @@ public class SupplierDeliveryReceiptDAO {
        
         return false;
     }
+  public ArrayList<SupplierDeliveryReceipt> GetDeliveryReceipt(String poNumber) throws ParseException {
+
+        ArrayList<SupplierDeliveryReceipt> DeliveryReceipt = new ArrayList<SupplierDeliveryReceipt>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("select * from supplier_delivery_receipt where poNumber = ?");
+             pstmt.setString(1, poNumber);
+            ResultSet rs = pstmt.executeQuery();
+           
+            while (rs.next()) {
+
+                SupplierDeliveryReceipt temp = new SupplierDeliveryReceipt();
+                
+                 temp.setDrNumber(rs.getInt("drNumber"));
+                temp.setPoNumber(rs.getInt("poNumber"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setReceivedQty(rs.getDouble("receivedQty"));
+                temp.setRejectedQty(rs.getDouble("rejectedQty"));
+                temp.setDateReceived(rs.getDate("dateRecieved"));
+                temp.setReceivedBy(rs.getInt("receivedBy"));
+                temp.setApprovedBy(rs.getInt("approvedBy"));
+                temp.setStatus(rs.getString("status"));
+                temp.setStatus(rs.getString("notes"));
+
+                DeliveryReceipt.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+
+            return DeliveryReceipt;
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDeliveryReceiptDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+  
+  public boolean UpdateSupplierDeliveryReceipt(SupplierDeliveryReceipt newSupplierDeliveryReceipt) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update supplier_delivery_receipt"
+                    + " SET receivedQty = ?, rejectedQty = ?, status = ? where drNumber = ? AND poNumber = ? AND itemCode = ?";
+
+            String query2 = "update supplier_purchase_order"
+                    + " SET receivingStatus = ? where poNumber = ? AND itemCode = ?";
+            
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            PreparedStatement pstmt2 = conn.prepareStatement(query2);
+            
+            pstmt.setDouble(1, newSupplierDeliveryReceipt.getReceivedQty());
+            pstmt.setDouble(2, newSupplierDeliveryReceipt.getRejectedQty());
+            pstmt.setString(3, newSupplierDeliveryReceipt.getStatus());
+            pstmt.setInt(4, newSupplierDeliveryReceipt.getDrNumber());
+            pstmt.setInt(5, newSupplierDeliveryReceipt.getPoNumber());
+            pstmt.setInt(6, newSupplierDeliveryReceipt.getItemCode());
+            
+            pstmt2.setString(1, newSupplierDeliveryReceipt.getStatus());
+            pstmt2.setInt(2, newSupplierDeliveryReceipt.getPoNumber());
+            pstmt2.setInt(3, newSupplierDeliveryReceipt.getItemCode());
+            pstmt.executeUpdate();
+            pstmt2.executeUpdate();
+            
+            pstmt.close();
+            pstmt2.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDeliveryReceiptDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+ public ArrayList<SupplierDeliveryReceipt> GetDeliveryReceiptForCuttingReport() throws ParseException {
+
+        ArrayList<SupplierDeliveryReceipt> DeliveryReceipt = new ArrayList<SupplierDeliveryReceipt>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT SPO.poNumber, SDR.drNumber, SPO.itemCode, I.itemName, SDR.receivedQty, SDR.rejectedQty, SPO.volumeQty, SPO.dateMade, \n" +
+            "		SPO.deliveryDate,U.lastName as preparedbyLastName, U.firstName as preparedbyFirstName, \n" +
+"        S.unitPrice, I.unitMeasurement, I.inventoryType, SPO.receivingStatus, SPO.notes\n" +
+"FROM supplier_purchase_order SPO\n" +
+"JOIN supplier_delivery_receipt SDR\n" +
+"ON	SPO.poNumber = SDR.poNumber\n" +
+"AND SPO.itemCode = SDR.itemCode\n" +
+"JOIN ref_supplier S\n" +
+"ON SPO.itemCode = S.itemCode\n" +
+"AND SPO.supplier = S.supplierID\n" +
+"JOIN ref_item I \n" +
+"ON S.itemCode = I.itemCode\n" +
+"JOIN user U \n" +
+"ON SPO.preparedBy = U.employeeID\n" +
+"WHERE I.inventoryType = 'production' AND SPO.receivingStatus = 'completed';");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                SupplierDeliveryReceipt temp = new SupplierDeliveryReceipt();
+                
+                temp.setDrNumber(rs.getInt("drNumber"));
+                temp.setPoNumber(rs.getInt("poNumber"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setReceivedQty(rs.getDouble("receivedQty"));
+                temp.setRejectedQty(rs.getDouble("rejectedQty"));
+                temp.setDateReceived(rs.getDate("dateRecieved"));
+                temp.setReceivedBy(rs.getInt("receivedBy"));
+                temp.setApprovedBy(rs.getInt("approvedBy"));
+                temp.setStatus(rs.getString("status"));
+                temp.setStatus(rs.getString("notes"));
+
+
+                DeliveryReceipt.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+
+            return DeliveryReceipt;
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDeliveryReceiptDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

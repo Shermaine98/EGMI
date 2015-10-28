@@ -180,6 +180,10 @@
         <servlet-name>PrintConsumption</servlet-name>
         <servlet-class>Controller_Reports.PrintConsumption</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetDRForCuttingReportServlet</servlet-name>
+        <servlet-class>Controller.GetDRForCuttingReportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -351,6 +355,10 @@
     <servlet-mapping>
         <servlet-name>PrintConsumption</servlet-name>
         <url-pattern>/PrintConsumption</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDRForCuttingReportServlet</servlet-name>
+        <url-pattern>/GetDRForCuttingReportServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

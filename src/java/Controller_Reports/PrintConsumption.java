@@ -75,7 +75,7 @@ public class PrintConsumption extends BaseServlet {
             response.setContentType("application/pdf");
 
             //get absolute path  
-            String relativeWebPath = "/Reports";
+            String relativeWebPath = "/ProcurementReports/Reports";
             String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
             File f = new File(absoluteDiskPath, "ConsumptionReport.jrxml");
 
@@ -87,7 +87,7 @@ public class PrintConsumption extends BaseServlet {
 
             // printing
             JasperPrint jp = JasperFillManager.fillReport(jr, map, conn);
-            JasperExportManager.exportReportToPdfFile(jp, "C:\\Users\\Geraldine\\Desktop\\EGMI\\web\\Reports\\ProcurementReports\\ConsumptionReport.pdf");
+            JasperExportManager.exportReportToPdfFile(jp, "/Users/shermainesy/NetBeansProjects/EGMI/web/Reports/ConsumptionReport.pdf");
             FacesContext.getCurrentInstance().responseComplete();
         } catch (Exception e) {
             e.printStackTrace();

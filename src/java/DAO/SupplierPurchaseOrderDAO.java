@@ -130,19 +130,22 @@ public class SupplierPurchaseOrderDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-        //no DR
+            //no DR
 
             if (x == false) {
                 PreparedStatement pstmt = conn.prepareStatement(
-                        "SELECT SPO.poNumber, SPO.itemCode, SPO.volumeQty, S.companyName, SPO.dateMade, SPO.deliveryDate, U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, S.unitPrice,I.itemName, I.unitMeasurement, I.inventoryType, SPO.notes, SPO.receivingStatus\n"
+                        "SELECT SPO.poNumber, SPO.itemCode, S.companyName, SPO.volumeQty, S.companyName, SPO.dateMade, \n"
+                        + "SPO.deliveryDate, U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, \n"
+                        + "S.unitPrice,I.itemName, I.unitMeasurement, I.inventoryType, SPO.notes, SPO.receivingStatus\n"
                         + "FROM supplier_purchase_order SPO\n"
-                        + "JOIN ref_supplier S \n"
-                        + "ON SPO.supplier = S.supplierID \n"
-                        + "JOIN ref_item I \n"
+                        + "JOIN ref_supplier S\n"
+                        + "ON SPO.itemCode = S.itemCode\n"
+                        + "AND SPO.supplier = S.supplierID\n"
+                        + "JOIN ref_item I\n"
                         + "ON S.itemCode = I.itemCode\n"
                         + "JOIN user U\n"
                         + "ON SPO.preparedBy = U.employeeID\n"
-                        + "WHERE SPO.itemcode = S.itemcode && SPO.poNumber = ? && SPO.receivingStatus != 'complete';");
+                        + "WHERE  SPO.poNumber = ? AND SPO.receivingStatus != 'complete';");
                 pstmt.setString(1, poNumber);
 
                 ResultSet rs = pstmt.executeQuery();
@@ -170,20 +173,23 @@ public class SupplierPurchaseOrderDAO {
             } // if exsiting, get delivery number with received
             else if (x == true) {
                 PreparedStatement pstmt = conn.prepareStatement(
-                          "SELECT  SPO.poNumber, SDR.drNumber, SPO.itemCode, I.itemName, SDR.receivedQty, SDR.rejectedQty, SPO.volumeQty, SPO.dateMade, \n"
-                        + "SPO.deliveryDate,U.lastName as preparedbyLastName , U.firstName as preparedbyFirstName, \n"
-                        + "S.unitPrice, S.companyName, I.unitMeasurement, I.inventoryType, SPO.receivingStatus, SPO.notes\n"
+                        "SELECT  SPO.poNumber, SDR.drNumber, SPO.itemCode, S.companyName, I.itemName, SDR.receivedQty, SDR.rejectedQty, SPO.volumeQty, SPO.dateMade, \n"
+                        + "SPO.deliveryDate,U.lastName as preparedbyLastName, U.firstName as preparedbyFirstName, \n"
+                        + "S.unitPrice, I.unitMeasurement, I.inventoryType, SPO.receivingStatus, SPO.notes\n"
                         + "FROM supplier_purchase_order SPO\n"
                         + "JOIN supplier_delivery_receipt SDR\n"
-                        + "ON SPO.poNumber = SDR.poNumber\n"
+                        + "ON	SPO.poNumber = SDR.poNumber\n"
+                        + "AND SPO.itemCode = SDR.itemCode\n"
                         + "JOIN ref_supplier S\n"
                         + "ON SPO.itemCode = S.itemCode\n"
+                        + "AND SPO.supplier = S.supplierID\n"
                         + "JOIN ref_item I \n"
                         + "ON S.itemCode = I.itemCode\n"
                         + "JOIN user U \n"
                         + "ON SPO.preparedBy = U.employeeID\n"
-                        + "WHERE SPO.poNumber = ? && SPO.receivingStatus != 'complete';");
-                 pstmt.setString(1, poNumber);
+                        + "WHERE SPO.poNumber = ? AND SPO.receivingStatus != 'complete';");
+
+                pstmt.setString(1, poNumber);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     SupplierPurchaseOrder temp = new SupplierPurchaseOrder();

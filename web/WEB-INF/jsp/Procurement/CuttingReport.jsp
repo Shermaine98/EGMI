@@ -4,7 +4,10 @@
     Author     : shermainesy
 --%>
 
+<%@page import="Model.SupplierDeliveryReceipt"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="/LevelOfAccess/LevelOFAccess.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,15 +15,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="bootstrap/css/jquery-ui-datePicker.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/searchStyle.css">
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery.mockjax.js"></script>
-        <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
-        <script type="text/javascript" src="bootstrap/js/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-        <script src="js/searchSupplier.js"></script>
-        <script src="js/deleteRow.js"></script>
-        <script src="bootstrap/js/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/jquery.dataTables.min.css">
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
         <title>Encode Cutting Report</title>
         <style>
             input[type=number]::-webkit-inner-spin-button, 
@@ -29,12 +26,54 @@
                 margin: 0; 
             }
         </style>
+        <script>
+             $(document).ready(function () {
+                $('#dataTable').DataTable({
+                    "paging": false,
+                    "info": false,
+                    "dom": '<"pull-left "f>'
+                });
+             });
+        </script>
     </head>
     <body>
-        <<div align="center" class="container">
+        
+     <%       
+        
+        ArrayList<SupplierDeliveryReceipt> DeliveryReceipt = (ArrayList<SupplierDeliveryReceipt>) request.getAttribute("DeliveryReceiptListCuttingReport");
+    
+     %>
+    <form id="form1" method="POST" action="">
+        <div align="center" class="container">
+            <table id="dataTable" class="table table-striped table-bordered table-hover table-responsive dataTable" style="width:80%">
+                <thead>
+                    <tr>
+                        <th>Delivery Number</th>
+                        <th>Purchase Order Number</th>
+                        <th>Date Received</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        for (int i = 0; i < DeliveryReceipt.size(); i++) {
+                    %> 
+                    <tr class="viewpurchaseOrder">
+                        <td class="purchaseOrderNum"><%= DeliveryReceipt.get(i).getDrNumber()%></td>
+                        <td><%= DeliveryReceipt.get(i).getPoNumber()%></td>
+                        <td><%= DeliveryReceipt.get(i).getDateReceived()%></td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+            <input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>
+        </div>
+    </form>
+                
+     <div align="center" class="container">       
             <h2>Encode Cutting Report</h2><br/>
             <form method="POST" action="EncodeSupplierPurchaseOrderServlet">
-
                 <table class="table table-bordered" style="width:40%">
                     <colgroup>
                         <col style="width:40%"/>

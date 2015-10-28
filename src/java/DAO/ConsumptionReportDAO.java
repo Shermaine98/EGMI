@@ -189,6 +189,45 @@ public class ConsumptionReportDAO {
         }
         return null;
     }
+    
+    public ArrayList<ConsumptionReport> searchConsumptionReport(String productionNumber) throws ParseException {
+
+        ArrayList<ConsumptionReport> ConsumptionReport = new ArrayList<ConsumptionReport>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+
+            String search = productionNumber + "%";
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productionNumber, productID, sizeType, itemCode, sizeName, sizeVolumeQty, preparedBy, dateMade\n"
+                    + "FROM consumption_report where productionNumber LIKE ? Order by productID;");
+
+            pstmt.setString(1, search);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                ConsumptionReport temp = new ConsumptionReport();
+                temp.setProductionNumber(rs.getInt("productionNumber"));
+                temp.setProductID(rs.getInt("productID"));
+                temp.setSizeName(rs.getString("sizeName"));
+                temp.setSizeType(rs.getString("sizeType"));
+                temp.setItemCode(rs.getInt("itemCode"));
+                temp.setVolumeQty(rs.getInt("sizeVolumeQty"));
+                temp.setDateMade(rs.getDate("dateMade"));
+                temp.setPreparedBy(rs.getInt("preparedBy"));
+                ConsumptionReport.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+
+            return ConsumptionReport;
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsumptionReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 
 }   
     
