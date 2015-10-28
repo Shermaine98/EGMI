@@ -60,7 +60,7 @@ public class PrintConsumption extends BaseServlet {
             Logger.getLogger(PrintConsumption.class.getName()).log(Level.SEVERE, null, ex);
         }
         OutputStream outStream = response.getOutputStream();
-        response.addHeader("content-disposition", "attachment; filename=this.pdf");   
+        response.addHeader("content-disposition", "attachment; filename=ConsumptionReport.pdf");   
         response.setContentType("application/pdf");
         response.setContentLength(byteStream.length);
         outStream.write(byteStream, 0, byteStream.length);
