@@ -71,6 +71,25 @@ public class UserDAO {
         }
         return valid;
     }
+    
+    public boolean changePassword(User user, String password){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update user set password = ? where email = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, password);
+            pstmt.setString(2, user.getEmail());
+
+            int rows = pstmt.executeUpdate();
+            conn.close();
+            return rows == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public int getLastEmpNumber() {
         int lastEmployeeNumber = 0;

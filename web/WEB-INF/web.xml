@@ -184,6 +184,10 @@
         <servlet-name>GetDRForCuttingReportServlet</servlet-name>
         <servlet-class>Controller.GetDRForCuttingReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>Controller.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -359,6 +363,10 @@
     <servlet-mapping>
         <servlet-name>GetDRForCuttingReportServlet</servlet-name>
         <url-pattern>/GetDRForCuttingReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
