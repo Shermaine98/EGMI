@@ -41,18 +41,18 @@
                         success: function (data) {
 
                             $('#consumptionReportList').empty();
-                            $('#consumptionReportList').append('Production Number: ' + data[0].productionNumber + '<br/>');
-                            $('#consumptionReportList').append('Product ID: ' + data[0].productID + '<br/>');
-                            $('#consumptionReportList').append('Date Made: ' + data[0].dateMade + '<br/>');
-                            $('#consumptionReportList').append('Prepared By: ' + data[0].preparedBy + '<br/>');
-                            $('#consumptionReportList').append('Size Type: ' + data[0].SizeType + '<br/>');
+                            $('#consumptionReportList').append('<b>Production Number:</b> ' + data[0].productionNumber + '<br/>');
+                            $('#consumptionReportList').append('<b>Product ID:</b> ' + data[0].productID + '<br/>');
+                            $('#consumptionReportList').append('<b>Date Made:</b> ' + data[0].dateMade + '<br/>');
+                            $('#consumptionReportList').append('<b>Prepared By:</b> ' + data[0].preparedBy + '<br/>');
+                            $('#consumptionReportList').append('<b>Size Type:</b> ' + data[0].SizeType + '<br/>');
                             var container = [];
                             var temp = true;
                             for (var i = 0; i < Object.size(data); i++) {
                                 if (container.length == 0) {
                                     container[i] = data[i].SizeName;
-                                    $('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
-                                    $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
+                                    $('#consumptionReportList').append('<b>Size Name:</b> ' + data[i].SizeName + '<br/>');
+                                    $('#consumptionReportList').append('<b>Volume Quantity:</b> ' + data[i].volumeQty + '<br/>');
                                 }
 
                                 else {
@@ -64,27 +64,27 @@
                                     }
                                     if (temp) {
                                         container[i] = data[i].SizeName;
-                                        $('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
-                                        $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');
+                                        $('#consumptionReportList').append('<b>Size Name:</b> ' + data[i].SizeName + '<br/>');
+                                        $('#consumptionReportList').append('<b>Volume Quantity:</b> ' + data[i].volumeQty + '<br/><br/>');
                                     }
                                     temp = true;
                                 }
                                 /*$('#consumptionReportList').append('Size Name: ' + data[i].SizeName + '<br/>');
                                  $('#consumptionReportList').append('Volume Quantity: ' + data[i].volumeQty + '<br/>');*/
                             }
-                            for(var y = 0; y < Object.size(data); y++){
-                                $('#consumptionReportList').append('Item Code: ' + data[y].itemCode + '<br/>');
-                                $('#consumptionReportList').append('Item Name: ' + data[y].itemName + '<br/>');
-                                $('#consumptionReportList').append('Item Consumption:' + data[y].itemConsumption + '<br/>');
-                                
+                            for (var y = 0; y < Object.size(data); y++) {
+                                $('#consumptionReportList').append('<b>Item Code:</b> ' + data[y].itemCode + '<br/>');
+                                $('#consumptionReportList').append('<b>Item Name:</b> ' + data[y].itemName + '<br/>');
+                                $('#consumptionReportList').append('<b>Item Consumption:</b> ' + data[y].itemConsumption + '<br/>');
+
                             }
-                            
-                          
-                            $('#consumptionReportList').append( '<form method="POST" action="PrintConsumption" target="_blank"> \n\
+
+
+                            $('#consumptionReportList').append('<br/><div align="center"><form method="POST" action="PrintConsumption" target="_blank"> \n\
                                                                 <input type="hidden" id="printPONumber" name="printPONumber" value=""/>\n\
-                                                                <input type="submit" class="btn btn-default"> </form> ');                    
-                            document.getElementById('printPONumber').value =productionNumber;
-                          
+                                                                <input type="submit" class="btn btn-default"> </form></div> ');
+                            document.getElementById('printPONumber').value = productionNumber;
+
                         },
                         error: function (XMLHttpRequest, textStatus, exception) {
                             alert(XMLHttpRequest.responseText);
@@ -107,44 +107,46 @@
             if (data.equalsIgnoreCase("ViewConsumptionReport")) {
                 ArrayList<ConsumptionReport> cr = (ArrayList<ConsumptionReport>) request.getAttribute("crList"); %>
         <!--View Consumption Report-->
-        <div class="col-md-8 center1">
+        <div class="container ViewMargins" >
             <h2>View Consumption Report</h2>
             <br/><br/><br/>  
-            <table id="view" class="table table-striped table-bordered table-hover table-responsive dataTable">
-                <thead>
-                    <tr>
-                        <th>Production No.</th>
-                        <th>Product ID</th>
-                        <th>Size Name</th>
-                        <th>Size Type</th>
-                        <th>Prepared By</th>
-                    </tr>
-                </thead>
+            <div style="float:left;">
+                <table id="view" class="table table-bordered table-hover table-responsive dataTable">
+                    <thead>
+                        <tr>
+                            <th>Production No.</th>
+                            <th>Product ID</th>
+                            <th>Size Name</th>
+                            <th>Size Type</th>
+                            <th>Prepared By</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <%
-                        for (int i = 0; i < cr.size(); i++) {
-                    %>
-                    <tr class="production">
-                        <td class="productionNumber"><%= cr.get(i).getProductionNumber()%></td>
-                        <td><%= cr.get(i).getProductID()%></td>
-                        <td><%= cr.get(i).getSizeName()%></td>
-                        <td><%= cr.get(i).getDateMade()%></td>
-                        <td><%= cr.get(i).getPreparedBy()%></td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                </tbody>
-            </table>
+                    <tbody>
+                        <%
+                            for (int i = 0; i < cr.size(); i++) {
+                        %>
+                        <tr class="production">
+                            <td class="productionNumber"><%= cr.get(i).getProductionNumber()%></td>
+                            <td><%= cr.get(i).getProductID()%></td>
+                            <td><%= cr.get(i).getSizeName()%></td>
+                            <td><%= cr.get(i).getDateMade()%></td>
+                            <td><%= cr.get(i).getPreparedBy()%></td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+            </div>
             <br/><br/>
             <!-- To get the Click row-->
-            <div class="panel panel-default" style="margin-left:70px; margin-right:70px;">
+            <div class="panel panel-default" style="float:right; width:450px;">
                 <div class="panel-body" id="consumptionReportList">
                 </div>
             </div>
         </div>
-                
+
         <br/><br/>
         <%
         } else if (data.equalsIgnoreCase("ConsumptionReportView")) {

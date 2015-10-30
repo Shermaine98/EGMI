@@ -30,39 +30,40 @@
     </head>
     <body>  
         <br/><br/><br/>
-        <%        
-        ArrayList<AccessoriesInventory> AccessoriesInventory = (ArrayList<AccessoriesInventory>) request.getAttribute("AccessoriesInventoryList");
+        <%            ArrayList<AccessoriesInventory> AccessoriesInventory = (ArrayList<AccessoriesInventory>) request.getAttribute("AccessoriesInventoryList");
         %>
     <center><h2>Accessories Inventory</h2></center>
     <div align="center" class="container">
-        <table id="AccessoriesInventory" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Item Code</th>
-                    <th>Delivery Order Number</th>
-                    <th>Purchase Number</th>
-                    <th>Date Updated</th>
-                    <th>Quantity</th>
-                    <th>Updated By</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%
-                    for (int i = 0; i < AccessoriesInventory.size(); i++){
-                %>
-                <tr>
-                    <td><%=AccessoriesInventory.get(i).getItemCode()%></td>
-                    <td><%=AccessoriesInventory.get(i).getDrNumber()%></td>
-                    <td><%=AccessoriesInventory.get(i).getPoNumber()%></td>
-                    <td><%=AccessoriesInventory.get(i).getDateUpdated()%></td>
-                    <td><%=AccessoriesInventory.get(i).getQty()%></td>
-                    <td><%=AccessoriesInventory.get(i).getUpdatedBy()%></td>
-                </tr>
-                <%
-                    }
-                %>
-            </tbody>
-        </table>
+        <div style="float:left; width:500px;">
+            <table id="AccessoriesInventory" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Delivery Order Number</th>
+                        <th>Purchase Number</th>
+                        <th>Date Updated</th>
+                        <th>Quantity</th>
+                        <th>Updated By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        for (int i = 0; i < AccessoriesInventory.size(); i++) {
+                    %>
+                    <tr>
+                        <td><%=AccessoriesInventory.get(i).getItemCode()%></td>
+                        <td><%=AccessoriesInventory.get(i).getDrNumber()%></td>
+                        <td><%=AccessoriesInventory.get(i).getPoNumber()%></td>
+                        <td><%=AccessoriesInventory.get(i).getDateUpdated()%></td>
+                        <td><%=AccessoriesInventory.get(i).getQty()%></td>
+                        <td><%=AccessoriesInventory.get(i).getUpdatedBy()%></td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

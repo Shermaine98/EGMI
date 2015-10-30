@@ -34,7 +34,7 @@
         %>
     <center><h2>Production Inventory</h2></center>
     <div align="center" class="container">
-        <table id="productionInventory" class="table table-bordered">
+        <table id="productionInventory" class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Production Number</th>
